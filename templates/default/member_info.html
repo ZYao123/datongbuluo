@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+{%include file="inc_link.html"%}
+<link href="templates/default/style/webstyle.css" rel="stylesheet" type="text/css" />
+</head>
+<link type="text/css" rel="stylesheet" href="js/validator.css"></link>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/getarea.js"></script>
+<script src="js/formValidator.js" type="text/javascript" charset="UTF-8"></script>
+<script src="js/formValidatorRegex.js" type="text/javascript" charset="UTF-8"></script>
+<script src="js/checkform.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+{%foreach from=$js item=list key=k%}
+var {%$k%}	= "{%$list%}";
+{%/foreach%}
+
+</script>
+<script>
+function checkform()
+{
+	ReadyValidator('form');
+	isempty('email','',emailblank,'','false','false','',emailblank);
+}
+</script>
+
+
+<!--[if IE 6]> 
+<script type="text/javascript" src="png.js"></script>
+<script>
+PNG.fix('*');
+</script>
+<![endif]-->
+<body onload="checkform()">
+
+{%include file="head.html"%}    <!--  body  开始  -->
+    <div class="bodys">
+        <div class="help"><span class="help_top">首页 >  会员中心 > <span class="help_color">账号管理</span></span>
+            <div class="help_bottom">
+                {%include file="left.html"%}
+                
+<div class="dd">
+                    <div class="help_right">
+                        <div class="dd_top"><span class="dd_t">会员信息</span></div>
+                        <div class="hyxx_list"><form id="form" method="post" action="?act=info_update" >
+                            <table width="60%" border="0" cellspacing="0" cellpadding="0" class="tl">
+                                
+                                <tr>
+                                    <td width="162" height="56" align="right" valign="top">用户名：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top" class="hyxx_size">{%$row_member.username%}</td>
+                                </tr>
+                                <tr>
+                                    <td height="56" align="right" valign="top">会员等级：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top" class="hyxx_size1">{%$user_rank%}</td>
+                                </tr>
+                                <tr>
+                                    <td height="56" align="right" valign="top">性别：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top" class="hyxx_size1">
+                                    <input type="radio" name="sex" value="0" id="sex" {%if $row_member.sex == 0%}checked="checked"{%/if%}/>保密
+                                    <input type="radio" name="sex" value="1" id="sex" {%if $row_member.sex == 1%}checked="checked"{%/if%} />男
+                                    <input type="radio" name="sex" value="2" id="sex" {%if $row_member.sex == 2%}checked="checked"{%/if%} />女
+                              
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="56" align="right" valign="top">手机号码：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top"><input name="mobile" type="text" class="hyxx_text" id="mobile" value="{%$row_member.mobile%}" /></td>
+                                </tr>
+                                <tr>
+                                    <td height="56" align="right" valign="top">邮箱：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top"><input name="email" type="text" class="hyxx_text" id="email" value="{%$row_member.email%}" /><span id="emailTip"></span></td>
+                                </tr>
+                                <tr>
+                                    <td height="56" align="right" valign="top">出生日期：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top"><input name="birthday" type="text" class="hyxx_text" id="birthday" value="{%$row_member.birthday%}" /></td>
+                                </tr>
+<!--                                <tr>
+                                    <td height="56" align="right" valign="top">信用额度：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top"><input name="user_money" type="text" class="hyxx_text" id="user_money" value="{%$row_member.user_money%}" /></td>
+                                </tr>-->
+                                <tr>
+                                    <td height="56" align="right" valign="top">MSN：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top"><input name="MSN" type="text" class="hyxx_text" id="MSN" value="{%$row_member.MSN%}" /></td>
+                                </tr>
+                                <tr>
+                                    <td height="56" align="right" valign="top">QQ：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top"><input name="QQ" type="text" class="hyxx_text" id="QQ" value="{%$row_member.QQ%}" /></td>
+                                </tr>
+                                <tr>
+                                    <td height="56" align="right" valign="top">固定电话：&nbsp;&nbsp;</td>
+                                    <td align="left" valign="top"><input name="telephone" type="text" class="hyxx_text" id="telephone" value="{%$row_member.telephone%}" /></td>
+                                </tr>
+                                <tr>
+                                    <td height="56" align="right" valign="top">&nbsp;</td>
+                                    <td align="left" valign="top">
+                                      <input type="image" name="imageField" id="imageField" src="templates/default/images/hyxx_4_1.jpg" />
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                           <!-- <table width="40%" border="0" cellspacing="0" cellpadding="0" class="tr" >
+                              <tr>
+                                <td height="120">
+                                
+                            <table width="120" border="0"  cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td height="120" align="center" id = 'screenshotsShow'>
+                                {%if $row_member.picurl%}
+                                <img src="{%$row_member.picurl%}" width="100" height="100" />
+                                {%else%}
+                                <img src="face/i_include/userface_default.gif" width="100" height="100" />
+                                {%/if%}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="center" height="30"><a href='javascript:;' onclick="faceshow()">请上传您的头像</a></td>
+                              </tr>
+                            </table>                                
+                            <input name="picurl" type="hidden" class="hyxx_text" id="picurl" value="{%$row_member.picurl%}" />
+                                </td>
+                              </tr>
+                            </table>  --> 
+                                                 
+                            </form>
+
+<div id='face'>
+     <div class="face_close tr" onclick="facehide()"></div>
+     <div class="cl">
+     <div class="dd_top" style="width:330px;"><span class="dd_t">上传头像</span></div>
+     <iframe src="face/start.html" width="330" height="277" frameborder="0" scrolling="no"></iframe>
+     </div>
+</div>
+
+
+                        </div>
+                    </div>
+                </div>                
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+    <!--  body  结束  -->
+{%include file="bottom.html"%}
+
+</body>
+</html>

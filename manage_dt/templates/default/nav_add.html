@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.nav_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" ></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script src="templates/default/js/getuploadify.js"></script>
+<script src="templates/default/js/getjcrop.js"></script>
+<script type="text/javascript" src="plugin/calendar/calendar.js"></script>
+</head>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+
+</script>
+<body>     
+<form action="" method="post" id="form" name="form" onsubmit="return cfm_nav();">
+    <div class="Form02">
+      <h3>{$lang.basic}</h3>
+      <table width="100%" border="0" class="v5-table05">
+	  <tr>
+        <td>{$lang.system_content}</td>
+        <td><SELECT name="menulist" id="menulist" onchange="add_main(this.value);">
+                <OPTION value="-">-</OPTION>     
+                {foreach from=$article item=list key=key}
+                <option value="10000{$key}">{if $list.str}|-{$list.str}{/if}{$list.classname}</option>
+                {/foreach}       
+                <option value="-">-</option>
+                {foreach from=$goods item=list key=key}
+                <option value="20000{$key}">{if $list.str}|-{$list.str}{/if}{$list.classname}</option>
+                {/foreach}             
+                  
+            </SELECT></td>
+      </tr>
+	  <tr>
+        <td><span class="red">*</span>{$lang.classname}</td>
+        <td><input type="text" name="classname" class="v5-input in180" id="classname"/></td>
+      </tr>
+      <tr>
+        <td><span class="red">*</span>{$lang.linkurl}</td>
+        <td><input type="text" name="linkurl" class="v5-input in180" id="linkurl"/></td>
+      </tr>
+       <tr>
+        <td>{$lang.orderid}</td>
+        <td><input type="text" name="orderid" class="v5-input in60" id="orderid" value="{$orderid}"  onKeyUp="value=value.replace(/[^\d]/g,'')" /></td>
+      </tr>
+      <tr>
+      <td>{$lang.position}</td>
+        <td>
+        	<select name="position" id="position">
+            {foreach from=$lang.position_child item=list key=key}
+            	<option value="{$key}">{$list}</option>
+            {/foreach}
+            </select>
+        </td>
+      </tr>
+      <td>{$lang.target}</td>
+        <td>
+        	<select name="target" id="target">
+            {foreach from=$lang.target_child item=list key=key}
+            	<option value="{$key}">{$list}</option>
+            {/foreach}
+            </select>
+        </td>
+      </tr>
+      <tr>
+        <td>{$lang.checkinfo}</td>
+        <td>
+        	<input name="checkinfo" type="radio" value="true" checked="checked" />&nbsp;{$lang.yes}&nbsp;
+            <input name="checkinfo" type="radio" value="false" />&nbsp;{$lang.no}
+        </td>
+      </tr>
+        </table>
+	</div>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" id="act" type="hidden" value="subadd" />
+</form>
+</body>
+</html>
+<SCRIPT language="JavaScript" type="Text/Javascript">
+var last;
+function add_main(key)
+{
+var sysm = new Object;
+	{foreach from=$article item=list key=key}
+	sysm[10000{$key}] = new Array();
+	sysm[10000{$key}][0] = '{$list.classname}';
+	sysm[10000{$key}][1] = 'news.php?cid={$list.id}';
+	{/foreach} 
+	
+	{foreach from=$goods item=list key=key}
+	sysm[20000{$key}] = new Array();
+	sysm[20000{$key}][0] = '{$list.classname}';
+	sysm[20000{$key}][1] = 'item_list.php?cid={$list.id}';
+	{/foreach} 
+	
+	if (key != '-')
+	{
+		if(sysm[key][0] != '-')
+		{
+			document.getElementById('classname').value = sysm[key][0];
+			document.getElementById('linkurl').value = sysm[key][1];
+			last = document.getElementById('menulist').selectedIndex;
+		}
+		else
+		{
+			if(last < document.getElementById('menulist').selectedIndex)
+			{
+				document.getElementById('menulist').selectedIndex ++;
+			}
+			else
+			{
+				document.getElementById('menulist').selectedIndex --;
+			}
+			last = document.getElementById('menulist').selectedIndex;
+			document.getElementById('classname').value = sysm[last-1][0];
+			document.getElementById('linkurl').value = sysm[last-1][1];
+		}
+	}
+	else
+	{
+		last = document.getElementById('menulist').selectedIndex = 1;
+		document.getElementById('classname').value = sysm[last-1][0];
+		document.getElementById('linkurl').value = sysm[last-1][1];
+	}
+}
+//-->
+</SCRIPT>

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.ads_category}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+</script>
+</head>
+<body>
+<form action="" method="post" id="form" name="form"> 
+    <input type="hidden" name="from" id="from"value="{$from}" />  
+    <input type="hidden" name="act" id="act" value="subdel" />        
+    <div class="pro_nr" id="header">
+        <span class="pro_bt">
+            <a href="javascript:location.reload();">
+            <img onmousemove="src='templates/default/images/pro_2.jpg'" onmouseout="src='templates/default/images/pro_1.jpg'" 
+            src="templates/default/images/pro_1.jpg" width="47" height="16"/>
+            </a>
+        </span>
+        <div class="pro_xx">
+            <div class="tl">
+                <span class="pro_tbl1">
+                	<a href="javascript:DialogIframe('ads_category.php?act=add','{$lang.ads_category_add}','80%','95%','','','','dosubmit');">
+                    <img src="templates/default/images/tbl1.jpg" align="left" />&nbsp;{$lang.ads_category_add}</a>
+                </span>
+                <span class="pro_tbl1">
+                	<a href="javascript:UpOrderID('ads_category.php');">
+                    	<img src="templates/default/images/flgl_1.jpg" align="left" />&nbsp;{$lang.action_orderid}
+                    </a>
+                </span>
+                <span class="pro_tbl3">
+                    <a href="javascript:;" onclick="return ConfDelAll('form');">
+                    <img src="templates/default/images/tbl2.jpg" align="left" />&nbsp;{$lang.action_del}</a>
+                </span>
+            </div>
+            <div class="tr">
+                 <a href="javascript:Upselect('ads_category.php','list');" class="tr"><img src="templates/default/images/pro_7.jpg" /></a>
+                <input type="text" class="pro_text v5-input in180" name="keyword" id="keyword" value="{$keyword}" />
+            </div>
+        </div>
+        <div class="pro_bt1">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="8%" height="30" align="center" valign="middle" class="pro_rb">
+                        <span class="tl">&nbsp;<input type="checkbox" name="checkbox" value="checkbox" onclick="chk_all($(this).attr('checked'))"/>&nbsp;
+                        </span>
+                        <a href="#"><img src="templates/default/images/pro_8.jpg" /></a>
+                    </td>
+                    <td width="20%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.action}</td>
+                    <td width="8%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.orderid}</td>
+                    <td width="8%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.id}</td>
+                    <td width="16%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.classname}</td>
+                    <td width="38%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.description}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="topheight"></div>
+     <div class="pro_nr">
+        <div class="pro_bottom">
+        	{if $info}
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            {foreach from=$info item=list}
+                <tr class="pro_bt2">
+                    <td width="8%" height="35" align="left" valign="middle" class="pro_tbr">
+                    	<span class="tl">&nbsp;
+                        <input type="checkbox" name="id[]" value="{$list.id}"  />
+                        </span>
+                        <a href="#">&nbsp;<img src="templates/default/images/pro_9.png" /></a>
+                    </td>
+                    <td width="20%" align="left" valign="middle" class="pro_tbr pro_l5">
+                    	
+                    	&nbsp;<a href="javascript:DialogIframe('ads_category.php?act=add&parentid={$list.id}','{$lang.ads_category_add}','80%','95%','','','','dosubmit');">{$lang.action_add}</a>
+                        &nbsp;<a href="ads_category.php?act=list&parentid={$list.id}">{$lang.action_manage}</a>
+        				&nbsp;<a href="javascript:DialogIframe('ads_category.php?act=edit&id={$list.id}','{$lang.ads_category_edit}','80%','95%','','','','dosubmit');">{$lang.action_edit}</a>
+                        {if $list.built_in eq 'true'}
+                        &nbsp;<a href="javascript:;">{$lang.xtblcategory} </a>
+                        {else}
+       					&nbsp;<a href="javascript:;" onclick="return ConfDel('ads_category.php?act=subdel&id={$list.id}&from={$from}');">{$lang.action_del}</a>
+                        {/if}
+                    </td>
+                    <td width="8%" align="left" valign="middle" class="pro_tbr">&nbsp;
+                    	<input type="hidden" name="ids[]" id="ids[]" value="{$list.id}" />
+                        <input type="text" name="orderid[]" id="orderid[]" class="input_gray_short" value="{$list.orderid}" />
+                    </td>
+                     <td width="8%" align="left" valign="middle" class="pro_tbr">&nbsp;{$list.id}</td>
+                    <td width="16%" align="left" valign="middle" class="pro_tbr">&nbsp;{$list.classname}</td>
+                    <td width="38%" align="left" valign="middle" class="pro_tbr">&nbsp;{$list.description}</td>
+                </tr>
+            {/foreach}
+            </table>
+            {else}
+       	  <div class="no_info">{$lang.no_info}</div>
+            {/if}
+            <div class="footheight"></div>
+        </div>
+        <div class="pro_bot" id="footer">
+            {$page} 
+       </div>
+   </div>
+</form>
+</body>
+</html>

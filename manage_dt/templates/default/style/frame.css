@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+/*全局设置*/
+body{margin:0;padding:0;font-size:12px;line-height:22px;font-family:"宋体";color:#000;-webkit-text-size-adjust:none;}
+html,body,div,dl,dt,dd,ol,ul,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,p{margin:0;padding:0;}
+*{padding:0;margin:0;}
+html,body{width:100%;height:100%;font-size:12px;overflow:hidden;z-index:1;}
+body a{outline:none;blr:expression(this.onFocus=this.blur());}
+ul,li{list-style:none;}img{border:0;}
+.cl{clear:both;}
+
+
+/*布局样式*/
+
+.left{position:absolute;top:85px;width:201px;left:0px;bottom:0px;z-index:7; display:block;background:url(../images/mb_bg.png);}
+.left{*height:expression(this.parentElement.parentElement.clientHeight-85);*top:0;*bottom:0;*z-index:1; *padding-top:85px;}
+.menu{height:100%;}
+.menu iframe{height:100%;width:99.99%;z-index:20;}
+.right{position:absolute;right:0;top:85px;bottom:0px;z-index:7;left:201px;}
+.right{*height:expression(this.parentElement.parentElement.clientHeight-85);*top:0;*bottom:0;*z-index:1;*padding-top:85px;background:url(../images/mb_bg.png);}
+.left_btn02{width:17px;height:50px;position:absolute;left:0;top:0; z-index:8; padding:0;}
+.main{height:100%;}
+.main iframe{height:100%;width:99.99%;z-index:20;}
+
+
+/*头部样式*/
+.header{height:85px;position:relative;z-index:10;width:100%}
+.logo{width:208px;height:50px;position:absolute;left:3px;top:26px;}
+.leftpic{width:600px;height:120px;position:absolute;left:-70px;top:215px;}
+.login_area{width:301px;height:343px;background:url(../images/login_bg.png);position:absolute;left:675px;top:160px;}
+.title{padding:3px 0 0 3px;height:47px;margin-bottom:29px;}
+.title a{display:block;width:147px;height:47px;text-align:center;line-height:47px;color:#626262;font-size:14px;float:left;}
+.title a:hover{background:url(../images/bg01.jpg);color:#626262;text-decoration:none;}
+.title a.on{display:block;width:147px;height:47px;text-align:center;line-height:47px;font-size:14px;float:left;background:url(../images/bg01.jpg);color:#626262;text-decoration:none;}
+
+.mainbody{width:100%;position:absolute;height:100%; background:url(../images/pic.jpg) top left}
+.mb_header{width:100%;min-height:85px; height:85px;background:url(../images/header_bg.jpg);}
+.logo03{width:324px;height:59px;float:left;padding:0 0 0 0px; margin-right:20px;}
+.mb_header_r{float:left; width:100% }
+
+.nav a{display:block;min-width:100px; width:auto;height:31px;text-align:center;line-height:31px;font-family:"微软雅黑";background:url(../images/mb_bg03.png);color:#333;float:left;margin-right:3px;display:inline; text-decoration:none; font-size:14px}
+.nav a:hover{color:#000;background:url(../images/mb_bg02.png);text-decoration:none;}
+.icon_list{height:54px;}
+.icon_list ul{ margin:10px 10px 0 0; float:right}
+.icon_list li{height:24px;line-height:24px;float:left;}
+.icon_list a{padding:0 15px 0 34px;color:#fff;}
+.icon_list a:hover{color:#fff;}
+.icon05{background:url(../images/icon05.png) no-repeat left center;}
+.icon06{background:url(../images/icon06.png) no-repeat left center;}
+.search{background:url(../images/mb_bg04.png);width:221px;height:24px;border:none;line-height:22px;padding-left:5px;}
+
+.icon01{background:url(../images/fk.png) no-repeat left center;}
+.icon02{background:url(../images/sy.png) no-repeat left center;}
+.icon03{background:url(../images/qc.png) no-repeat left center;}
+.icon04{background:url(../images/tc.png) no-repeat left center;}

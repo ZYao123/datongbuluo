@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+{%include file="inc_link.html"%}
+<link href="templates/default/style/webstyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<!--[if IE 6]> 
+<script type="text/javascript" src="png.js"></script>
+<script>
+PNG.fix('*');
+</script>
+<![endif]-->
+<body>
+
+{%include file="head.html"%}    <!--  body  开始  -->
+    <div class="bodys">
+        <div class="help"><span class="help_top">首页 >  会员中心 > <span class="help_color">账号管理</span></span>
+            <div class="help_bottom">
+                {%include file="left.html"%}
+                
+<div class="dd">
+                    <div class="help_right"><span class="dd_wz"></span>
+                        <div class="dd_top"><span class="dd_t">我的积分</span></div>
+                        <div class="hyxx_list">
+                            <table width="1065" border="0" cellspacing="0" cellpadding="0">
+                        
+                                <tr>
+                                    <td width="162" height="40" align="left" valign="top">当前拥有积分：<span class="jifen">{%$points_member.integral%}</span> 积分&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr>
+                                  <td height="56" align="right" valign="top">
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                  {%if $points%}
+                                 
+									<tr>
+                                    <td height="28" align="left" valign="middle" class="help_back"><span class="yidong">来源</span></td>
+                                    <td width="218" align="center" valign="middle" class="help_back"> 积分 </td>
+                                  
+                                    <td width="263" align="center" valign="middle" class="help_back">日期</td>
+                                    <td width="133" align="center" valign="middle" class="help_back">类型</td>
+                               		</tr>
+                                     {%foreach from=$points item=list%}
+                                	<tr>
+                                  	<td height="38" align="left" valign="middle" class="help_bor ys1">{%$list.jianjie%}</td>
+                                    <td align="center" valign="middle" class="help_bor">{%if $list.zt==1%}{%$list.integral%}{%else%}<font color="#FF0000">{%$list.integral%}</font>{%/if%}</td>
+                                 
+                                    <td align="center" valign="middle" class="help_bor">{%getdateTime($list.posttime)%}</td>
+                                    <td align="center" valign="middle" class="help_bor ys4">{%if $list.zt==1%}增加{%else%}<font color="#FF0000">扣除</font>{%/if%}</td>
+                                	</tr>
+                                     {%/foreach%}
+                                	<tr>
+                                	  <td height="28" colspan="5" align="right" valign="middle">{%$page%}</td>
+                               	    </tr>
+                                    {%else%}
+                                    <tr>
+                                	  <td height="28" colspan="5" align="center" valign="middle">亲，您还没有积分哦</td>
+                               	    </tr>
+                                    {%/if%}
+                                   
+								</table>
+</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>                
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+    <!--  body  结束  -->
+{%include file="bottom.html"%}
+
+</body>
+</html>

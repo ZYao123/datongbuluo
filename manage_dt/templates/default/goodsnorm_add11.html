@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.goods_attribute_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script type="text/javascript" src="plugin/colorpicker/colorpicker.js"></script>
+
+</head>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+i=1;
+</script>
+<body>   
+<form action="" method="post" id="form" name="form" onsubmit="return cfm_goodsnorm();">
+  <div class="Form02">
+    <h3>{$lang.basic}</h3>
+      <table width="100%" border="0" class="v5-table05">
+          <tr>
+              <td width="150" align="right"><span class="red">*</span>{$lang.normname}：</td>
+              <td>
+                  <input type="text" name="normname" class="v5-input in180" id="normname"/>
+              </td>
+          </tr>
+          <tr>
+              <td width="150" align="right">{$lang.rename}：</td>
+              <td>
+                  <input type="text" name="rename" class="v5-input in180" id="rename"/>
+              </td>
+          </tr>
+          <tr>
+              <td width="150" align="right">{$lang.classname}：</td>
+              <td>
+                  <input type="text" name="classname" class="v5-input in180" id="classname"/>
+              </td>
+          </tr>
+          <tr>
+              <td align="right">{$lang.rdotype}：</td>
+              <td>
+                  <input name="rdotype" type="radio" value="text"  checked="checked" onclick="shownorm('text')"/>&nbsp;{$lang.rdotype_text}&nbsp;
+                  <input name="rdotype" type="radio" value="color" onclick="shownorm('color')"/>&nbsp;{$lang.rdotype_color}&nbsp;
+                  <input name="rdotype" type="radio" value="image" onclick="shownorm('image')"/>&nbsp;{$lang.rdotype_image}
+              </td>
+          </tr>
+            
+          <tr>
+              <td align="right">
+           		  {$lang.spec}<span class="cnote"><a href="javascript:AddDmTr('tboption', '');">[+]</a></span>：
+              </td>
+              <td>
+               	  <table border="0" cellspacing="0" cellpadding="0" align="left" id="tboption" >
+                      <tr>
+                          <td> 
+                              <span class="delvote">[<a href="javascript:;" onclick="DelDmTr($(this),'')">-</a>]</span>
+                              <span class="delvote"><span class="red">*</span>{$lang.name}：<input type="hidden" name="norm[0][id]"/><input type="text" name="norm[0][name]"  class="v5-input in180"/>&nbsp;</span>
+                              <span class="dn" name="color[]">{$lang.color}：<input type="text" name="norm[0][color]" id="color_1"  class="v5-input in180" onclick="colorpicker('colorpanel_1', 'color_1', 'color_1');" /> <span id="colorpanel_1"></span> &nbsp;</span>
+                             <span class="dn" name="image[]">{$lang.pic}：<input type="text" name="norm[0][pic]" id="pic_1"  class="v5-input in180" /> <a href="javascript:;" onclick="showupload('pic_1')">{$lang.uploadpic}</a></span>
+                          </td>
+                      </tr>
+                  </table>
+              </td>
+          </tr>
+          <tr>
+              <td align="right">{$lang.orderid}：</td>
+              <td>
+                  <input type="text" id="orderid" name="orderid" class="v5-input in60" value="{$orderid}" onKeyUp="value=value.replace(/[^\d]/g,'')">
+                  </td>
+          </tr>
+          <tr>
+              <td align="right">{$lang.compile}：</td>
+              <td>
+                  <input name="compile" type="radio" value="true"/>&nbsp;{$lang.yes}&nbsp;
+                  <input name="compile" type="radio" value="false" checked="checked" />&nbsp;{$lang.no}
+              </td>
+          </tr>
+          <tr>
+              <td align="right">{$lang.checkinfo}：</td>
+              <td>
+                  <input name="checkinfo" type="radio" value="true" checked="checked" />&nbsp;{$lang.yes}&nbsp;
+                  <input name="checkinfo" type="radio" value="false" />&nbsp;{$lang.no}
+              </td>
+          </tr>
+      </table>
+	</div>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" id="act" type="hidden" value="subadd" />
+</form>
+</body>
+</html>

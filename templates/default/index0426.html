@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$webname%}</title>
+{%include file="inc_link.html"%}
+<script type="text/javascript">
+$(function(){
+	$(".product_tp img").LoadImage({width:116,height:89});
+	$(".xsqg img").LoadImage({width:162,height:131});
+	$(".handout01 img").LoadImage({width:181,height:146});
+});
+function checkSearchForm(){
+   	var key = $('#keyword').val();
+	if(key=='' || key==undefined){
+		alert('搜索不能为空');
+		$('#keyword').focus();
+		return false;
+	}
+	return true;
+}
+</script>
+</head>
+<body>
+<!--  header  开始  -->
+<div class="header">
+	{%include file="head_top.html"%}
+	<div class="header_middle">
+    
+	<div style="width:410px;float:left;position: relative!important;">
+		<h1 class="logo">
+			{%foreach from=GetArticle_list(28,1) item=list%}
+					{%$list.content%}
+			{%/foreach%}
+		</h1>
+		<div style="float:left;">
+			<div style="color:#999;float:left;padding-right:10px;height:46px;line-height:46px;">点击扫描二维码</div>
+			<div style="float:left;cursor:pointer;" onmouseover="javascript:chengimg(0);" onmouseout="javascript:chengimg(1);">
+				<img src="templates/default/images/tel_erm.jpg" id="erm_img"/>
+				<div class="sn-qrcode" style="display: none;">
+					<div class="sn-qrcode-content" style="background: url(include/qr_code.php)">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+		function chengimg(sign)
+		{
+			if(!sign)
+			{
+				$("#erm_img").attr("src",'templates/default/images/tel_erm_hover.jpg');
+				$('.sn-qrcode').show();
+			}else
+			{
+				$("#erm_img").attr("src",'templates/default/images/tel_erm.jpg');
+				$('.sn-qrcode').hide();
+			}
+
+		}
+		</SCRIPT>
+	</div>
+	<div class="ss">
+		<div class="ss_top">
+		<form id="searchForm" name="searchForm" method="get" action="item_list.php" onSubmit="return checkSearchForm()">
+			
+			 <input name="keywords" type="text" id="keyword" onkeyup="keyupdeal(event,this.value);" onkeydown="keydowndeal(event);" onclick="keyupdeal(event,this.value);" onblur="closediv();"  autocomplete="off" class="text" value="{%$keywords%}"/>
+			 <input name="" type="image" src="templates/default/images/index_3.jpg" />
+		</form>
+		<div id="search_suggest" style="display:none;top:200px;left:757px;" onmouseover='javascript:_over();' onmouseout='javascript:_out();'></div>
+		</div>
+		<div class="ss_link">热门搜索：{%if $hotkeywords%}
+		{%foreach from=$hotkeywords item=list key=k%}
+		<a href='item_list.php?keywords={%$list%}'>{%$list%}</a>&nbsp;
+		{%/foreach%}
+		{%/if%}</div>
+	</div>
+	<div class="header_right">
+		<span class="header_wz">
+			<span class="cd_dw" style="background:url(templates/default/images/index_4.jpg) center no-repeat; color:#FFF; text-align:center;">
+			{%$shop_item_num%}
+			</span>
+		</span>
+		<span class="cd"><a href="shopcart.php?act=list">去购物车结算</a> </span>
+	</div>
+</div>
+
+<div class="header_bottom">
+	<div class="fl">
+		<span class="fl_title"><a href="#"><img src="templates/default/images/tb13.jpg" /></a>全部分类</span>
+		<div class="fl_list">
+			<ul>
+			{%foreach from=GetGoodsType('428',6) item=list key=k%}
+				<li>
+					<span class="tb2_{%$k%}"></span>&nbsp;<strong>
+					<a href="item_list.php?cid={%$list.id%}">{%$list.classname%}</a></strong><br />
+					{%foreach from=GetGoodsType($list.id,6) item=list1 key=k%}
+					<a href="item_list.php?cid={%$list1.id%}">{%$list1.classname%}</a>
+					{%/foreach%}
+				</li>
+			{%/foreach%}
+			</ul>
+		</div>
+	</div>
+	<div class="header_b_right">
+		<div class="nav">
+			<ul>
+				<li><a href="index.php">首页</a></li>
+				{%foreach from=GetNav('middle') item=list key=key%}
+				<li><a href="{%$list.linkurl%}" target="{%$list.target%}">{%$list.classname%}</a></li>
+				{%/foreach%}
+			</ul>
+		</div>
+		<div class="xbnr">
+			<div class="xbnr_left">
+				<div class="tpqh">
+					<!-- 幻灯片代码开始 -->
+				<script language='javascript'>
+				linkarr = new Array();
+				picarr = new Array();
+				//textarr = new Array();
+				var swf_width=730;
+				var swf_height=341;
+				//文字颜色|文字位置|文字背景颜色|文字背景透明度|按键文字颜色|按键默认颜色|按键当前颜色|自动播放时间|图片过渡效果|是否显示按钮|打开方式
+				var configtg='0xffffff|2|0xcecece|8|0xffffff|0xDA202C|0x000033|4|3|1|_blank';
+				var files = "";
+				var links = "";
+				var texts = "";
+				//这里设置调用标记
+
+				{%foreach from=GetArticle_list(30,5,'image') item=list key=k%}  
+				linkarr[{%$k+1%}]='ads.php?id={%$list.id%}';
+				picarr[{%$k+1%}]='{%$list.picurl%}';
+				{%/foreach%}		
+				
+				
+				for(i=1;i<linkarr.length;i++){
+				if(links=="") links = linkarr[i];
+				else links += "|"+linkarr[i];
+				}
+				for(i=1;i<picarr.length;i++){
+				if(files=="") files = picarr[i];
+				else files += "|"+picarr[i];
+				}
+				document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ swf_width +'" height="'+ swf_height +'">');
+				document.write('<param name="movie" value="templates/default/images/bcastr3.swf"><param name="quality" value="high">');
+				document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
+				document.write('<param name="FlashVars" value="bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'&bcastr_config='+configtg+'">');
+				document.write('<embed src="templates/default/images/bcastr3.swf" wmode="opaque" FlashVars="bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'&bcastr_config='+configtg+'&menu="false" quality="high" width="'+ swf_width +'" height="'+ swf_height +'" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />'); document.write('</object>');
+				</script>
+				<!--幻灯片代码结束-->
+				</div>
+				<div class="product">
+					<span class="an" style="cursor: pointer;z-index:999;" onClick="r_left1()">
+					<img src="templates/default/images/index_7.jpg" />
+					</span>
+					<div class="product_list">
+						<DIV id=demo style="OVERFLOW: hidden; WIDTH:100%; COLOR: #ffffff; float:left">
+						<TABLE cellSpacing=0 cellPadding=0 align=left border=0 cellspace="0">
+						  <TBODY>
+							<TR>
+							  <TD id=demo1 vAlign=top><table width="663" border="0" cellpadding="0" cellspacing="0">
+								  <tr>
+									  {%foreach from=GetGoods(0,1) item=list%}
+										<td><span class="product_border x" style="width:115px;padding:0 17px;">
+										<span class="product_wz" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;width:120px;">
+											{%$list.title%}
+										</span>
+									  <span class="product_tp" style="width:120px;"> 
+									  <a href="item_show.php?cid={%$list.classid%}&id={%$list.id%}"><img src="{%$list.picurl%}" width="120" height="89" /></a></span></span></td>
+									  {%/foreach%}
+								  </tr>
+								</table></TD>
+							  <TD id=demo2 vAlign=top>&nbsp;</TD>
+							</TR>
+						  </TBODY>
+						</TABLE>
+					  </DIV>
+						<script language=JavaScript src="js/scrollpic.js"></script>
+					</div>
+					<span class="an1" style="cursor: pointer;z-index:999;" onClick="r_right1()"><img src="templates/default/images/index_11.jpg" /></span></div>
+				</div>
+				<div class="xbnr_right">
+					<div class="new">
+						<span class="new_title">最新消息</span>
+						<div class="new_list">
+							<ul>
+								{%foreach from=GetArticle_list(14,4) item=list%}
+								<li><a href="news_info.php?cid={%$list.classid%}&id={%$list.id%}">·{%$list.title%} </a></li>
+								{%/foreach%}
+							</ul>
+						</div>
+						<span class="new_more"><A href="news.php?cid=14">查看更多>></A></span>
+					</div>
+					<div class="tp">
+						{%foreach from=GetArticle_list(31,1) item=list%}
+						<span class="tl">{%$list.content%}</span>
+						{%/foreach%}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  header  结束  --> 
+
+<!--  body  开始  -->
+<div class="body">
+	<div class="top">
+		<div class="qg">
+			<div class="qg_title"><span class="qg_bt">精品推荐</span>
+				<div class="qg_link">
+					<table width="576" border="0" >
+						<tr>
+							{%foreach from=GetGoodsType('436',5) item=list key=k%}
+								<td width="104" align="center" valign="middle" class="qg_link1">
+								<a href="item_list.php?cid={%$list.id%}">{%$list.classname%}</a>
+								</td>
+							{%/foreach%}
+						</tr>
+					</table>
+				</div>
+				<div class="qg_list">
+					<ul>
+						{%foreach from=GetGoods(0,8,5) item=list%}
+						<li class="handout" onmousemove="this.className='handon'" onmouseout="this.className='handout'"><span class="tl"><a href="item_show.php?cid={%$list.classid%}&id={%$list.id%}" class="xsqg"><img src="{%$list.picurl%}" width="162" height="131" /></a></span><span class="qg_wz"><span class="qq_wz02">{%$list.title%}</span> <span class="color3">抢购价：</span><span class="color2">￥{%$list.price%}</span></span></li>
+						{%/foreach%}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--品牌推荐-->      
+		<div class="link">
+			<ul>
+				{%foreach from=get_brand(0,14) item=list%}
+				<li><a href="{%$list.url%}"><img src="{%$list.logo%}" width="90" height="28" /></a></li>
+				{%/foreach%}
+			</ul>
+		</div>
+	</div>
+	<!-- 楼层开始-->
+	{%$i=0%}
+	{%foreach from=GetGoodsType(428,5) item=list key=k%}
+	<div class="floor">
+	
+		<div class="floor_title{%if $i!=0%}{%$i%}{%/if%}">
+			<div class="floor_link">
+				<ul>
+					{%foreach from=GetGoodsType($list.id,5) item=list1 %}
+					<li><a href="item_list.php?cid={%$list1.id%}">{%$list1.classname%}</a></li>
+					{%/foreach%}
+				</ul>
+			</div>
+			{%$i=$i+1%}
+			{%$i%}F{%$list.classname%}
+		</div>
+		
+		<div class="floor_bottom">
+			<div class="floor_left">
+				<div class="floor_wz"><a href="item_list.php?cid={%$list.id%}">{%$list.classname%}>></a></div>
+				<ul>
+					{%foreach from=GetArticle_list({%33+$k%}) item=list_article%}
+					<li>{%$list_article.content%}</li>
+					{%/foreach%}
+				</ul>
+			</div>
+			
+			<div class="floor_list">
+				<ul>
+					{%foreach from=GetGoods($list.id,3,8) item=goodslist%}
+					<li class="handout01" onmousemove="this.className='handon01'" onmouseout="this.className='handout01'"><span class="floor_tp"><a href="item_show.php?id={%$goodslist.id%}&cid={%$goodslist.classid%}"><img src="{%$goodslist.picurl%}" width="181" height="146" /></a></span><span class="floor_wz1"><span class="floor_wz102">{%$goodslist.title%}</span>
+					<strong class="color4">￥{%$goodslist.price%}</strong></span></li>
+					{%/foreach%}
+				</ul>
+			</div>
+			
+			<div class="floor_right">
+				<div class="floor_tp1"></div>
+				<div class="floor_right_list">
+					<ul>
+						{%foreach from=GetArticle_list({%38+$k%}) item=list%}
+						<li>{%$list.content%}</li>
+						{%/foreach%}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	{%/foreach%}
+	<!-- 楼层结束-->
+</div>
+<!--  body  结束  --> 
+{%include file="bottom.html"%}
+</body>
+</html>

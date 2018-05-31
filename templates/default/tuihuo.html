@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>{%$webname%}</title>
+<meta name="generator" content="{%$generator%}" />
+<meta name="keywords" content="{%$keyword%}" />
+<meta name="description" content="{%$description%}" />
+<link href="templates/default/style/webstyle.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body{ background:none;}
+</style>
+</head>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+function tunkuan_cfm_msg()
+{
+
+	
+	if($("#content").val() == "")
+	{
+		alert("请填写退货理由！");
+		$("#content").focus();
+		return false;
+	}
+	$("#form").submit();
+}
+
+$(function(){
+
+	
+	
+	$("#content").focus(function(){
+		$("#content").attr("class", "msg_input_on"); 
+	}).blur(function(){
+		$("#content").attr("class", "msg_input"); 
+	});
+
+	$("#title").focus();
+});
+</script>
+<body >
+<div class="subCont">
+			
+			<form name="form" id="form" method="post" action="member.php?act=tuihuo_add">
+				<span class="msgtitle">退货备注：</span><textarea name="content" class="msg_input" style="width:400px;height:60px;overflow:auto;" id="content" ></textarea>
+				<div class="msg_btn_area"> <a href="javascript:void(0);" onclick="tunkuan_cfm_msg();return false;">提　交</a></div>
+				<input type="hidden" name="oid"  value="{%$oid%}" />
+			</form>
+		
+			
+		</div>
+</body>
+</html>

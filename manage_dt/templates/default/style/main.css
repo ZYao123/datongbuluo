@@ -1,0 +1,17 @@
+/*reset*/
+
+
+/*focus*/
+.focus {overflow:hidden;position:relative; margin:0;padding:0; z-index:-10000;height:613px}
+.focus_m ul {width:100%;overflow:hidden;height:613px}
+.focus_m li {width:100%;_float:left;height:613px}
+.focus_s li.active b {margin-top:-20px;}
+.focus_l,.focus_r {position:absolute;display:block;width:50px;height:75px;overflow:hidden;z-index:2;top:200px;}
+.focus_l {left:0;}
+.focus_r {right:0;}
+.focus_l b,.focus_r b {position:absolute;z-index:1;display:block;width:50px;height:75px;overflow:hidden;background:#000;opacity:0.3;filter:alpha(opacity=30);cursor:pointer;}
+.focus_l span,.focus_r span {display:block;position:relative;z-index:2;width:22px;height:33px;top:21px;cursor:pointer;}
+.focus_l span {left:12px;background:url(../images/l.png) 0 0 no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=noscale, src='../images/l.png');_background:none;}
+.focus_r span {left:16px;background:url(../images/r.png) 0 0 no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=noscale, src='../images/r.png');_background:none;}
+.focus_l:hover,.focus_r:hover {*zoom:1;}
+.focus_l:hover b,.focus_r:hover b {opacity:0.5;filter:alpha(opacity=50);}

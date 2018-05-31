@@ -1,0 +1,6 @@
+INSERT INTO `lc_link` VALUES('4','shopx','','uploads/image/20141115/1416045296.jpg','baidu.com','1','2014','true');
+INSERT INTO `lc_link` VALUES('5','shopx','','uploads/image/20141115/1416042971.jpg','baidu.com','2','2014','true');
+INSERT INTO `lc_link` VALUES('6','shopx','','uploads/image/20141115/1416042420.jpg','baidu.com','3','2014','true');
+INSERT INTO `lc_link` VALUES('7','shopx','','uploads/image/20141115/1416047238.jpg','baidu.com','4','2014','true');
+INSERT INTO `lc_link` VALUES('8','shopx','','uploads/image/20141115/1416040556.jpg','baidu.com','5','2014','true');
+INSERT INTO `lc_link` VALUES('9','shopx','','uploads/image/20141115/1416046293.jpg','baidu.com','6','2014','true');

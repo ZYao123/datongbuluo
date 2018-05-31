@@ -1,0 +1,1 @@
+INSERT INTO `lc_shopship` VALUES('1','快递','0','true','已集成快递100的接口，可在线查看快件的物流信息','1.0','LCSHOP开发组','3b982079fb18b4eb');

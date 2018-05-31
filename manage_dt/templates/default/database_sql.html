@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.db_sql}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script type="text/javascript" src="templates/default/js/db.func.js"></script>
+</head>
+<script>
+{foreach from=$lang.js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+</script>
+<body>
+<form name="form" id="form" method="post" action="?act=runsql" onsubmit="return mfg_sqlquery();">
+	<table width="95%" border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top:20px">
+		<tr align="center" class="mgr_tr">
+			<td align="center" valign="middle" style="background:#f2f2f2;padding:5px;"><textarea id="sqlquery" name="sqlquery" style="width:100%;height:200px;border:0;overflow:auto;"></textarea></td>
+		</tr>
+	</table>
+	<div class="mgr_divb">
+		<div class="selall">
+			<input value="0" type="radio" name="querytype" />
+			{$lang.querytype_0}
+			<input value="2" checked="checked" type="radio" name="querytype" />
+			{$lang.querytype_2} </div>
+		<span class="mgr_btn"><a href="javascript:runsql()">{$lang.querytype_submit}</a></span> </div>
+</form>
+
+</body>
+</html>
+<script>
+function runsql()
+{
+	sqlquery  = $('#sqlquery').text();
+	querytype   = '2';
+	$("input[name^='querytype']").each(function(index){
+		if($(this).attr("checked"))
+		{
+			querytype = $(this).val();
+		}
+	});
+	DialogIframe('database.php?act=runsql&sqlquery='+sqlquery+'&querytype='+querytype,'{$lang.sql_query}','50%','50%','','NULL','NULL','dosubmit');
+	}
+</script>

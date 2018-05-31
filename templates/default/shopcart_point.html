@@ -1,0 +1,27 @@
+
+<div class="p_top" >
+			<span class="p_t">　使用中的购物券（如果想更换购物券直接重新添加）</span>
+</div>
+<table width="500" border="0" cellspacing="0" cellpadding="0">							
+	<tr>
+		<td width="40%" height="28" align="center" valign="middle" class="help_back">标题</td>
+		<td width="10%" height="28" align="center" valign="middle" class="help_back">券码</td>
+		<td width="15%" align="center" valign="middle" class="help_back">面值</td>
+		<td width="15%" align="center" valign="middle" class="help_back">条件</td>
+		<td width="10%" align="center" valign="middle" class="help_back">有效期</td>
+	</tr>
+	{%assign var="list" value=get_menmberPoint()%}
+	<tr>
+		<td height="81" align="center" valign="middle" class="help_bor ys1">
+			<span class="ys">{%$list.title%} </span></td>
+		<td align="center" valign="middle" class="help_bor"><span class="ys3">{%$list.password%}</span>
+		<td align="center" valign="middle" class="help_bor"><span class="ys3">￥{%$list.money%}</span>
+		</td>
+		<td align="center" valign="middle" class="help_bor">
+		<span class="ys3">￥{%$list.meet_money%}</span>
+		</td>
+		<td align="center" valign="middle" class="help_bor">
+		<span class="ys3">{%$list.day%}天</span>
+		</td>
+	</tr>
+</table>											

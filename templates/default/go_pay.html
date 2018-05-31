@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$title%}--{%$webname%}</title>
+<link href="templates/default/style/shopcart.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/lcshopz.js"></script>
+<!--[if IE 6]> 
+<script type="text/javascript" src="png.js"></script>
+<script>
+PNG.fix('*');
+</script>
+<![endif]-->
+</head>
+<body>
+<div class="gwc1">
+    <!--  header  开始  -->
+    <div class="gwc_header">
+        {%include file="shopcarthead.html"%}
+        <div class="gwc_top">
+            <div class="gwc_top_left"><a href='index.php'><img src="{%$LOGO.picurl%}"class="tl" /></a></div>
+            <div class="gwc_top_right">
+                <div class="gwc_lc gwc_lc_3"><span class="gwc_lc_w1"><img src="templates/default/images/1.jpg" align="left" />&nbsp;我的购物车</span><span class="gwc_lc_w2"><img src="templates/default/images/gwc_5.jpg" align="left" />&nbsp;确认订单信息</span><span class="tl color_white" ><img src="templates/default/images/3.jpg" align="left" />&nbsp;付款</span></div>
+            </div>
+        </div>
+    </div>
+    <!--  header  结束  -->
+    <!--  body  开始  -->
+    <div class="gwc_body">
+    {%$html_text%}
+    </div>
+    <div style="clear:both"></div>
+    <!--  body  结束  -->
+</div>
+{%include file="shopcartbottom.html"%}
+</body>
+</html>

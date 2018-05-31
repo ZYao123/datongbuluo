@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.order_list}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<link href="templates/default/style/admin1.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+
+</script>
+</head>
+<body>
+    <div class="pro_nr" id="header">
+   		<span class="pro_bt">
+            <a href="javascript:location.reload();">
+            <img onmousemove="src='templates/default/images/pro_2.jpg'" onmouseout="src='templates/default/images/pro_1.jpg'" src="templates/default/images/pro_1.jpg" width="47" height="16"/>
+            </a>
+        </span>
+   		<div class="pro_bt1" style="margin-top:4px;">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="10%" align="center" valign="middle" class="pro_rb" height="30">&nbsp;{$lang.title}</td>
+                    <td width="30%" align="center" valign="middle" class="pro_rb">&nbsp;{$lang.description}</td>
+                    <td width="12%" align="center" valign="middle" class="pro_rb">&nbsp;{$lang.version}</td>
+                    <td width="12%" align="center" valign="middle" class="pro_rb">&nbsp;{$lang.author}</td>
+                    <td width="15%" align="center" valign="middle" class="pro_rb">&nbsp;{$lang.apikey}</td>
+                  <td align="center" valign="middle">&nbsp;{$lang.action}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="height:54px;"></div>
+    <div class="pro_nr">
+        <div class="pro_bottom">
+        {if $info}
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                {foreach from=$info item=list}
+                 <tr>
+                   <td width="10%" align="center" valign="middle" class="pro_tbr pro_pr">
+                      &nbsp;{$list.title} 
+                   </td>
+                   <td width="30%" align="left" valign="middle" class="pro_tbr pro_pr">{$list.description}</td>
+                    <td width="12%" align="left" valign="middle" class="pro_tbr pro_pr">&nbsp;{$list.version}</td>
+                    <td width="12%" align="left" valign="middle" class="pro_tbr pro_pr">{$list.author}</td>
+                    <td width="15%" align="left" valign="middle" class="pro_tbr pro_pr">{$list.apikey}</td>
+                    <td align="center" valign="middle" class="pro_tbr pro_pr"><a href="javascript:;" onclick="javascript:DialogIframe('shopship.php?act=edit&id={$list.id}&from={$from}','{$lang.shop_ship_edit}','50%','50%','','','','dosubmit');">{if $list.checkinfo eq 'true'}{$lang.action_Disabled}{else}{$lang.action_Enable}{/if}</a></td>
+                </tr>  
+                {/foreach}
+            </table>
+            {else}
+       	  <div class="no_info">{$lang.no_info}</div>
+            {/if}
+            <div style="height:10px;"></div>
+            <div class="pro_tbr" style="font-size:14px; text-align:center; font-weight:bold">{$lang.SetupTitle}[<a href='https://code.google.com/p/kuaidi-api/wiki/Open_API_API_URL' style="color: #0080C0" target="_blank">{$lang.ViewShipCompany}</a>]</div>
+<form name="form" id="form" method="post" action="shopship.php?act=save">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="mgr_table">
+		<tr align="center" class="thead">
+			<td width="5%" height="30" align="center"><input type="checkbox" name="checkid" id="checkid"  onclick="chk_all($(this).attr('checked'))"></td>
+			<td width="5%" align="center">ID</td>
+		  <td align="left">{$lang.ShipCompanyCode}</td>
+		  <td width="25%" align="left">{$lang.ShipCompany}</td>
+			<td width="20%" align="center">{$lang.ShipOrderid}</td>
+			<td width="18%" align="center">{$lang.action}</td>
+		</tr>
+        {if $postmodeinfo}
+        {foreach from=$postmodeinfo item=list}
+		<tr align="center" class="mgr_tr">
+			<td height="32"><input type="checkbox" name="id[]" id="id[]" value="{$list.id}" /></td>
+			<td>{$list.id}
+			  <input type="hidden" name="checkid[]" id="checkid[]" value="{$list.id}" /></td>
+			<td align="left"><input type="text" name="classid[]" id="classid[]" class="input_gray" value="{$list.classid}" /></td>
+			<td align="left"><input type="text" name="classname[]" id="classname[]" class="input_gray" value="{$list.classname}" /></td>
+			<td><!--<a href="postmode_save.php?id={$list.id}&orderid={$list.orderid}&action=up"><img src="templates/default/images/up.gif" title="向上移动" /></a> -->
+			  <input type="text" name="orderid[]" id="orderid[]" class="input_gray_short" value="{$list.orderid}" />
+			  <!--<a href="postmode_save.php?id={$list.id}&orderid={$list.orderid}&action=down"><img src="templates/default/images/down.gif" title="向下移动" /></a> --></td>
+			<td class="action"><span>[<a href="javascript:;" onclick="return ConfDel('shopship.php?act=PostmodeDel&id={$list.id}&from={$from}')">{$lang.action_del}</a>]</span></td>
+		</tr>
+        {/foreach}        
+        {else}
+		<tr align="center">
+			<td colspan="6" class="mgr_nlist">{$lang.no_info}</td>
+		</tr>        
+        {/if}
+                    
+		<tr align="center">
+			<td height="25" colspan="6" class="tr_green">{$lang.ShipAddOne}</td>
+		</tr>
+		<tr align="center" class="mgr_tr">
+			<td height="32">&nbsp;</td>
+			<td>{$lang.ShipIncrement}</td>
+			<td align="left"><input type="text" name="classidadd" id="classidadd" class="input_gray" /></td>
+			<td align="left"><input type="text" name="classnameadd" id="classnameadd" class="input_gray" /></td>
+			<td><input type="text" name="orderidadd" id="orderidadd" class="input_gray_short" value="{$orderidadd}" /></td>
+			<td class="mgr_action"><input type="hidden" name="checkinfoadd" value="true" checked="checked"  /><input type="hidden" name="from" id="from" value="{$from}" />  </td>
+		</tr>
+	</table>
+</form>
+      </div>
+        <div class="pro_bot" id="footer">
+           
+
+	<div class="selall"><span>{$lang.ShipSelect}：</span><a href="javascript:;" onclick="return PostmodeDelAll('form','shopship.php');">{$lang.action_del}</a>&nbsp;&nbsp;{$lang.ShipTotal}<span>{$postmodecount}</span>{$lang.ShipCount}</div>
+	<span class="mgr_btn"><a href="#" onclick="form.submit();">{$lang.ShipUpdateAll}</a></span> 
+  
+        </div>
+	</div>
+</body>
+</html>

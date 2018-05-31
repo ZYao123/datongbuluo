@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.goods_norm_edit}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script type="text/javascript" src="plugin/colorpicker/colorpicker.js"></script>
+
+</head>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+i={$countcheck};
+</script>
+<body onload="shownorm('{$info.rdotype}')" >   
+<form action="" method="post" id="form" name="form" onsubmit="return cfm_goodsnorm();">
+  <div class="Form02">
+    <h3>{$lang.basic}</h3>
+      <table width="100%" border="0" class="v5-table05">
+          <tr>
+              <td width="150" align="right"><span class="red">*</span>{$lang.normname}：</td>
+              <td>
+                  <input type="text" name="normname" class="v5-input in180" id="normname" value="{$info.normname}"/>
+              </td>
+          </tr>
+          <tr>
+              <td width="150" align="right">{$lang.rename}：</td>
+              <td>
+                  <input type="text" name="rename" class="v5-input in180" id="rename" value="{$info.rename}"/>
+              </td>
+          </tr>
+          <tr>
+              <td width="150" align="right">{$lang.classname}：</td>
+              <td>
+                  <input type="text" name="classname" class="v5-input in180" id="classname" value="{$info.classname}"/>
+              </td>
+          </tr>
+          <tr>
+              <td align="right">{$lang.rdotype}：</td>
+              <td>
+                  <input name="rdotype" type="radio" value="text" onclick="shownorm('text')"{if $info.rdotype == 'text'} checked="checked" {/if}/>&nbsp;{$lang.rdotype_text}&nbsp;
+                  <input name="rdotype" type="radio" value="color" onclick="shownorm('color')"{if $info.rdotype == 'color'} checked="checked" {/if}/>&nbsp;{$lang.rdotype_color}&nbsp;
+                  <input name="rdotype" type="radio" value="image" onclick="shownorm('image')"{if $info.rdotype == 'image'} checked="checked" {/if}/>&nbsp;{$lang.rdotype_image}
+              </td>
+          </tr>
+            
+          <tr>
+              <td align="right">
+           		  {$lang.spec}<span class="cnote"><a href="javascript:AddDmTr('tboption', '');">[+]</a></span>：
+              </td>
+              <td>
+               	  <table border="0" cellspacing="0" cellpadding="0" align="left" id="tboption" >
+                  {$c=0}
+                     {foreach from=$norm item=list key=k}
+                      <tr>
+                          <td> 
+                              <span class="delvote">[<a href="javascript:;" onclick="DelDmTr($(this),{$list.id})">-</a>]</span>
+                              <span class="delvote"><span class="red" data='{$k+1}'>*</span>{$lang.name}：<input type="hidden" name="norm[{$k}][id]" value="{$list.id}"/><input type="text" name="norm[{$k}][name]"  class="v5-input in180" value="{$list.name}"/>&nbsp;</span>
+                              <span class="dn" name="color[]">{$lang.color}：<input type="text" name="norm[{$k}][color]" id="color_{$list.id}" value="{$list.color}"  class="v5-input in180" onclick="colorpicker('colorpanel_{$list.id}', 'color_{$list.id}', 'color_{$list.id}');" /> <span id="colorpanel_{$list.id}"></span> &nbsp;</span>
+                             <span class="dn" name="image[]">{$lang.pic}：<input type="text" name="norm[{$k}][pic]" id="pic_{$c}"  class="v5-input in180"  value="{$list.pic}"/> <a href="javascript:;" onclick="showupload('pic_{$c}')">{$lang.uploadpic}</a></span>
+                          </td>
+                      </tr>
+                      {$c=$c+1}
+                      {/foreach}
+                  </table>
+              </td>
+          </tr>
+          <tr>
+              <td align="right">{$lang.orderid}：</td>
+              <td>
+                  <input type="text" id="orderid" name="orderid" class="v5-input in60" value="{$info.orderid}" onKeyUp="value=value.replace(/[^\d]/g,'')">
+                  </td>
+          </tr>
+          <tr>
+              <td align="right">{$lang.compile}：</td>
+              <td>
+                  <input name="compile" type="radio" value="true"  {if $info.compile}{if $info.compile eq 'true'}checked="checked" {/if}{/if} />&nbsp;{$lang.yes}&nbsp;
+                    <input name="compile" type="radio" value="false" {if $info.compile}{if $info.compile eq 'false'}checked="checked" {/if}{/if}  />&nbsp;{$lang.no}                  
+              </td>
+          </tr>
+          <tr>
+              <td align="right">{$lang.checkinfo}：</td>
+              <td>
+                  <input name="checkinfo" type="radio" value="true"  {if $info.checkinfo}{if $info.checkinfo eq true}checked="checked" {/if}{else}checked="checked"{/if} />&nbsp;{$lang.yes}&nbsp;
+                    <input name="checkinfo" type="radio" value="false" {if $info.compile}{if $info.checkinfo eq false}checked="checked" {/if}{/if}  />&nbsp;{$lang.no}                  
+              </td>
+          </tr>
+      </table>
+	</div>
+    <input type="hidden" name="id" id="id"  value="{if $info.id}{$info.id}{/if}"/>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" id="act" type="hidden" value="subedit" />
+</form>
+</body>
+</html>

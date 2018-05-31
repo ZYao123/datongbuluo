@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.admin_list_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkz.func.js"></script>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+</script>
+</head>
+<body>     
+
+<form action="member_level.php" id="form" method="post" onsubmit="return {$refun}('{$act}');">
+    <div class="Form02">
+      <h3>{$lang.basic}</h3>
+        <table width="100%" border="0" class="v5-table05">
+		<tr>
+        <td align="right">{$lang.levelname}:</td>
+        <td><input type="text" name="levelname" class="v5-input in180" id="levelname"/>
+          <span class="red">*</span></td>
+      </tr>
+      <tr>
+        <td  align="right">{$lang.levelprice}:</td>
+        <td><input type="text" name="levelprice" id="levelprice" class="v5-input in180"/>
+          <span class="red">*</span></td>
+      </tr>      
+     <!-- <tr>
+        <td  align="right">{$lang.isbuy}:</td>
+        <td> <input type="radio" name="isbuy" value="1" >&nbsp;{$lang.yes}&nbsp;
+        <input type="radio" name="isbuy" value="0" checked>&nbsp;{$lang.no}</td>
+      </tr>
+      <tr>-->
+        <td  align="right">{$lang.ispoint}:</td>
+        <td> <input type="radio" name="ispoint" value="1" >&nbsp;{$lang.yes}&nbsp;
+        <input type="radio" name="ispoint" value="0" checked>&nbsp;{$lang.no}&nbsp;</td>
+      </tr>
+      <tr>
+        <td  align="right">{$lang.orderid}:</td>
+        <td>
+       <input type="text" name="orderid" id="orderid" class="v5-input in60" value="{$orderid}" onKeyUp="value=value.replace(/[^\d]/g,'')"/><span style="color:#999">&nbsp;{$lang.orderid_ts}</span>
+        </td>
+      </tr>
+     <input name="from" id="from" type="hidden" value="{$from}" />
+    </table>
+	</div>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" type="hidden" value="{$act}" />
+</form>
+</body>
+</html>

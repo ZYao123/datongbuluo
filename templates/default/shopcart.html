@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$title%}--{%$webname%}</title>
+<link href="templates/default/style/shopcart.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/lcshopz.js"></script>
+<script type="text/javascript" src="js/getarea.js"></script>
+<!--[if IE 6]> 
+<script type="text/javascript" src="png.js"></script>
+<script>
+PNG.fix('*');
+</script>
+<![endif]-->
+</head>
+<body>
+<div class="gwc1">
+    <!--  header  开始  -->
+    <div class="gwc_header">
+        {%include file="shopcarthead.html"%}
+        <div class="gwc_top">
+            <div class="gwc_top_left">
+           
+                <span class="gwc_top_wz"><img src="templates/default/images/gwc_2.jpg" align="left" />&nbsp;<a href="#">我的购物车</a></span></div>
+            <div class="gwc_top_right">
+                <div class="gwc_lc"><span class="gwc_lc_w1 color_white"><img src="templates/default/images/gwc_4.jpg" align="left" />&nbsp;我的购物车</span><span class="gwc_lc_w2"><img src="templates/default/images/gwc_5.jpg" align="left" />&nbsp;确认订单信息</span><span class="tl"><img src="templates/default/images/gwc_6.jpg" align="left" />&nbsp;付款</span></div>
+            </div>
+        </div>
+    </div>
+    <!--  header  结束  -->
+    <!--  body  开始  -->
+    <div class="gwc_body">
+    <!-- loading -->
+	<div class="regist_suc" style=" display:none"><img src="templates/default/images/loading.gif"  /> </div>
+    <!-- loading -->    
+    <div class="gwc" style="clear:both">
+        <div class="gwc_tops">
+            <table width="960" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="152" height="26" align="left" valign="top"><span class="gwc_jl">
+                        <input type="checkbox" id ='checkall' onclick="cart_chk_all($(this).attr('checked'),{%$totalnum%})" value="" checked="CHECKED" />
+                        </span> &nbsp;全选</td>
+                    <td width="262" align="left" valign="top">商品信息</td>
+                    <td width="85" align="left" valign="top">单价</td>
+                    <td width="140" align="left" valign="top" class="gwc_color">哈尔滨市</td>
+                    <td width="128" align="left" valign="top">数量</td>
+                    <td width="120" align="left" valign="top">小计（元）</td>
+                    <td align="left" valign="top">操作</td>
+                </tr>
+            </table>
+        </div>
+        <form id="form1" method="post" action="orderinfo.php">
+        <div class="gwc_b"><!--<span class="gwc_b2">
+            <input name="" type="checkbox" class="tl" value="" />
+            &nbsp;活动商品已购满3500.00元，再加50.00元领取赠品</span>-->
+            <div class="gwc_tops_list" >
+                <table width="960" border="0" cellspacing="0" cellpadding="0">
+                  {%foreach from=$cart_info item=list key=k%}
+                    <tr id = 'tr{%$list.id%}' class="gwc_actual_z" style="position:relative">
+                        <td width="54" height="82" align="right" valign="middle" >
+						<input name="id[]" id="id{%$k%}" type="checkbox" value="{%$list.id%}" checked="CHECKED" onclick="cart_chk_one({%$k%})" /></td>
+                        <td width="90" align="left" valign="middle" ><span class="tp01"><img src="{%$list.picurl%}" width="60" height="60" /></span></td>
+                        <td width="195" align="left" valign="middle" >{%$list.title%}<strong class="color05">{%$list.attrname%}</strong></td>
+                        <td width="170" align="center" valign="middle" >¥<span id='Unit_price{%$k%}'>{%$list.salesprice%}</span></td>
+                        <td width="103" align="left" valign="middle" >库存:{%$list.housenum%}</td>
+                        <td width="140" align="center" valign="middle"  >
+                        
+                        <input type="hidden" id='housenum{%$k%}' value="{%$list.housenum%}">
+                        <a href="javascript:;" onclick="UpdateShopCart({%$list.id%},'-1',{%$k%},{%$totalnum%})" class="tl"><img src="templates/default/images/gwc_9.jpg" /></a>
+                        <input name="num{%$k%}" type="text" class="text04" id="num{%$k%}" value="{%$list.num%}"  onkeyup="UpdateShopCart({%$list.id%},'0',{%$k%},{%$totalnum%})"/>
+                        <a href="javascript:;" onclick="UpdateShopCart({%$list.id%},'1',{%$k%},{%$totalnum%})" class="tl"><img src="templates/default/images/gwc_10.jpg" /></a>
+                        
+                      </td>
+                        <td width="99" align="center" valign="middle"><div id='kc{%$k%}' class="shopcart_popup1" style=" display:none"></div><strong class="color05">¥<span id='total{%$k%}'>{%$list.total%}</span></strong></td>
+                        <td align="center" valign="middle" ><!--<a href="#">收藏</a> --><a href="javascript:;" onclick="DelShopCart({%$list.id%},{%$k%})">删除</a></td>
+                    </tr>
+                    {%/foreach%}
+                </table>
+          </div>
+      </div>
+      
+      <div class="gwc_b3">
+      <span class="gwc_l1">&nbsp;&nbsp;<a href="javascript:;" onclick="DelShopCartAll()">删除选中商品</a>
+      &nbsp;&nbsp;<a href="javascript:;" onclick="DelShopCartAll1({%$totalnum%})">清空购物车</a></span>
+      <span class="gwc_wzl" style="padding-left:120px;"><span id = 'totalnum' class="color13">{%$totalnum%}</span>&nbsp;件商品&nbsp;&nbsp;总计：<span class="color06">¥<span id = 'totalgoodsprice'>{%$totalgoodsprice%}</span></span><br />
+            <strong>应付总额</strong>（不含运费）：<strong class="color13">¥<span id = 'totalprice'>{%$totalprice%}</span></strong></span><span class="gwc_an"><a href="index.php"><img src="templates/default/images/gwc_11.jpg" /></a>&nbsp;<input type="image" name="imageField" id="jiesuan" src="templates/default/images/gwc_12.jpg"  /></span> 
+      </div></form>
+      <div style="clear:both"></div>
+      </div>
+        <div class="wntj"><span class="wntj_title">为您推荐</span>
+            <div class="wntj_list">
+                <TR>
+                    <TD><DIV id=demo style="OVERFLOW: hidden; WIDTH:96%; COLOR: #ffffff; float:left">
+                            <TABLE cellSpacing=0 cellPadding=0 align=left border=0 cellspace="0">
+                                <TBODY>
+                                    <TR>
+                                        <TD id=demo1 vAlign=top><table width="910" border="0" cellpadding="0" cellspacing="0"> 
+                                       <tr>                                                                                                       
+                                       {%if $quality_goods%} 
+                                       {%foreach from=$quality_goods item=list%}      
+                                            <td>
+                                            <span class="wntj_border">
+                                                <span class="wntj_tp">
+                                                    <a href="item_show.php?cid={%$list.classid%}&id={%$list.id%}">
+                                                    <img src="{%$list.picurl%}" border="0" width="162" height="131" />
+                                                    </a>
+                                                </span>
+                                                <span class="wntj_wz">
+                                                    <a href="item_show.php?cid={%$list.classid%}&id={%$list.id%}">{%$list.title%} </a>
+                                                </span>
+                                                <span class="wntj_wz1">
+                                               ￥{%$list.price%}
+                                                </span>
+                                                </span>
+                                            </td>                                               
+                                       {%/foreach%}
+                                       {%/if%}
+                                        </tr>
+                                            </table></TD>
+                                        <TD id=demo2 vAlign=top>&nbsp;</TD>
+                                    </TR>
+                                </TBODY>
+                            </TABLE>
+                        </DIV>
+                        <script language=JavaScript src="js/scrollpic.js"></script>
+                    </TD>
+                </TR>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+    <!--  body  结束  -->
+</div>
+{%include file="shopcartbottom.html"%}
+</body>
+</html>

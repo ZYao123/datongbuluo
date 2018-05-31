@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.admin_list_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkz.func.js"></script>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+</script>
+</head>
+<body onLoad="javascript:document.form.reset()">     
+
+<form action="member.php" id="form" method="post" name="form" onsubmit="return {$refun}('{$act}');">
+    <div class="Form02">
+      <h3>{$lang.basic}</h3>
+        <table width="100%" border="0" class="v5-table05">
+		<tr>
+        <td>{$lang.username}:</td>
+        <td><input type="text" name="username" class="v5-input in180" id="username"/>
+          <span class="red">*</span></td>
+      </tr>
+      <tr>
+        <td>{$lang.email}:</td>
+        <td><input type="text" name="email" id="email" class="v5-input in180"/>
+          <span class="red">*</span></td>
+      </tr>      
+      <tr>
+        <td>{$lang.addPassword}:</td>
+        <td><input type="password" name="password" class="v5-input in180" id="password"/></td>
+      </tr>
+      <tr>
+        <td>{$lang.repassword}:</td>
+        <td><input type="password" name="repassword" class="v5-input in180" id="repassword" /></td>
+      </tr>
+      <tr>
+        <td>{$lang.user_rank}:</td>
+        <td>
+        <select name="user_rank"  class="v5-select">
+        {fun_user_rank()}
+        </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td>{$lang.sex}:</td>
+        <td>
+        <input type="radio" name="sex" value="0" checked>&nbsp;{$lang.secret}&nbsp;
+        <input type="radio" name="sex" value="1" >&nbsp;{$lang.m}&nbsp;
+        <input type="radio" name="sex" value="2" >&nbsp;{$lang.w}&nbsp;</td>
+      </tr>
+      <tr>
+        <td>{$lang.birthday}:</td>
+        <td><input type="text" name="birthday" class="v5-input in180" id="birthday" /></td>
+      </tr>      
+  <tr>
+    <td class="label">{$lang.credit_line}:</td>
+    <td><input name="credit_line" class="v5-input in60" type="text" id="credit_line" /></td>
+  </tr>
+    <tr>
+    <td class="label">{$lang.MSN}:</td>
+    <td>
+    <input name="MSN" type="text" class="v5-input in180"  id="MSN" />
+    </td>
+  </tr>
+    <tr>
+    <td class="label">{$lang.QQ}:</td>
+    <td>
+    <input name="QQ" type="text" class="v5-input in180"  id="QQ" />
+    </td>
+  </tr>
+    <tr>
+    <td class="label">{$lang.telephone}:</td>
+    <td>
+    <input name="telephone" type="text" class="v5-input in180"  id="telephone"/>
+    </td>
+  </tr>
+
+      <tr>
+        <td>{$lang.mobile}:</td>
+        <td><input type="text" name="mobile" class="v5-input in180" id="mobile"/></td>
+      </tr>
+      <tr>
+        <td>{$lang.checkuser}:</td>
+        <td>
+        <input type="radio" name="checkuser" value="0" checked>&nbsp;{$lang.normal}&nbsp;
+        <input type="radio" name="checkuser" value="1" >&nbsp;{$lang.freeze}&nbsp;
+      </td>
+      </tr>
+     <input name="from" id="from" type="hidden" value="{$from}" />
+    </table>
+	</div>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" type="hidden" value="{$act}" />
+</form>
+</body>
+</html>

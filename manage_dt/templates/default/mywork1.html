@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>欢迎</title>
+<link href="templates/default/style/webstyle.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript" ></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkz.func.js" type="text/javascript"></script>
+<script language="JavaScript" src="templates/default/js/FusionCharts.js"></script>
+</head>
+<body onload="getneworders(1,'')">
+<div class="hy">
+	<div class="headerl_bj">
+		<div class="headerl">
+		<div class="logo03">
+		<img src="templates/default/images/hy_21.png" />
+		</div>
+		<div class="icon_list" >
+			<ul>
+				<li class="icon01">
+				<a href="javascript:DialogIframe('bug.php?act=add','{$home.bug}','80%','95%','','','','dosubmit');">
+{$home.bug}</a></li>
+				<li class="icon02"><a href="../" target="_blank">{$home.index}</a></li>
+				<li class="icon03"><a href="index.php?act=clearcache" target="main">{$home.cache}</a></li>
+				<li class="icon04"><a href="index.php?act=unlogin">{$home.unlogin}</a></li>
+			</ul>
+		</div>
+		</div>
+		
+	</div>
+	<div class="bodyl_bj">
+		<div class="leftl">
+		   <span class="leftl_top">
+				<div class="leftl_text">
+					<a href="index.php?act=default" class="wo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$home.manage}</a>
+					<a href="#" class="wo1">&nbsp;&nbsp;&nbsp;{$home.box}</a>
+				</div>
+			</span>
+			<div class="leftl_yh"><span class="tl"><img src="templates/default/images/hy_5.jpg" /></span><span class="leftl_yh_wz">{$session.admin}<br />
+<a href="index.php?act=unlogin">{$home.unlogin}</a></span></div>
+			<div class="leftl_list">
+				<ul>
+				{foreach from=$nav item=list key=k}
+					<li class="leftl_bj2">
+					<span class="leftl_tp">
+						<div class="ico" id="ico_{$k}"></div>
+					</span>
+					<a href="index.php?act=default&from=mywork&menukey={$list.linkurl}" target="_self">{$list.label}</a>
+					<span class="leftl_sz" style="display:none">7</span></li>
+				 {/foreach}   
+					<!--<li class="leftl_bj2">
+					<span class="leftl_tp">
+						<div class="ico" id="ico_00"></div>
+					</span><a href="#">利润总额</a>
+					</li>
+					<li class="leftl_bj2">
+						<span class="leftl_tp">
+							<div class="ico" id="ico_01"></div>
+						</span><a href="#">服务器停机时间</a></li>
+					<li class="leftl_bj2">
+					<span class="leftl_tp">
+						<div class="ico" id="ico_02"></div>
+					</span><a href="#">总销售额</a></li>
+					<li class="leftl_bj2">
+						<span class="leftl_tp">
+							<div class="ico" id="ico_03"></div>
+						</span><a href="#">系统管理</a></li>-->
+				</ul>
+			</div>
+		</div>
+		<div class="rightl"> <span class="rightl_top"><img src="templates/default/images/hy_010.jpg" align="left" />&nbsp;欢迎您登录龙采SHOPX后台</span>
+			<div class="rightl_list">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="22%">&nbsp;</td>
+						<td width="8%">
+						   <a href="index.php?act=default&from=mywork&menukey=04_privilege">
+						   <img onmousemove="src='templates/default/images/hy_tp01.png'" onmouseout="src='templates/default/images/hy_tp1.png'" src="templates/default/images/hy_tp1.jpg" width="87" height="87"/>
+						   </a>
+						</td>
+						<td width="8%" class="dwl">
+						   <span class="lq">{$CommentCount}</span>
+						   <a href="index.php?act=default&from=mywork&menukey=10_goods&sign=com">
+						   <img onmousemove="src='templates/default/images/hy_tp02.png'" onmouseout="src='templates/default/images/hy_tp2.png'" src="templates/default/images/hy_tp2.jpg" width="87" height="87"/>
+						   </a>
+						</td>
+						<!-- <td width="8%"><a href="#"><img onmousemove="src='templates/default/images/hy_tp03.jpg'" onmouseout="src='templates/default/images/hy_tp3.jpg'" src="templates/default/images/hy_tp3.jpg" width="87" height="87"/></a></td>
+					   <td width="8%" class="dwl"><span class="hsq">1</span><a href="#"><img onmousemove="src='templates/default/images/hy_tp04.jpg'" onmouseout="src='templates/default/images/hy_tp4.jpg'" src="templates/default/images/hy_tp4.jpg" width="87" height="87"/></a></td>
+						<td width="8%" class="dwl"><span class="jhsq">1</span><a href="#"><img onmousemove="src='templates/default/images/hy_tp05.jpg'" onmouseout="src='templates/default/images/hy_tp5.jpg'" src="templates/default/images/hy_tp5.jpg" width="87" height="87"/></a></td>-->
+						<td width="8%">
+						   <a href="index.php?act=default&from=mywork&menukey=07_statement">
+						   <img onmousemove="src='templates/default/images/hy_tp06.png'" onmouseout="src='templates/default/images/hy_tp6.png'" src="templates/default/images/hy_tp6.jpg" width="87" height="87"/>
+						   </a>
+						</td>
+						<td width="8%">
+						   <a href="index.php?act=default&from=mywork&menukey=00_custom">
+						   <img onmousemove="src='templates/default/images/hy_tp07.png'" onmouseout="src='templates/default/images/hy_tp7.png'" src="templates/default/images/hy_tp7.jpg" width="87" height="87"/>
+						   </a>
+						</td>
+						<td >
+								&nbsp;
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="rightl_bottom">
+				<div class="rightl_lists">
+					<ul>
+						<li onclick="window.open('index.php?act=default&from=mywork&menukey=09_orders&sign=new')" style="cursor:pointer;">
+								<span class="hys_tiele2">{$name.NewOrderCount}</span>
+								<div class="hys_bottom2">
+										<span class="hys_tp"><img src="templates/default/images/hy_tb3.jpg" width="99%" /></span>
+										{$NewOrderCount}{$Unit.Article}
+								</div>
+						</li>
+						<li onclick="window.open('index.php?act=default&from=mywork&menukey=05_member')" style="cursor:pointer;">
+							   <span class="hys_tiele" >{$name.MemberCount}</span>
+								<div class="hys_bottom">
+										<span class="hys_tp"><img src="templates/default/images/hy_tb1.jpg" width="100%" /></span>
+										{$MemberCount}{$Unit.People}
+								</div>
+						</li>
+						<li onclick="window.open('index.php?act=default&from=mywork&menukey=09_orders&sign=task')" style="cursor:pointer;">
+								<span class="hys_tiele3">{$name.OrderCount}</span>
+								<div class="hys_bottom3">
+										<span class="hys_tp"><img src="templates/default/images/hy_tb4.jpg" width="100%" /></span>
+										{$OrderCount}{$Unit.Article}
+								</div>
+						</li>
+						<li onclick="window.open('index.php?act=default&from=mywork&menukey=10_goods&sign=com')" style="cursor:pointer;">
+							<span class="hys_tiele1">新评论</span>
+							<div class="hys_bottom1">
+								<span class="hys_tp"><img src="templates/default/images/hy_tb2.jpg" width="100%" /></span>
+								{$CommentCount}条
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="rightl_lists">
+					<ul>
+						 <li><span class="hys_tiele7"><span class="hys_an">
+							</span>{$name.SalesTotal}</span>
+							<div class="hys_bottom7"><span class="hys_tp"><img src="templates/default/images/hy_tb8.jpg" width="100%" /></span>{$SalesTotal}{$Unit.Yuan}                        </div>
+						</li>
+						<li><span class="hys_tiele5"><span class="hys_an">
+							</span>利润总额</span>
+							<div class="hys_bottom5"><span class="hys_tp"><img src="templates/default/images/hy_tb6.jpg" width="100%" /></span>
+							{$ProfitsMoney}{$Unit.Yuan}</div>
+						</li>
+						<li onclick="window.open('index.php?act=default&from=mywork&menukey=10_goods')">
+								<span class="hys_tiele4">
+								<span class="hys_an">
+							</span>{$name.HouseCount}</span>
+							<div class="hys_bottom4"><span class="hys_tp"><img src="templates/default/images/hy_tb5.jpg" width="100%" /></span>{$HouseCount}{$Unit.A}</div>
+						</li>
+						<li>
+							<span class="hys_tiele6">待审核BUG</span>
+							<div class="hys_bottom6">
+									<span class="hys_tp">
+									<img src="templates/default/images/hy_tb7.jpg" width="80%" /></span>
+									{$BugCount}{$Unit.Article}
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="product">
+					<div class="product_title"><span class="product_btwz">图片展示</span><img src="templates/default/images/hy_16.jpg" width="100%" /></div>
+					<div class="product_tp">
+						<div class="product_tps">   
+							
+							<ul>
+								<li>
+								<span id="userdiv">&nbsp;</span>
+								<script type="text/javascript">
+								 var chart = new FusionCharts("templates/default/Charts/MSColumn3D.swf", "ChartId", "500", "254");
+								 chart.setDataURL(escape("chart_user.php?act=xml&time1={$time1}&time2={$time2}&time3={$time3}&time4={$time4}&time5={$time5}"));
+								 chart.addParam("wmode","Opaque");   
+								 chart.addParam("wmode","transparent");
+								 chart.render("userdiv");
+								</script>                                
+								</li>
+								<li>
+								<span id="orderdiv">&nbsp;</span>	
+								<script type="text/javascript">
+								 var chart = new FusionCharts("templates/default/Charts/Pie3D.swf", "ChartId", "500", "254");
+								 //chart.setDataURL("templates/default/Charts/Pie3D.xml");
+								 chart.setDataURL(escape("chart_order.php?act=xml"));
+								 chart.addParam("wmode","Opaque"); 
+								 chart.addParam("wmode","transparent");  
+								 chart.render("orderdiv");
+								</script>  
+								</li>
+								<!--<li><a href="#">走势图<br />
+									<span class="wz1">Chart</span></a></li> -->
+							</ul> 
+						</div>
+						<img src="templates/default/images/hy_17.jpg" width="100%" height="254" />                   
+					</div>
+					<div class="product_list">
+						<div class="product_lists">
+							<ul>
+								<li><a href="index.php?act=default&from=mywork&menukey=07_statement">客户统计<br />
+									<span class="wz1">Customer</span></a></li>
+								<li style="width:49%;"><a href="index.php?act=default&from=mywork&menukey=07_statement">订单统计<br />
+									<span class="wz1">Orders</span></a></li>
+								<!--<li><a href="#">走势图<br />
+									<span class="wz1">Chart</span></a></li> -->
+							</ul>
+						</div>
+						<img src="templates/default/images/hy_18.jpg" width="100%" /></div>
+					<div class="product_db">&nbsp;
+						<!--<span class="dw"><input name="" type="text" class="text02" value="12-02-2013"\ />
+						<a href="#"><img src="templates/default/images/hy_21.jpg" /></a><span class="dw_wz">-</span>
+						<input name="" type="text" class="text02" value="12-02-2013"\ />
+						<a href="#"><img src="templates/default/images/hy_21.jpg" /></a> </span><img src="templates/default/images/hy_19.jpg" width="100%" /> --></div>
+					<div class="rightl_bottoml">
+						<div class="xdd"><span class="xdd_dd"><img src="templates/default/images/hy_33.jpg" /></span><span class="xdd_title"><span class="xdd_wz"><img src="templates/default/images/hy_23.jpg" align="left" />&nbsp;&nbsp;{$name.OrderCount}</span><a href="index.php?act=default&amp;from=mywork&amp;menukey=09_orders"><img src="templates/default/images/hy_22.jpg" width="100%" /></a></span>
+							<div class="xdd_bottom">
+								<table width="96%" border="0" cellspacing="0" cellpadding="0" class="table" style="border-top:solid 1px #ddd;">
+								  <tr>
+									<td height="54" colspan="5" valign="middle" style="background:#fff"><!--<select name="pagecount" class="text01" id="pagecount">
+												<option>6</option>
+												&nbsp;
+											</select> -->
+
+										   <input name="orderlistnum" type="text" class="text03" id="orderlistnum" style="color:#666" onfocus="if (this.value == '{$lang.searchnum}'){literal} {this.value='';this.style.color='#000'}{/literal} "  onblur="if (this.value == '') {literal}{{/literal}this.value='{$lang.searchnum}';this.style.color='#666'{literal}}{/literal} " value="{$lang.searchnum}" /> 
+											
+											
+											<a href="javascript:;" onclick="javascript:getneworders(1,$('#orderlistnum').val())" class="tr"><img src="templates/default/images/hy_24.jpg" /></a>
+									</td>
+								  </tr>
+								</table>
+								<table width="96%" border="0" cellspacing="0" cellpadding="0" class="table">
+									<tr>
+										<td width="14%" height="32" align="center" valign="middle">&nbsp;</td>
+										<td width="10%" align="center" valign="middle">&nbsp;</td>
+										<td width="22%" align="left" valign="middle">&nbsp;<img src="templates/default/images/hy_23.jpg" />&nbsp;序号</td>
+										<td width="18%" align="left" valign="middle">&nbsp;<img src="templates/default/images/hy_25.jpg" />&nbsp;用户</td>
+										<td width="36%" align="left" valign="middle">&nbsp;<img src="templates/default/images/hy_26.jpg" />&nbsp;状态</td>
+									</tr>
+								</table>
+							 
+							  
+							  <div id='getneworders'></div>
+							</div>
+						</div>
+						<div class="yhl"><span class="xdd_titles"><span class="xdd_wz"><img src="templates/default/images/hy_25.jpg" align="left" />&nbsp;&nbsp;{$name.user}</span></span>
+							<div class="xdd_bottoms">
+								<div class="xyh">
+									<ul>
+										<li class="xyh_z" id='title1' style="color:#4d4d4d" onclick="huandong(1,2)">{$name.useradmin}</li>
+										<li id='title2' onclick="huandong(2,2)">{$name.usermember}</li>
+									</ul>
+								</div>
+								<div class="xyh_list">
+									<ul id='content1'>
+										{foreach from=$admins item=list key=k}
+										<li><span class="xyh_tp"><img src="templates/default/images/hy_36.jpg" width="100%" /></span><span class="xyh_wz"><a href="javascript:DialogIframe('privilege.php?act=edit&id={$list.id}','{$lang.admin_edit}','80%','95%','','','','dosubmit');">{$list.username|truncate:12}</a></span></li>
+										{/foreach}
+									</ul>
+									<ul id='content2' style="display:none">
+										{foreach from=$members item=list key=k}
+										{if $k!=0 and $k%5==0}
+										<div style="clear:both;"></div>
+										{/if}
+										<li><span class="xyh_tp"><img src="{if $list.avatar eq ''}templates/default/images/hy_36.jpg{else}{$list.avatar}{/if}" width="100%" /></span><span class="xyh_wz"><a href="javascript:;"  onclick="javascript:DialogIframe('member.php?act=edit&id={$list.id}&from={$from}','{$lang.member_update}','80%','95%','','','','dosubmit');">{$list.username|truncate:12}</a></span></li>
+										{/foreach}
+									</ul>
+								</div>
+							  
+								
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="hy_bot">Copyright  2009 - 2014 SHOPX All Rights Reserved <span class="color01" style="display:none">longcai</span></div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

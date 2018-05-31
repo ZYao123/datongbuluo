@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.goods_edit}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" ></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js?default=Math.random()"></script>
+<script src="templates/default/js/getuploadify.js"></script>
+<script src="templates/default/js/getjcrop.js"></script>
+<script src="templates/default/js/jquery.formatCurrency-1.4.0.js" type="text/javascript" ></script>
+<script type="text/javascript" src="plugin/colorpicker/colorpicker.js"></script>
+<script type="text/javascript" src="plugin/calendar/calendar.js"></script>
+<script type="text/javascript" src="editor/kindeditor-min.js"></script>
+<script type="text/javascript" src="editor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="templates/default/js/goods.js"></script>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+$(document).ready(function() { 
+	add_select('{$info.classid}','{$info.id}');
+});
+</script>
+</head>
+
+<body> 
+    
+<form action="" method="post" id="form" name="form" onsubmit="return cfm_goods();">
+	<div class="Form02">
+      <h3>{$lang.basic}</h3>
+      <table width="100%" border="0" class="v5-table05">
+            <tr>
+                <td width="150" align="right"><span class="red">*</span>{$lang.classid}：</td>
+                <td>
+                    <select name="classid" id="classid" class="v5-select"  onchange="add_select(this.value,'{$info.id}');">
+                    <option value="0">--</option>
+                    {foreach from=$class_info item=list}
+                        <option value="{$list.id}" 
+                        {if $info.classid}
+                            {if $info.classid eq $list.id}
+                            selected="selected"
+                            {/if}
+                        {/if}>{if $list.str}|-{$list.str}{/if}{$list.classname}</option>
+                    {/foreach}
+                    </select>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td id="add_select">
+                	
+                </td>
+              </tr>
+               <tr>
+                <td align="right"> {$lang.goods_attribute}：</td>
+                <td>
+                {foreach item=list from=$attr_info}
+                <input name="attribute[{$list.id}]" type="checkbox"  {if in_array($list.id,$goods_attr_info)}checked="checked"{/if} value="{$list.id}"/>
+                &nbsp;{$list.name}&nbsp;
+                {/foreach}
+                </td>
+              </tr>
+            <tr>
+                <td align="right"><span class="red">*</span>{$lang.title}：</td>
+                <td>
+                <input type="text" name="title" id="title" class="v5-input in300" value="{$info.title}"/>
+                <div class="title_panel">
+                    <input type="hidden" name="colorval" id="colorval"  value="{$info.colorval}"/>
+                    <input type="hidden" name="boldval" id="boldval"  value="{$info.boldval}"/>
+                    <span onclick="colorpicker('colorpanel','colorval','title');" class="color"></span>
+                    <span id="colorpanel"></span> 
+                    <span onclick="blodpicker('boldval','title');" class="blod"> </span> 
+                    <span onclick="clearpicker()" class="clear" title="清除属性">[#]</span>
+                </div>
+               </td>
+        </tr>
+              <tr>
+                <td align="right">{$lang.retitle}：</td>
+                <td>
+                <input type="text" name="retitle" id="retitle" class="v5-input in300" value="{$info.retitle}" />
+                </div>
+               </td>
+        </tr>
+      <tr style="display:none">
+        <td align="right"><span class="red">*</span>{$lang.goodsNO}：</td>
+        <td><input type="text" name="goodsNO" class="v5-input in180" id="goodsNO"  value="{$info.goodsNO}" /></td>
+      </tr>
+       <tr>
+        <td> </td>
+        <td>
+        <input name="phone" type="checkbox" value="1" {if $info.phone==1}checked="checked"{/if}/>&nbsp;{$lang.phone}</td>
+        </td>
+      </tr>
+      <tr id="tr_buyprice">
+        <td align="right"><span class="red">*</span>{$lang.buyprice}：</td>
+        <td>
+        <input type="text" name="buyprice" class="v5-input in180 checkKey" id="buyprice" 
+        value="{$info.buyprice}" />
+         {$lang.goods_tips.price}
+        </td>
+      </tr>
+      <tr id="tr_salesprice">
+        <td align="right"><span class="red">*</span>{$lang.salesprice}：</td>
+        <td><input type="text" name="salesprice" class="v5-input in180 checkKey" id="salesprice"  value="{$info.salesprice}" />
+        {$lang.goods_tips.price}
+        </td>
+      </tr>
+        <tr id="old_price">
+        <td align="right">{$lang.old_price}：</td>
+        <td>
+        <input type="text" name="old_price" class="v5-input in180 checkKey" 
+        value='{$info.old_price}'/>
+        {$lang.goods_tips.price}
+        </td>
+      </tr>
+      <tr>
+        <td align="right">{$lang.integral}：</td>
+        <td><input type="text" name="integral" class="v5-input in180" id="integral"  value="{$info.integral}"  
+        onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onpaste="return false"
+        />{$lang.goods_tips.integral}</td>
+      </tr>
+       <tr>
+        <td align="right">{$lang.need_integral}：</td>
+        <td>
+        <input type="text" name="need_integral" class="v5-input in180" id="integral"  
+        onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onpaste="return false" value="{$info.need_integral}"/>
+        {$lang.goods_tips.need_integral}
+        </td>
+      </tr>
+      <tr style="display:none">
+        <td align="right">{$lang.promotionprice}：</td>
+        <td><input type="text" name="promotionprice" class="v5-input in180" id="promotionprice"  value="{$info.promotionprice}"/></td>
+      </tr>
+      <tr>
+        <td align="right">{$lang.promotiontime}：</td>
+        <td>
+        <input type="text" name="starttime" class="v5-input in150" id="starttime"  readonly="readonly"  value="{if $info.starttime}{$info.starttime|date_format:'%Y-%m-%d %H:%M:%S'}{/if} " />
+		<script type="text/javascript">
+            date = new Date();
+            Calendar.setup({
+                inputField     :    "starttime",
+                ifFormat       :    "%Y-%m-%d %H:%M:%S",
+                showsTime      :    true,
+                timeFormat     :    "24"
+            });
+            </script>
+        -
+        <input type="text" name="endtime" class="v5-input in150" id="endtime"  readonly="readonly"   value="{if  $info.endtime}{$info.endtime|date_format:'%Y-%m-%d %H:%M:%S'}{/if} "/>
+		<script type="text/javascript">
+            date = new Date();
+            Calendar.setup({
+                inputField     :    "endtime",
+                ifFormat       :    "%Y-%m-%d %H:%M:%S",
+                showsTime      :    true,
+                timeFormat     :    "24"
+            });
+            </script>
+        
+        </td>
+      </tr>
+      
+      <tr>
+        <td align="right"><span class="red">*</span>{$lang.weight}：</td>
+        <td><input type="text" name="weight" class="v5-input in180" id="weight"   value="{$info.weight}"/>{$lang.goods_tips.weight}</td>
+      </tr>
+      <tr id="tr_housenum">
+        <td align="right"><span class="red">*</span> {$lang.housenum}：</td>
+        <td><input type="text" name="housenum" class="v5-input in180" id="housenum"   value="{$info.housenum}"/></td>
+      </tr>
+      
+      <tr>
+        <td align="right"> {$lang.warnnum}：</td>
+        <td><input type="text" name="warnnum" class="v5-input in180" id="warnnum" value="5" value="{$info.warnnum}" /></td>
+      </tr>
+      <tr>
+        <td align="right"> {$lang.housewarn}：</td>
+        <td><input name="housewarn" type="radio" value="true" {if $info.housewarn eq 'true'}checked="checked" {/if}/>&nbsp;{$lang.yes}&nbsp;
+        <input name="housewarn" type="radio" value="false" {if $info.housewarn eq 'false'}checked="checked" {/if} />&nbsp;{$lang.no}</td>
+      </tr>
+      <tr>
+        <td align="right"> {$lang.payfreight}：</td>
+        <td><input name="payfreight" type="radio" value="true" {if $info.payfreight eq 'true'}checked="checked" {/if}/>&nbsp;{$lang.yes}&nbsp;
+        <input name="payfreight" type="radio" value="false" {if $info.payfreight eq 'false'}checked="checked" {/if}/>&nbsp;{$lang.no}</td>
+      </tr>
+            <tr>
+                <td align="right">{$lang.checkinfo}：</td>
+                <td>
+                    <input name="checkinfo" type="radio" value="true"  {if $info.checkinfo eq 'true'}checked="checked" {/if}/>&nbsp;{$lang.yes}&nbsp;
+                    <input name="checkinfo" type="radio" value="false"  {if $info.checkinfo eq 'false'}checked="checked" {/if}/>&nbsp;{$lang.no}
+                </td>
+            </tr>
+        </table>
+      <h3>{$lang.depict}</h3>
+      <table width="100%" border="0" class="v5-table05">
+                  
+       
+       <tr>
+        <td align="right"> {$lang.orderid}：</td>
+        <td><input type="text" name="orderid" class="v5-input in60" id="orderid" value="{$info.orderid}" onKeyUp="value=value.replace(/[^\d]/g,'')"/></td>
+      </tr>
+      <tr>
+        <td align="right"> {$lang.posttime}：</td>
+        <td>
+        	<input type="text" name="posttime" class="v5-input in150" id="posttime"  readonly="readonly" value="{$smarty.now|date_format:'%Y-%m-%d %H:%M:%S'} " />
+            {literal}
+          <script type="text/javascript">
+				date = new Date();
+				Calendar.setup({
+					inputField     :    "posttime",
+					ifFormat       :    "%Y-%m-%d %H:%M:%S",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+				</script>
+            {/literal}
+        </td>
+      </tr>
+      <tr>
+        <td align="right">{$lang.picurl}：</td>
+        <td>
+       	  <input type="text" name="picurl" class="v5-input in180" id="picurl"  value="{$info.picurl}"/>
+        	<span class="cnote">
+                <span class="gray_btn" onclick="GetUploadify('uploadify','{$lang.thumupload}','image','image',1,20000000,'picurl')">{$lang.uploadpic}</span>
+                <span class="reimg">
+                	<input type="checkbox" name="rempic" id="rempic" value="true" />{$lang.remote}
+                </span> 
+                <span class="cutimg">
+                	<a href="javascript:;" onclick="GetJcrop('jcrop','picurl');return false;">{$lang.tailor}</a>
+                </span> 
+            </span>
+        </td>
+      </tr>
+      <tr>
+        <td align="right"> {$lang.keywords}：</td>
+        <td><input type="text" name="keywords" class="v5-input in360" id="keywords" value="{$info.keywords}"/></td>
+      </tr>
+      <tr>
+        <td align="right"> {$lang.description}：</td>
+        <td><textarea name="description" id="description" class="v5-textarea tin60 w657">{$info.description}</textarea></td>
+      </tr>
+     
+     
+      
+       <tr>
+        <td align="right"> {$lang.remark}：</td>
+        <td><textarea name="remark" id="remark" class="v5-textarea tin60 w657">{$info.remark}</textarea></td>
+      </tr>
+     
+      <tr>
+        <td align="right"> {$lang.picarr}：</td>
+        <td>
+            <fieldset class="picarr">
+                <legend>{$lang.list}</legend>
+                <div>{$lang.most}<strong>50</strong>{$lang.spread}<span onclick="GetUploadify('uploadify2','{$lang.uploadphotos}','image','image',50,200000000,'picarr','picarr_area')">{$lang.startupload}</span></div>
+                <ul id="picarr_area">
+                	{foreach from=$info.picarr item=list}
+					<li rel="{$list}"><input type="text" name="picarr[]" value="{$list}"><a href="javascript:void(0);" onclick="ClearPicArr('{$list}')">{$lang.action_del}</a></li>
+                    {/foreach}
+                </ul>
+            </fieldset>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">{$lang.content}：</td>
+        <td>
+        <input name="checkinfo" type="button" value="{$lang.pc}"  id="show1" onclick="select_con('con1','con2')"/>
+        <input name="checkinfo" type="button" value="{$lang.phone}" id="show2" onclick="select_con('con2','con1')"/>
+        <div id="con1">
+        <textarea name="content" id="content" class="kindeditor">{$info.content}</textarea>
+        {literal}
+	<script>
+		var editor;
+		KindEditor.ready(function(K) {
+			editor = K.create('textarea[name="content"]', {allowFileManager : true,width:'667px',height:'280px'});
+		});
+	</script>
+        {/literal}
+        </div>
+         <div id="con2" style="display:none;">
+        <textarea name="phone_content" id="phone_content" class="kindeditor">{$info.phone_content}</textarea>
+        {literal}
+        <script>
+                var editor;
+                KindEditor.ready(function(K) {
+                        editor = K.create('textarea[name="phone_content"]', {allowFileManager : true,width:'667px',height:'280px'});
+                });
+        </script>
+        {/literal}
+        </div>
+				<div class="features">
+					<input type="checkbox" name="remote" id="remote" value="true" />
+					{$lang.downloadpic}
+					&nbsp;
+					<input type="checkbox" name="autothumb" id="autothumb" value="true" />
+					{$lang.fristpic}
+					&nbsp;
+					<input type="checkbox" name="autodesc" id="autodesc" value="true" />
+					{$lang.draw}
+					<input type="text" name="autodescsize" id="autodescsize" value="200" size="3" class="input_gray_short" />
+					{$lang.toword}
+					&nbsp;
+					<input type="checkbox" name="autopage" id="autopage" value="true" />
+					{$lang.autopage}
+					<input type="text" name="autopagesize" id="autopagesize" value="5" size="6" class="input_gray_short" />
+					{$lang.kb}</div></td>
+      </tr>
+      <tr>
+        <td align="right">{$lang.ser_conent}：</td>
+        <td><textarea name="ser_conent" id="ser_conent" class="kindeditor">{$info.ser_conent}</textarea>
+        		{literal}
+		  <script>
+				var editor;
+				KindEditor.ready(function(K) {
+					editor = K.create('textarea[name="ser_conent"]', {allowFileManager : true,width:'667px',height:'280px'});
+				});
+				</script>
+                {/literal}</td>
+      </tr>
+      </table>
+    </div>
+    <input type="hidden" name="id" id="id" value="{$info.id}"/>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" id="act" type="hidden" value="subedit" />
+</form>
+</div>
+</body>
+</html>
+<script>
+
+</script>

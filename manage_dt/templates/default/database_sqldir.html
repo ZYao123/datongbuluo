@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.db_restore}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script type="text/javascript" src="templates/default/js/db.func.js"></script>
+<script>
+{foreach from=$lang.js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+</script>
+<body>
+<form action="" method="post" id="form" name="form">
+<input type="hidden" name="act" id="act" value="reset" /> 
+<input type="hidden" name="dirname" value="{$dirname}" />      
+    <div class="pro_nr" id="header">
+        <span class="pro_bt">
+            <a href="javascript:location.reload();">
+            <img onmousemove="src='templates/default/images/pro_2.jpg'" onmouseout="src='templates/default/images/pro_1.jpg'" 
+            src="templates/default/images/pro_1.jpg" width="47" height="16"/>
+            </a>
+        </span>
+        <div class="pro_xx">
+            <div class="tl">
+                <span class="pro_tbl1">
+                    <a href="javascript:;" onclick="return ConfDelAll('form');">
+                    <img src="templates/default/images/tbl2.jpg" align="left" />&nbsp;{$lang.action_del}</a>
+                </span>
+                <span class="pro_tbl1">
+                    <a href="javascript:;" onclick="form.submit();">
+                    <img src="templates/default/images/hyy.jpg" align="left" />&nbsp;{$lang.restore}</a>
+                </span>
+            </div>
+        </div>       
+        <div class="pro_bt1">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="10%" height="30" align="center" valign="middle" class="pro_rb">
+                        <span class="tl">&nbsp; <input type="checkbox" name="checkall" onclick="CheckAllBtn(form)" value="check" checked="checked" />&nbsp;
+                        </span>
+                        <a href="#"><img src="templates/default/images/pro_8.jpg" /></a>
+                    </td>
+                    <td width="30%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.file_name}</td>
+                    <td width="30%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.file_size}[{$lang.totalrow}{$files_size}]</td>
+                    <td width="20%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.backup_time}</td>
+                    <td width="10%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.action}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="topheight"></div>
+    <div class="pro_nr">
+        <div class="pro_bottom">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            {foreach from=$info item=list}
+                <tr class="pro_bt2">
+                    <td width="10%" height="35" align="left" valign="middle" class="pro_tbr">
+                    	<span class="tl">&nbsp;
+                        <input name="tbname[]" type="checkbox" value="{$list.name}" checked="checked" />
+                        </span>
+                        <a href="#">&nbsp;<img src="templates/default/images/pro_9.png" /></a>
+                    </td>
+                    <td width="30%" align="left" valign="middle" class="pro_tbr pro_l5">&nbsp;
+                    	<a>{$list.name}</a> </td>
+                    <td width="30%" align="left" valign="middle" class="pro_tbr pro_l5">&nbsp;{$list.size}</td>
+                    <td width="20%" align="left" valign="middle" class="pro_tbr">&nbsp;{$list.mktime}</td>
+                    <td width="30%" align="left" valign="middle" class="pro_tbr">
+                        <span>[<a href="javascript:;" onclick="return ConfDel('database.php?act=del&dirname={$dirname}&tbname={$list.name}');">{$lang.action_del}</a>]</span>
+                    </td>
+                </tr>
+            {/foreach}
+            </table>
+            <div class="footheight"></div>
+        </div>        
+        <div class="pro_bot" id="footer">
+            <div class="page_info">{$lang.total}<span>{count($info)}</span>{$lang.sql}</div>
+        </div>
+   </div>
+</form>
+</body>
+</html>

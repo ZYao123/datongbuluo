@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>快递单号获取接口API - Example</title>
+	<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+	<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+	{literal}<script language="javascript">
+	
+	$(document).ready(function()
+	{
+
+			$("#retData").html('loading...');
+ 
+			var expressid = $("#expressid").val();
+            var expressno = $("#expressno").val();
+			var type = $("#type").val();
+			$.get("/data/kuaidi/get.php",{com:expressid,nu:expressno,type:type,rn:Math.floor(1+Math.random()*(99999-1))},
+				function(data)
+				{
+//					$("#retData").html(data);
+//
+//					var retData = eval(data);
+//					var retMsg = '';
+//					var j = 0;
+//
+//					for (var i=0;i<retData.length;i++)
+//					{
+//						if (i == retData.length -1)
+//						{
+//							retMsg += "<font color='#CC0000'>" + retData[i].item + "</font><br/>";
+//						}else{
+//							retMsg += retData[i].item + "<br/>";
+//						}
+//					}
+//					
+					$("#retData").html(data);
+				}
+			);
+ 
+			return false;
+
+	});
+	
+	</script>
+{/literal}
+</head>
+ 
+<body>
+<input name="type" type="hidden" id="type" value="{$type}"/> 
+<input name="expressid" type="hidden" id="expressid" value="{$expressid}"/> 
+<input name="expressno" type="hidden" id="expressno" value="{$expressno}"/>
+<div id="retData">{$info}</div>
+</body>
+ 
+</html>

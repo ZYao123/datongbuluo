@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.upload_title}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templates/default/js/jquery.min.js"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script type="text/javascript" src="templates/default/js/mgr.func.js"></script>
+
+
+</head>
+<body>
+<div class="newupload">
+	<div class="newupload_area">
+		<form name="from" id="from" enctype="multipart/form-data" method="post" onsubmit="UploadPrompt(0)" >
+			<label>{$lang.check_file}</label>
+			<input type="file" name="upfile" id="upfile">
+            <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+		</form>
+	</div>
+	<div class="uploading"></div>
+</div>
+</body>
+</html>

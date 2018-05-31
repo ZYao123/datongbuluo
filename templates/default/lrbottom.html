@@ -1,0 +1,6 @@
+    <div class="zc_bot">
+    {%foreach from=GetNav('bottom') item=list key=key%}
+        {%if $key > 0%}|{%/if%}<a href="{%$list.linkurl%}" target="{%$list.target%}">{%$list.classname%}</a>
+        {%/foreach%}
+    <br />
+        <span class="size">{%$copyright%}</span></div>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$webname%}</title>
+<meta name="generator" content="{%$generator%}" />
+<meta name="keywords" content="{%$keyword%}" />
+<meta name="description" content="{%$description%}" />
+<link href="templates/default/style/webstyle.css" rel="stylesheet" type="text/css" />
+<link href="templates/default/style/suggest.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/suggest.js"></script>
+<script type="text/javascript" src="js/transport.js"></script>
+</head>
+<body>
+<div class="help_bj">
+	{%include file="head.html"%}
+    <!--  body  开始  -->
+    <div class="body">
+        <div class="zh_left">
+            <div class="ddzxl"><span class="ddzxl_title">帮助中心</span>
+            {%if $help_class%} 
+            {%foreach from=$help_class item=list key=k%}
+            <div class="ddzxl_list"><span class="ddzxl_top"><img src="templates/default/images/zh_3.jpg" align="left" />&nbsp;{%$list.classname%}</span>
+                <ul class="ddzxl_bor">
+                	{%foreach from=$list.list item=help_info%}
+                    <li><a href="help.php?cid={%$info.classid%}&id={%$help_info.id%}">{%$help_info.title%} </a></li>
+                    {%/foreach%}
+                </ul>
+            </div>
+            {%/foreach%}
+            {%/if%}
+            </div>
+            <div class="rxdhl"><span class="ddzxl_title">热线电话</span>
+                <div class="rxdhl_bottom"><span class="tl"><img src="templates/default/images/zh_1.jpg" /></span><span class="rxdhl_wz"><strong class="rxdhl_color">{%$tel%}</strong><br />
+                    电话服务指引</span></div>
+            </div>
+        </div>
+        <div class="zh_right"><span class="zh_right_wz">{%$getposstr%} > <span class="zh_color">{%$info.title%}</span></span>
+            <div class="zh_title"><span class="zh_title_wz">{%$info.title%}</span></div>
+            <div class="zh_wz">{%$info.content%}</div>
+        </div>
+    </div>
+    <!--  body  结束  -->
+    {%include file="bottom.html"%}
+</div>
+</body>
+</html>

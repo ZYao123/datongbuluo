@@ -1,0 +1,24 @@
+<graph baseFontSize='12' xaxisname='' yaxisname='' hovercapbg='DEDEBE' hovercapborder='889E6D' rotateNames='0' yAxisMaxValue='100' numdivlines='9' divLineColor='CCCCCC' divLineAlpha='80' decimalPrecision='0' showAlternateHGridColor='1' AlternateHGridAlpha='30' AlternateHGridColor='CCCCCC' caption='{$xmcaption}' subcaption='' >
+   <categories font='Arial' fontColor='000000'>
+      {foreach from=$month item=list}
+	  <category name='{$list}'/>
+	  {/foreach}
+   </categories>
+   <dataset seriesname='{$reg_user}' color='f19e29' >
+      {foreach from=$reg_count item=list}
+	  <set value='{$list}' />
+	  {/foreach}
+   </dataset>
+    <dataset seriesname='{$order_user}' color='ff6868' >
+      {foreach from=$order_count item=list}
+	  <set value='{$list}' />
+	  {/foreach}
+   </dataset>
+<!--    <dataset seriesname='Grain' color='C9198D' >
+      <set value='27' />
+      <set value='25' />
+      <set value='28' />
+      <set value='26' />
+      <set value='10' />
+   </dataset>-->
+</graph>

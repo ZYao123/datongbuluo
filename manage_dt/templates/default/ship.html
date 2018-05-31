@@ -1,0 +1,55 @@
+<div class='ship'>
+  <div class='ShipDefault'>
+        {$lang.ShipDefault}:
+        {if $ShipDefault}
+        
+        <input name="first_edit{$pid}[]" maxlength="6" type="text" id="first{$pid}0"  value="{$ShipDefault.first}" onblur="ShipPricing(this.id)">{if $TemPricing eq '0'}{$lang.ShipWeightUnit}{elseif $TemPricing eq '1'}{$lang.ShipItem}{else}{$lang.ShipVolumeUnit}{/if}{$lang.ShipWithin}，
+        <input name="fprice_edit{$pid}[]" maxlength="6" type="text" id="fprice{$pid}0" value="{$ShipDefault.fprice}" onblur="ShipPrice(this.id)">{$lang.ShipPriceUnit}，
+        {$lang.ShipEach}{$lang.ShipAdd}<input maxlength="6" name="second_edit{$pid}[]"  value="{$ShipDefault.second}" type="text" id="second{$pid}0" onblur="ShipPricing(this.id)">{if $TemPricing eq '0'}{$lang.ShipWeightUnit}{elseif $TemPricing eq '1'}{$lang.ShipItem}{else}{$lang.ShipVolumeUnit}{/if}，
+        {$lang.ShipAdd}<input maxlength="6" name="sprice_edit{$pid}[]" type="text" id="sprice{$pid}0"  value="{$ShipDefault.sprice}" onblur="ShipPrice(this.id)">{$lang.ShipPriceUnit}
+        <input type="hidden" name="area_edit{$pid}[]" value="0" id="attrvalue_input_{$pid}0" />
+        <input type="hidden" name="id_edit{$pid}[]" value="{$ShipDefault.id}" id="attrvalue_input_{$pid}0" />
+        {else}
+        <input name="first{$pid}[]" maxlength="6" type="text" id="first{$pid}0" value="1" onblur="ShipPricing(this.id)">{if $TemPricing eq '0'}{$lang.ShipWeightUnit}{elseif $TemPricing eq '1'}{$lang.ShipItem}{else}{$lang.ShipVolumeUnit}{/if}{$lang.ShipWithin}，
+        <input name="fprice{$pid}[]" maxlength="6" type="text" id="fprice{$pid}0" onblur="ShipPrice(this.id)">{$lang.ShipPriceUnit}，
+        {$lang.ShipEach}{$lang.ShipAdd}<input maxlength="6" name="second{$pid}[]" value="1" type="text" id="second{$pid}0" onblur="ShipPricing(this.id)">{if $TemPricing eq '0'}{$lang.ShipWeightUnit}{elseif $TemPricing eq '1'}{$lang.ShipItem}{else}{$lang.ShipVolumeUnit}{/if}，
+        {$lang.ShipAdd}<input maxlength="6" name="sprice{$pid}[]" type="text" id="sprice{$pid}0" onblur="ShipPrice(this.id)">{$lang.ShipPriceUnit}
+        <input type="hidden" name="area{$pid}[]" value="0" id="attrvalue_input_{$pid}0" />
+        {/if}
+    </div>
+    <table  border="0" align="center" cellpadding="0" cellspacing="1" id="ShipSpecial{$pid}" class="ShipSpecial {if !$ShipSpecial}shipHidden{/if}">
+      <tr>
+        <td align="center">{$lang.ShipTransportedTo}</td>
+        <td width="100" align="center">{$lang.Shipfirst}{if $TemPricing eq '0'}{$lang.ShipWeight}{elseif $TemPricing eq '1'}{$lang.ShipItem}{else}{$lang.ShipVolume}{/if}({if $TemPricing eq '0'}{$lang.ShipWeightUnit}{elseif $TemPricing eq '1'}{$lang.ShipItem}{else}{$lang.ShipVolumeUnit}{/if})</td>
+        <td width="100" align="center">{$lang.Shipfirst}{$lang.ShipPrice}({$lang.ShipPriceUnit})</td>
+        <td width="100" align="center">{$lang.Shipsecond}{if $TemPricing eq '0'}{$lang.ShipWeight}{elseif $TemPricing eq '1'}{$lang.ShipItem}{else}{$lang.ShipVolume}{/if}({if $TemPricing eq '0'}{$lang.ShipWeightUnit}{elseif $TemPricing eq '1'}{$lang.ShipItem}{else}{$lang.ShipVolumeUnit}{/if})</td>
+        <td width="100" align="center">{$lang.Shipsecond}{$lang.ShipPrice}({$lang.ShipPriceUnit})</td>
+        <td width="50" align="center">{$lang.action}</td>
+      </tr>
+     {if $ShipSpecial}
+     {foreach from=$ShipSpecial item=list key=k}
+     <tr id="tr{$pid}1">
+        <td><div id='area{$pid}1' class="shiparea1 fl">
+        {foreach from=$list.areaname item=areaname key=k1}
+        {$areaname.classname}&nbsp;
+        {/foreach}
+        </div><div class="fr"><a href='javascript:;' onclick="javascript:areapostvalue('{$pid}1');DialogIframe('shipping.php?act=shiparea','{$lang.ShipSelectArea}','55%','70%','','','','dosubmit')">{$lang.action_edit}</a></div>
+        <input type="hidden" name="area_edit{$pid}[]" value="{$list.area}" id="attrvalue_input_{$pid}1" />
+        <input type="hidden" name="id_edit{$pid}[]" value="{$list.id}" id="attrvalue_input_{$pid}1" />
+        </td>
+        <td align="center">
+          <input name="first_edit{$pid}[]" type="text" id="first{$pid}1" value="{$list.first}" onblur="ShipPricing(this.id)" maxlength="6" />
+        </td>
+        <td align="center">
+          <input maxlength="6" name="fprice_edit{$pid}[]" type="text" id="fprice{$pid}1" value="{$list.fprice}" onblur="ShipPrice(this.id)"/> 
+        </td>
+        <td align="center"><input maxlength="6" name="second_edit{$pid}[]" value="{$list.second}" type="text" id="second{$pid}1" onblur="ShipPricing(this.id)"></td>
+        <td align="center"><input maxlength="6" name="sprice_edit{$pid}[]" type="text" id="sprice{$pid}1" value="{$list.sprice}" onblur="ShipPrice(this.id)"></td>
+        <td align="center"><a href='javascript:;' onclick="ShipSpecialDel('tr{$pid}1',{$list.id})">{$lang.action_del}</a></td>
+      </tr>
+      {/foreach}
+      {/if}
+    </table>
+
+    <div class='ShipSpecialAdd'><a href='javascript:;' onClick="ShipSpecial({$pid})">{$lang.ShipSpecial}</a></div>
+</div>

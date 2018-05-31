@@ -1,0 +1,92 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="js/validator.css"></link>
+{%foreach from=$info item=list key=k%}
+    <div onclick="selectaddr({%$k%},{%$totalnum%})" id='div{%$k%}' {%if ($list.is_first == "1" && $divid >= "1" ) || ($k == "0" && $divid == "0" ) %} class="addrlist2" {%else%} class="addrlist" onmouseover="this.className = 'addrlist1'" onmouseout=" this.className = 'addrlist'"{%/if%}>
+        <input onclick="Calculate()" type="radio" name="aid" id="aid{%$k%}" value="{%$list.id%}" {%if ($list.is_first == "1" && $divid >= "1" ) || ($k == "0" && $divid == "0" ) %} checked="checked" {%/if%} />
+        <span>{%$list.road_address%} {%$list.cur_address%}&nbsp;&nbsp;{%$list.rec_name%}(收)</span>&nbsp;&nbsp;
+        {%$list.zipcode%}&nbsp;&nbsp;
+        {%$list.phone%}&nbsp;&nbsp;
+        {%$list.telephone%} 
+        {%if $act1 == 'update'%}　{%if $list.is_first != "1"%}<a  href='javascript:;' onclick="Getphp('orderinfo.php?act=addr&act1=isfirst&id={%$list.id%}','address')">设为默认</a>{%else%}　　　　{%/if%}　
+        <a href='javascript:;' onclick="Getphp('orderinfo.php?act=addr&act1=update1&id={%$list.id%}','address')">修改</a>{%/if%}
+    </div>
+{%/foreach%}
+
+{%if $info eq null || $act1 == 'update' || $act1 == 'update1'%}
+
+<script src="js/formValidator.js" type="text/javascript" charset="UTF-8"></script>
+<script src="js/formValidatorRegex.js" type="text/javascript" charset="UTF-8"></script>
+<script src="js/checkform.js" type="text/javascript" charset="UTF-8"></script>
+<script>
+{%foreach from=$js item=list key=k%}
+var {%$k%}	= "{%$list%}";
+{%/foreach%}
+ReadyValidator('form1');
+wenzi('rec_name',rec_name,'',rec_name);
+isempty('AddrCountry','',AddrCountry,'','true','true','',AddrCountry);
+isempty('AddrProvince','',AddrProvince,'','true','true','',AddrProvince);
+isempty('AddrCity','',AddrCity,'','true','true','',AddrCity);
+isempty('AddrArea','',AddrArea,'','true','true','',AddrArea);
+isempty('cur_address','',cur_address,'','true','true','',cur_address);
+checkzipcode('zipcode',zipcode,zipcode,'',zipcodeerror);
+telandphone2('phone',phone,phone,'','手机号不正确');
+telandphone2('telephone',phone,phone,'','电话号码不正确');
+</script>  
+{%if $info eq null%}<input type="hidden" name="aid" id="aid" value="0" />{%/if%}
+<form id="form1" method="post">
+        <div class="shdz_nr">
+            <ul>
+                <li><span class="shdz_wz">收货人姓名:</span><span class="shdz_sr">
+                    <input type="text" class="shdz_text" name="rec_name" id="rec_name" value="{%$info1.rec_name%}" />
+                    &nbsp;*</span></li>
+                <li style="height:67px;"><span class="shdz_wz">收货地址:</span><span class="shdz_sr">            
+        <select name="AddrCountry" id="AddrCountry" onchange="do_area('AddrCountry','AddrProvince','{%$lang.AddrProvince%}')" class="in100">
+          <option value="" >{%$lang.AddrCountry%}</option>
+          {%foreach from=$TemAddressIDS.0 item=list%}
+          <option value="{%$list.id%}" {%if $TemAddressID.1 eq $list.id%} selected="selected" {%/if%}>{%$list.classname%}</option>
+          {%/foreach%}
+        </select>
+        <select name="AddrProvince" id="AddrProvince" onchange="do_area('AddrProvince','AddrCity','{%$lang.AddrCity%}')" class="in100">
+          <option value="" >{%$lang.AddrProvince%}</option>
+          {%foreach from=$TemAddressIDS.1 item=list%}
+          <option value="{%$list.id%}" {%if $TemAddressID.2 eq $list.id%} selected="selected" {%/if%}>{%$list.classname%}</option>
+          {%/foreach%}          
+        </select>    
+        <select name="AddrCity" id="AddrCity"  class="in100" onchange="do_area('AddrCity','AddrArea','{%$lang.AddrArea%}')" >
+          <option value="" >{%$lang.AddrCity%}</option>
+          {%foreach from=$TemAddressIDS.2 item=list%}
+          <option value="{%$list.id%}" {%if $TemAddressID.3 eq $list.id%} selected="selected" {%/if%}>{%$list.classname%}</option>
+          {%/foreach%}          
+        </select>          
+        <select name="AddrArea" id="AddrArea" class="in100">
+          <option value="" >{%$lang.AddrArea%}</option>
+          {%foreach from=$TemAddressIDS.3 item=list%}
+          <option value="{%$list.id%}" {%if $TemAddressID.4 eq $list.id%} selected="selected" {%/if%}>{%$list.classname%}</option>
+          {%/foreach%}          
+        </select>        
+              <span id="AddrCountryTip" ></span><span id="AddrProvinceTip" ></span><span id="AddrCityTip" ></span><span id="AddrAreaTip" ></span><br>
+                 <input name="cur_address" type="text" class="shdz_text2" id="cur_address" style="margin-left:103px;" value="{%$info1.cur_address%}" size="" />
+                    &nbsp;*&nbsp;&nbsp;<!--<span class="shdz_color1">不需要重复填写省/市/区</span>--></span><span id="cur_addressTip" ></span></li>
+                <li><span class="shdz_wz">邮政编码:</span><span class="shdz_sr">
+                    <input type="text" class="shdz_text" name="zipcode" id="zipcode" value="{%$info1.zipcode%}" />
+                    &nbsp;*&nbsp;&nbsp;</span><span id="zipcodeTip" ></span></li>
+                <li><span class="shdz_wz">手机号码:</span><span class="shdz_sr">
+                    <input type="text" class="shdz_text" name="phone" id="phone" value="{%$info1.phone%}"  />
+                    &nbsp;&nbsp;</span><span id="phoneTip" style="width:250px"></span></li>
+                <li><span class="shdz_wz">电话号码:</span><span class="shdz_sr">
+                    <input type="text" class="shdz_text" name="telephone" id="telephone" value="{%$info1.telephone%}" />
+                   </span><span id="telephoneTip" style="width:250px"></span></li>
+                <li><span class="shdz_wz">设为默认:</span><span class="shdz_sr">
+                    <input name="is_first" type="checkbox" id="is_first" value="1" {%if $info1.is_first == '1'%}checked{%/if%}/>
+                    <input type="hidden" name="act" id="act" value="addr" />
+                    <input type="hidden" name="id" id="id" value="{%$info1.id%}" />
+                    <input type="hidden" name="act1" id="act1" value="{%if $act1 == 'update1'%}updatepost{%else%}add{%/if%}" />
+                    </span></li>
+                <li><span class="shdz_bc">
+                  <img  src="templates/default/images/shdz_2.jpg" style=" cursor: pointer" onclick="ajaxdosubmit('form1','orderinfo.php','address')" />
+                 </span></li>
+            </ul>
+            <div style="clear:both"></div>
+        </div>
+      </form>
+{%/if%}

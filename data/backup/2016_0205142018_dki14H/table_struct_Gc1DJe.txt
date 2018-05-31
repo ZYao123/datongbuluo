@@ -1,0 +1,763 @@
+DROP TABLE IF EXISTS `lc_admin`;
+
+CREATE TABLE `lc_admin` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `username` varchar(60) NOT NULL COMMENT '用户名',
+  `password` char(32) NOT NULL COMMENT '密码',
+  `loginip` char(20) NOT NULL COMMENT '登陆IP',
+  `logintime` int(10) unsigned NOT NULL COMMENT '登陆时间',
+  `regtime` int(10) NOT NULL COMMENT '注册时间',
+  `checkadmin` enum('true','false') NOT NULL COMMENT '审核',
+  `email` varchar(60) NOT NULL COMMENT '邮箱',
+  `mobile` varchar(25) NOT NULL COMMENT '手机',
+  `privilege` text NOT NULL COMMENT '权限列表',
+  `role_id` int(11) NOT NULL COMMENT '角色id',
+  `custom` text COMMENT '个性菜单',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_admin_log`;
+
+CREATE TABLE `lc_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `userid` int(11) NOT NULL COMMENT '管理员id',
+  `username` varchar(30) NOT NULL COMMENT '管理员用户名',
+  `action` varchar(100) NOT NULL COMMENT '操作内容',
+  `actiontime` int(11) NOT NULL COMMENT '日志时间',
+  `actionip` varchar(60) NOT NULL COMMENT 'IP地址',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2243 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_admin_role`;
+
+CREATE TABLE `lc_admin_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `rolename` varchar(60) NOT NULL COMMENT '角色名称',
+  `roledescription` tinytext NOT NULL COMMENT '角色简介',
+  `privilege` text NOT NULL COMMENT '权限',
+  `sign` tinyint(1) DEFAULT '0' COMMENT '管理员表标示(0:超级,1:管理自己的商品)',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_ads_category`;
+
+CREATE TABLE `lc_ads_category` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '广告位id',
+  `parentid` smallint(5) unsigned NOT NULL COMMENT '上级id',
+  `parentstr` varchar(50) NOT NULL COMMENT '上级id字符串',
+  `classname` varchar(30) NOT NULL COMMENT '广告位名称',
+  `orderid` smallint(5) unsigned NOT NULL COMMENT '排列顺序',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `description` text COMMENT '描述',
+  `temp` text COMMENT '模版',
+  `built_in` enum('false','true') DEFAULT 'false' COMMENT '是否为内置分类',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_ads_list`;
+
+CREATE TABLE `lc_ads_list` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `classid` smallint(5) unsigned NOT NULL COMMENT '投放范围(广告位)',
+  `parentid` smallint(5) unsigned NOT NULL COMMENT '所属广告位父id',
+  `parentstr` varchar(80) NOT NULL COMMENT '所属广告位父id字符串',
+  `title` varchar(30) NOT NULL COMMENT '广告标识',
+  `admode` char(10) NOT NULL COMMENT '展示模式',
+  `picurl` varchar(100) NOT NULL COMMENT '上传内容地址',
+  `adtext` text NOT NULL COMMENT '展示内容',
+  `linkurl` varchar(255) NOT NULL COMMENT '跳转链接',
+  `orderid` smallint(5) unsigned NOT NULL COMMENT '排列排序',
+  `posttime` int(10) unsigned NOT NULL COMMENT '提交时间',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `starttime` int(10) NOT NULL,
+  `endtime` int(10) NOT NULL,
+  `contact` varchar(30) NOT NULL COMMENT '联系人',
+  `tel` varchar(30) NOT NULL COMMENT '电话',
+  `email` varchar(80) NOT NULL COMMENT '邮箱',
+  `hits` int(11) NOT NULL DEFAULT '0',
+  `order` int(11) DEFAULT '0',
+  `width` int(4) DEFAULT NULL COMMENT '宽度',
+  `height` int(4) DEFAULT NULL COMMENT '高度',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_area`;
+
+CREATE TABLE `lc_area` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `parentid` int(11) NOT NULL COMMENT '上级id',
+  `parentstr` varchar(50) NOT NULL COMMENT '上级id字符串',
+  `classname` varchar(80) NOT NULL COMMENT '名称',
+  `orderid` int(11) NOT NULL COMMENT '排序',
+  `checkinfo` enum('true','false') DEFAULT 'true' COMMENT '审核',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3235 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_article`;
+
+CREATE TABLE `lc_article` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '列表信息id',
+  `classid` smallint(5) unsigned NOT NULL COMMENT '所属栏目id',
+  `parentid` smallint(5) unsigned NOT NULL COMMENT '所属栏目上级id',
+  `parentstr` varchar(80) NOT NULL COMMENT '所属栏目上级id字符串',
+  `title` varchar(80) NOT NULL COMMENT '标题',
+  `colorval` char(10) NOT NULL COMMENT '字体颜色',
+  `boldval` char(10) NOT NULL COMMENT '字体加粗',
+  `author` varchar(50) NOT NULL COMMENT '作者编辑',
+  `linkurl` varchar(255) NOT NULL COMMENT '跳转链接',
+  `keywords` varchar(50) NOT NULL COMMENT '关键词',
+  `description` varchar(255) NOT NULL COMMENT '摘要',
+  `content` mediumtext COMMENT '详细内容',
+  `picurl` varchar(100) NOT NULL COMMENT '缩略图片',
+  `hits` mediumint(8) unsigned NOT NULL COMMENT '点击次数',
+  `orderid` int(10) unsigned NOT NULL COMMENT '排列排序',
+  `posttime` int(10) NOT NULL COMMENT '更新时间',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `phone_content` text COMMENT '手机版内容',
+  `phone` tinyint(1) DEFAULT '0' COMMENT '手机版:1 是 0 否',
+  `phone_picurl` varchar(100) DEFAULT '' COMMENT '手机端缩略图',
+  `phone_desc` varchar(255) DEFAULT '' COMMENT '手机端摘要',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_article_agree`;
+
+CREATE TABLE `lc_article_agree` (
+  `a_id` int(10) NOT NULL COMMENT '文章ID',
+  `yes` int(10) NOT NULL DEFAULT '0',
+  `no` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`a_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC COMMENT='文章点击赞表';
+
+DROP TABLE IF EXISTS `lc_article_category`;
+
+CREATE TABLE `lc_article_category` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '栏目id',
+  `parentid` smallint(5) unsigned NOT NULL COMMENT '栏目上级id',
+  `parentstr` varchar(50) NOT NULL COMMENT '栏目上级id字符串',
+  `classname` varchar(30) NOT NULL COMMENT '栏目名称',
+  `linkurl` varchar(255) NOT NULL COMMENT '跳转链接',
+  `seotitle` varchar(80) NOT NULL COMMENT 'SEO标题',
+  `keywords` varchar(50) NOT NULL COMMENT '关键词',
+  `description` varchar(255) NOT NULL COMMENT '描述',
+  `orderid` smallint(5) unsigned NOT NULL COMMENT '排列排序',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `built_in` enum('false','true') DEFAULT 'false' COMMENT '是否为内置分类',
+  `lc_content` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_attribute`;
+
+CREATE TABLE `lc_attribute` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '属性id',
+  `name` varchar(60) NOT NULL COMMENT '属性名',
+  `built_in` enum('false','true') DEFAULT 'false' COMMENT '是否为内置属性',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='属性表';
+
+DROP TABLE IF EXISTS `lc_bug`;
+
+CREATE TABLE `lc_bug` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL COMMENT 'BUG标题',
+  `content` text NOT NULL COMMENT 'BUG内容',
+  `u_id` int(10) NOT NULL COMMENT '留言人',
+  `time` int(11) NOT NULL COMMENT '反馈时间',
+  `checkinfo` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否审核0:否1:是',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_failedlogin`;
+
+CREATE TABLE `lc_failedlogin` (
+  `username` char(30) NOT NULL COMMENT '用户名',
+  `ip` char(15) NOT NULL COMMENT '登陆IP',
+  `time` int(10) unsigned NOT NULL COMMENT '登陆时间',
+  `num` tinyint(1) NOT NULL COMMENT '失败次数',
+  `isadmin` tinyint(1) NOT NULL COMMENT '是否是管理员',
+  PRIMARY KEY (`username`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_gbook`;
+
+CREATE TABLE `lc_gbook` (
+  `lc_id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `lc_title` varchar(255) NOT NULL COMMENT '留言标题',
+  `lc_content` text COMMENT '留言内容',
+  `lc_name` varchar(20) DEFAULT NULL COMMENT '留言者姓名',
+  `lc_tel` varchar(30) DEFAULT NULL COMMENT '电话',
+  `lc_email` varchar(100) DEFAULT NULL COMMENT '邮箱',
+  `lc_datetime` varchar(200) DEFAULT NULL COMMENT '添加日期',
+  `lc_ip` varchar(100) DEFAULT NULL COMMENT 'IP地址',
+  `lc_reply` text COMMENT '回复',
+  `lc_zt` int(4) DEFAULT '-1' COMMENT '留言状态',
+  PRIMARY KEY (`lc_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_goods`;
+
+CREATE TABLE `lc_goods` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `classid` smallint(5) unsigned NOT NULL COMMENT '所属商品类别',
+  `parentid` smallint(5) unsigned NOT NULL COMMENT '所属类别上一级ID',
+  `parentstr` varchar(80) NOT NULL COMMENT '所属类别的上级类ID拼接字符串',
+  `brandid` smallint(5) NOT NULL COMMENT '品牌ID',
+  `brandpid` smallint(5) NOT NULL COMMENT '品牌ID父ID?',
+  `brandpstr` varchar(80) NOT NULL COMMENT '商品品牌父id字符串',
+  `title` varchar(80) NOT NULL COMMENT '商品名称',
+  `colorval` char(10) NOT NULL COMMENT '标题颜色',
+  `boldval` char(10) NOT NULL COMMENT '标题加粗',
+  `flag` text NOT NULL COMMENT '属性',
+  `goodsNO` varchar(30) NOT NULL COMMENT '货号',
+  `payfreight` enum('true','false') NOT NULL COMMENT '运费承担',
+  `weight` varchar(10) NOT NULL COMMENT '重量',
+  `salesprice` decimal(10,2) unsigned NOT NULL COMMENT '销售价格',
+  `promotionprice` char(10) DEFAULT NULL COMMENT '促销价格',
+  `promotiontime` varchar(60) DEFAULT NULL COMMENT '促销时间',
+  `housenum` smallint(5) unsigned NOT NULL COMMENT '库存数量',
+  `housewarn` enum('true','false') NOT NULL COMMENT '库存警告',
+  `warnnum` smallint(5) unsigned NOT NULL COMMENT '警告数量',
+  `integral` char(10) NOT NULL COMMENT '积分点数',
+  `author` varchar(30) NOT NULL COMMENT '来源作者',
+  `linkurl` varchar(255) NOT NULL COMMENT '跳转链接',
+  `keywords` varchar(30) NOT NULL COMMENT '关键词',
+  `description` varchar(255) NOT NULL COMMENT '摘要',
+  `content` mediumtext NOT NULL COMMENT '详细内容',
+  `picurl` varchar(100) NOT NULL COMMENT '缩略图片',
+  `picarr` text NOT NULL COMMENT '组图',
+  `hits` int(10) unsigned NOT NULL COMMENT '点击次数',
+  `orderid` int(10) unsigned NOT NULL COMMENT '排列排序',
+  `posttime` int(10) unsigned NOT NULL COMMENT '更新时间',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `delstate` set('true') NOT NULL COMMENT '删除状态',
+  `deltime` int(10) NOT NULL COMMENT '删除时间',
+  `ercode` varchar(255) DEFAULT NULL COMMENT '商品二维码',
+  `remark` tinytext COMMENT '商品备注',
+  `sellnum` int(11) DEFAULT '0' COMMENT '销量',
+  `appraisenum` int(11) DEFAULT '0' COMMENT '评价条数',
+  `retitle` varchar(200) DEFAULT NULL COMMENT '副标题',
+  `norm` text COMMENT '所选规格元素信息',
+  `ser_conent` text COMMENT '售后服务',
+  `buyprice` decimal(10,2) unsigned NOT NULL COMMENT '商品进价',
+  `phone_content` text COMMENT '手机版内容',
+  `phone` tinyint(1) DEFAULT '0' COMMENT '手机版:1 是 0 否',
+  `phone_picurl` varchar(100) DEFAULT '' COMMENT '手机端缩略图',
+  `phone_desc` varchar(255) DEFAULT '' COMMENT '手机端摘要',
+  `old_price` decimal(10,2) DEFAULT NULL COMMENT '原价',
+  `need_integral` int(10) DEFAULT NULL COMMENT '积分换购(需要积分数)',
+  `uid` int(10) DEFAULT NULL COMMENT '管理员ID(哪个小管理员上传的)',
+  `starttime` varchar(50) DEFAULT NULL COMMENT '活动开始时间',
+  `endtime` varchar(50) DEFAULT NULL COMMENT '活动结束时间',
+  `special_price` smallint(1) NOT NULL DEFAULT '0' COMMENT '当值由0变为1时 购买此商品不计积分',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COMMENT='商品表';
+
+DROP TABLE IF EXISTS `lc_goodsattr`;
+
+CREATE TABLE `lc_goodsattr` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品属性id',
+  `goodsid` int(11) unsigned NOT NULL COMMENT '商品id',
+  `attrname` text NOT NULL COMMENT '规格ID字符串',
+  `housenum` int(11) NOT NULL COMMENT '库存数量',
+  `price` decimal(10,2) unsigned NOT NULL COMMENT '售价',
+  `goodsNO` char(30) DEFAULT NULL COMMENT '货号',
+  `buyprice` decimal(10,2) unsigned NOT NULL COMMENT '商品进价',
+  `old_price` decimal(10,2) DEFAULT NULL COMMENT '原价',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=350 DEFAULT CHARSET=utf8 COMMENT='商品规格关系表';
+
+DROP TABLE IF EXISTS `lc_goodsattr_value`;
+
+CREATE TABLE `lc_goodsattr_value` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品属性id',
+  `goodsid` int(11) unsigned NOT NULL COMMENT '商品id',
+  `attrname` text NOT NULL COMMENT '属性Array',
+  `color` varchar(30) DEFAULT NULL COMMENT '背景颜色',
+  `pic` varchar(80) DEFAULT NULL COMMENT '背景******',
+  `attrid` int(11) DEFAULT '0' COMMENT '属性id',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=340 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_goodsattribute`;
+
+CREATE TABLE `lc_goodsattribute` (
+  `a_id` varchar(255) NOT NULL COMMENT '属性id',
+  `g_id` int(10) unsigned NOT NULL COMMENT '商品id',
+  PRIMARY KEY (`g_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='产品属性关系表';
+
+DROP TABLE IF EXISTS `lc_goodsbrand`;
+
+CREATE TABLE `lc_goodsbrand` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `parentid` mediumint(8) unsigned NOT NULL COMMENT '商品品牌父id',
+  `parentstr` varchar(50) NOT NULL COMMENT '商品品牌父id字符串',
+  `classname` varchar(80) NOT NULL COMMENT '品牌名称',
+  `orderid` mediumint(10) unsigned NOT NULL COMMENT '排列排序',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `rename` varchar(80) DEFAULT NULL COMMENT '品牌别名',
+  `logo` varchar(80) DEFAULT NULL COMMENT '品牌图片',
+  `url` varchar(80) DEFAULT NULL COMMENT '品牌地址',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COMMENT='商品品牌表';
+
+DROP TABLE IF EXISTS `lc_goodscategory`;
+
+CREATE TABLE `lc_goodscategory` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `parentid` mediumint(8) unsigned NOT NULL COMMENT '类型父id',
+  `parentstr` varchar(50) NOT NULL COMMENT '类型父id字符串',
+  `classname` varchar(30) NOT NULL COMMENT '类别名称',
+  `attrstr` int(11) NOT NULL COMMENT '商品类型',
+  `orderid` mediumint(8) unsigned NOT NULL COMMENT '排列顺序',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '是否审核',
+  `unit` varchar(30) DEFAULT NULL COMMENT '单位',
+  `keywords` varchar(255) DEFAULT NULL COMMENT '关键词',
+  `description` varchar(500) DEFAULT NULL COMMENT '描述',
+  `section` int(5) DEFAULT '0' COMMENT '价格分段',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=840 DEFAULT CHARSET=utf8 COMMENT='商品分类表';
+
+DROP TABLE IF EXISTS `lc_goodsnorm`;
+
+CREATE TABLE `lc_goodsnorm` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品属性id',
+  `normname` varchar(80) NOT NULL COMMENT '规格名称',
+  `classname` varchar(80) NOT NULL COMMENT '分类名称',
+  `rename` varchar(80) NOT NULL COMMENT '规格别名',
+  `rdotype` varchar(30) NOT NULL COMMENT '显示类型',
+  `orderid` int(11) NOT NULL COMMENT '排序',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `compile` enum('false','true') DEFAULT NULL COMMENT '是否允许编辑背景',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='商品规格表';
+
+DROP TABLE IF EXISTS `lc_goodsnorm_value`;
+
+CREATE TABLE `lc_goodsnorm_value` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品属性id',
+  `normid` int(11) unsigned NOT NULL COMMENT '规格id',
+  `name` varchar(80) NOT NULL COMMENT '属性值名称',
+  `color` varchar(30) DEFAULT NULL COMMENT '颜色值',
+  `pic` varchar(80) DEFAULT NULL COMMENT '图文',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='商品规格具体值表';
+
+DROP TABLE IF EXISTS `lc_goodsorder`;
+
+CREATE TABLE `lc_goodsorder` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `username` varchar(30) NOT NULL COMMENT '会员用户名',
+  `rec_name` varchar(50) NOT NULL COMMENT '收货人姓名',
+  `cur_address` varchar(255) DEFAULT NULL COMMENT '地址',
+  `phone` varchar(50) DEFAULT NULL COMMENT '手机',
+  `telephone` varchar(50) DEFAULT NULL COMMENT '电话',
+  `Province` varchar(50) DEFAULT NULL COMMENT '省',
+  `City` varchar(50) DEFAULT NULL COMMENT '市',
+  `zipcode` varchar(50) DEFAULT NULL COMMENT '邮政编码',
+  `Courierid` varchar(50) DEFAULT NULL,
+  `postid` varchar(50) NOT NULL COMMENT '运单号',
+  `postmode` smallint(5) NOT NULL COMMENT '送货方式:1快递；２ems',
+  `paymode` smallint(5) NOT NULL COMMENT '支付方式:1在线支付2货到付款',
+  `TimeRequired` smallint(5) DEFAULT NULL,
+  `weight` varchar(10) NOT NULL COMMENT '物品重量',
+  `cost` decimal(10,2) NOT NULL COMMENT '商品运费',
+  `orderamount` decimal(10,2) NOT NULL COMMENT '订单金额',
+  `integral` int(10) unsigned NOT NULL COMMENT '积分点数',
+  `buyremark` text NOT NULL COMMENT '购物备注',
+  `sendremark` text NOT NULL COMMENT '发货方备注',
+  `posttime` int(10) unsigned NOT NULL COMMENT '订单时间',
+  `orderid` mediumint(10) unsigned NOT NULL COMMENT '排列排序',
+  `checkinfo` varchar(255) NOT NULL COMMENT '审核状态   =3加积份',
+  `core` set('true') NOT NULL COMMENT '是否加星',
+  `delstate` set('true') NOT NULL COMMENT '删除状态',
+  `deltime` int(10) unsigned NOT NULL COMMENT '删除时间/收货时间',
+  `orderlistnum` varchar(30) DEFAULT NULL COMMENT '订单编号',
+  `Invoice` smallint(5) DEFAULT NULL,
+  `InvoiceType` smallint(5) DEFAULT NULL COMMENT '发票类型１普通发票',
+  `companyname` varchar(100) DEFAULT NULL COMMENT '公司发票抬头',
+  `userid` int(10) unsigned DEFAULT NULL COMMENT '用户id',
+  `ReceiptTime` int(10) DEFAULT '0' COMMENT '收货时间',
+  `paynum` varchar(50) DEFAULT NULL COMMENT '订单支付号',
+  `bankId` varchar(50) DEFAULT '0' COMMENT '付款银行代码',
+  `delhouse` tinyint(1) DEFAULT '0' COMMENT '是否减掉库存  0:否,1是',
+  `sendtime` int(10) DEFAULT NULL COMMENT '发货时间',
+  `phone_sign` tinyint(1) DEFAULT '0' COMMENT '0:电脑下的订单 ：1 手机下的订单',
+  `message` text COMMENT '备注留言',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `orderlistnum` (`orderlistnum`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=277 DEFAULT CHARSET=utf8 COMMENT='订单表';
+
+DROP TABLE IF EXISTS `lc_goodsreview`;
+
+CREATE TABLE `lc_goodsreview` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `goodsid` int(10) unsigned NOT NULL COMMENT '商品id',
+  `nickname` varchar(30) NOT NULL COMMENT '昵称',
+  `content` text NOT NULL COMMENT '评论内容',
+  `ip` char(20) NOT NULL COMMENT '评论ip',
+  `orderid` mediumint(8) unsigned NOT NULL COMMENT '排列排序',
+  `posttime` int(10) unsigned NOT NULL COMMENT '更新时间',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_goodsshopcart`;
+
+CREATE TABLE `lc_goodsshopcart` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `gid` int(10) unsigned NOT NULL COMMENT '商品id',
+  `gtitle` varchar(150) NOT NULL COMMENT '商品名称',
+  `gpicurl` varchar(150) NOT NULL COMMENT '商品缩图',
+  `price` decimal(10,2) NOT NULL COMMENT '商品单价',
+  `num` int(10) NOT NULL COMMENT '订购数量',
+  `gorderlistnum` varchar(30) NOT NULL COMMENT '订单',
+  `Status` varchar(50) NOT NULL,
+  `uid` int(10) NOT NULL,
+  `norm` varchar(255) DEFAULT NULL COMMENT '规格',
+  `gintegral` int(10) DEFAULT NULL COMMENT '积分',
+  `buyprice` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '商品进价',
+  `edit_date` date DEFAULT NULL COMMENT '下订单时间',
+  `consume_points` int(10) DEFAULT '0' COMMENT '消耗积分',
+  PRIMARY KEY (`id`),
+  KEY `gid` (`gid`) USING BTREE,
+  KEY `gorderlistnum` (`gorderlistnum`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=666 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_goodstype`;
+
+CREATE TABLE `lc_goodstype` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品属性id',
+  `classname` varchar(80) NOT NULL COMMENT '类型名称',
+  `rename` varchar(80) DEFAULT NULL COMMENT '类型别名',
+  `orderid` mediumint(8) unsigned NOT NULL COMMENT '排列排序',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `brand` text COMMENT '关联品牌',
+  `norm` text COMMENT '关联规格',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='商品类型表';
+
+DROP TABLE IF EXISTS `lc_goodstypeattr`;
+
+CREATE TABLE `lc_goodstypeattr` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品属性id',
+  `typeid` int(11) unsigned NOT NULL COMMENT '所属商品类型',
+  `attrname` varchar(80) NOT NULL COMMENT '属性名称',
+  `rename` varchar(80) NOT NULL DEFAULT '' COMMENT '别名',
+  `showtype` tinyint(3) NOT NULL COMMENT '前台显示型式',
+  `attrvalue` text NOT NULL COMMENT '属性可选值',
+  `intype` tinyint(3) NOT NULL COMMENT '该属性值的录入方式',
+  `orderid` int(11) NOT NULL COMMENT '排序',
+  `checkinfo` enum('true','false') NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='商品类型扩展属性表';
+
+DROP TABLE IF EXISTS `lc_link`;
+
+CREATE TABLE `lc_link` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '友情链接id',
+  `webname` varchar(30) NOT NULL COMMENT '网站名称',
+  `webnote` varchar(200) NOT NULL COMMENT '网站描述',
+  `picurl` varchar(100) NOT NULL COMMENT '缩略图片',
+  `linkurl` varchar(255) NOT NULL COMMENT '跳转链接',
+  `orderid` smallint(5) unsigned NOT NULL COMMENT '排列排序',
+  `posttime` int(10) unsigned NOT NULL COMMENT '更新时间',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_member`;
+
+CREATE TABLE `lc_member` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `username` varchar(32) DEFAULT NULL COMMENT '用户名',
+  `password` varchar(32) DEFAULT NULL COMMENT '密码',
+  `question` varchar(50) DEFAULT NULL COMMENT '提问',
+  `answer` varchar(50) DEFAULT NULL COMMENT '回答',
+  `cnname` varchar(10) DEFAULT NULL COMMENT '姓名',
+  `enname` varchar(20) DEFAULT NULL COMMENT '英文名',
+  `avatar` varchar(100) DEFAULT NULL COMMENT '头像',
+  `sex` tinyint(1) unsigned DEFAULT NULL COMMENT '性别',
+  `birthday` date DEFAULT NULL COMMENT '生日类型',
+  `astro` varchar(10) DEFAULT '-1' COMMENT '星座',
+  `bloodtype` tinyint(2) DEFAULT '-1' COMMENT '血型',
+  `trade` varchar(10) DEFAULT '-1' COMMENT '行业',
+  `cardtype` tinyint(2) DEFAULT '-1' COMMENT '证件类型',
+  `cardnum` varchar(32) DEFAULT NULL COMMENT '证件号码',
+  `intro` text COMMENT '个人说明',
+  `email` varchar(40) DEFAULT NULL COMMENT '电子邮件',
+  `qqnum` varchar(20) DEFAULT NULL COMMENT 'QQ号码',
+  `mobile` varchar(20) DEFAULT NULL COMMENT '手机',
+  `telephone` varchar(20) DEFAULT NULL COMMENT '固定电话',
+  `enteruser` set('1') DEFAULT NULL COMMENT '认证',
+  `expval` int(10) DEFAULT NULL COMMENT '经验值',
+  `integral` int(10) unsigned DEFAULT NULL COMMENT '积分',
+  `regtime` int(10) unsigned DEFAULT NULL COMMENT '注册时间',
+  `regip` varchar(20) DEFAULT NULL COMMENT '注册IP',
+  `logintime` int(10) unsigned DEFAULT NULL COMMENT '登陆时间',
+  `loginip` varchar(20) DEFAULT NULL COMMENT '登陆IP',
+  `sms` int(10) DEFAULT NULL COMMENT '短信验证码',
+  `smstime` int(10) DEFAULT NULL COMMENT '短信发送时间',
+  `user_money` decimal(10,2) DEFAULT '0.00' COMMENT '可用资金',
+  `frozen_money` decimal(10,2) DEFAULT '0.00' COMMENT '冻结资金',
+  `pay_points` int(10) unsigned DEFAULT '0',
+  `rank_points` int(10) DEFAULT '0',
+  `address_id` mediumint(8) DEFAULT NULL,
+  `visit_count` smallint(5) DEFAULT NULL,
+  `user_rank` tinyint(3) DEFAULT NULL COMMENT '会员等级',
+  `is_special` tinyint(3) DEFAULT NULL,
+  `ec_salt` varchar(10) DEFAULT NULL,
+  `salt` varchar(10) DEFAULT NULL,
+  `parent_id` smallint(9) DEFAULT NULL,
+  `flag` tinyint(3) DEFAULT NULL,
+  `alias` varchar(60) DEFAULT NULL,
+  `credit_line` decimal(10,2) DEFAULT '0.00',
+  `checkuser` tinyint(3) DEFAULT '0' COMMENT '会员状态0为活动1为冻结',
+  `MSN` varchar(150) DEFAULT NULL COMMENT 'MSN',
+  `QQ` varchar(50) DEFAULT NULL,
+  `picurl` varchar(200) DEFAULT NULL,
+  `code` int(8) DEFAULT NULL COMMENT '找回密码随机码',
+  `find_time` int(10) DEFAULT NULL COMMENT '找回密码时间',
+  `phone` tinyint(1) DEFAULT '0' COMMENT '0: 电脑注册1:手机注册',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=215 DEFAULT CHARSET=utf8 COMMENT='会员表';
+
+DROP TABLE IF EXISTS `lc_member_address`;
+
+CREATE TABLE `lc_member_address` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `userid` int(32) DEFAULT NULL COMMENT '用户id',
+  `rec_name` varchar(50) DEFAULT NULL COMMENT '收货人姓名',
+  `cur_address` varchar(200) DEFAULT NULL COMMENT '所在地区',
+  `road_address` varchar(200) DEFAULT NULL COMMENT '街道地址',
+  `zipcode` varchar(10) DEFAULT NULL COMMENT '邮政编码',
+  `phone` varchar(100) DEFAULT NULL COMMENT '手机号码',
+  `address_id` varchar(200) DEFAULT NULL,
+  `is_first` varchar(50) DEFAULT NULL COMMENT '是否为默认',
+  `telephone` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=155 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_member_good`;
+
+CREATE TABLE `lc_member_good` (
+  `m_id` int(10) NOT NULL DEFAULT '0' COMMENT '会员ID',
+  `g_id` int(10) NOT NULL DEFAULT '0' COMMENT '品商ID',
+  `date` datetime DEFAULT NULL COMMENT '收藏浏览时间',
+  `type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:收藏 1:浏览',
+  PRIMARY KEY (`m_id`,`g_id`,`type`),
+  KEY `m_id` (`m_id`) USING BTREE,
+  KEY `g_id` (`g_id`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员收藏商品关系表';
+
+DROP TABLE IF EXISTS `lc_member_point`;
+
+CREATE TABLE `lc_member_point` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `m_id` int(10) NOT NULL COMMENT '会员ID',
+  `p_id` int(10) NOT NULL COMMENT '购物券ID',
+  `posttime` int(10) NOT NULL COMMENT '添加时间',
+  `password` varchar(32) NOT NULL COMMENT '券码',
+  `o_id` int(10) DEFAULT '0',
+  `starttimem` int(11) DEFAULT NULL,
+  `endtimem` int(11) DEFAULT NULL,
+  `moneym` decimal(5,0) DEFAULT NULL,
+  `meet_moneym` decimal(10,0) DEFAULT NULL,
+  `info` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `m_id` (`m_id`) USING BTREE,
+  KEY `p_id` (`p_id`) USING BTREE,
+  KEY `posttime` (`posttime`) USING BTREE,
+  KEY `o_id` (`o_id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=50 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC COMMENT='会员购物券关系表';
+
+DROP TABLE IF EXISTS `lc_nav`;
+
+CREATE TABLE `lc_nav` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '导航id',
+  `classname` varchar(80) NOT NULL COMMENT '导航名称',
+  `linkurl` varchar(255) NOT NULL COMMENT '跳转链接',
+  `position` varchar(30) NOT NULL COMMENT '位置',
+  `target` varchar(30) NOT NULL DEFAULT '0' COMMENT '打开方式',
+  `orderid` smallint(5) unsigned NOT NULL COMMENT '排列排序',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '隐藏导航',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_order_refund`;
+
+CREATE TABLE `lc_order_refund` (
+  `o_id` int(10) NOT NULL DEFAULT '0' COMMENT '订单ID',
+  `content` text NOT NULL COMMENT '退货详细内容',
+  `datetime` datetime DEFAULT NULL COMMENT '退货时间',
+  PRIMARY KEY (`o_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC COMMENT='退货表';
+
+DROP TABLE IF EXISTS `lc_payment`;
+
+CREATE TABLE `lc_payment` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `code` varchar(20) NOT NULL COMMENT '文件名',
+  `name` varchar(120) NOT NULL COMMENT '接口名称',
+  `depict` text NOT NULL COMMENT '接口描述',
+  `orderid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `config` text NOT NULL COMMENT '接口配置',
+  `is_cod` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '货到付款',
+  `is_online` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '在线支付',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=159 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_point`;
+
+CREATE TABLE `lc_point` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `classid` smallint(5) unsigned NOT NULL COMMENT '投放范围(广告位)',
+  `parentid` smallint(5) unsigned NOT NULL COMMENT '所属广告位父id',
+  `parentstr` varchar(80) NOT NULL COMMENT '所属广告位父id字符串',
+  `title` varchar(30) NOT NULL COMMENT '广告标识',
+  `picurl` varchar(100) NOT NULL COMMENT '上传内容地址',
+  `linkurl` varchar(255) NOT NULL COMMENT '跳转链接',
+  `orderid` smallint(5) unsigned NOT NULL COMMENT '排列排序',
+  `posttime` int(10) unsigned NOT NULL COMMENT '提交时间',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `starttime` int(10) NOT NULL,
+  `endtime` int(10) NOT NULL,
+  `contact` varchar(30) NOT NULL COMMENT '联系人',
+  `tel` varchar(30) NOT NULL COMMENT '电话',
+  `email` varchar(80) NOT NULL COMMENT '邮箱',
+  `hits` int(11) NOT NULL DEFAULT '0',
+  `width` int(4) DEFAULT NULL COMMENT '宽度',
+  `height` int(4) DEFAULT NULL COMMENT '高度',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '面值',
+  `meet_money` decimal(10,2) DEFAULT '0.00' COMMENT '达到多少面额',
+  `content` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_point_size`;
+
+CREATE TABLE `lc_point_size` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '广告位id',
+  `parentid` smallint(5) unsigned NOT NULL COMMENT '上级id',
+  `parentstr` varchar(50) NOT NULL COMMENT '上级id字符串',
+  `classname` varchar(30) NOT NULL COMMENT '广告位名称',
+  `orderid` smallint(5) unsigned NOT NULL COMMENT '排列顺序',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `description` text COMMENT '描述',
+  `temp` text COMMENT '模版',
+  `built_in` enum('false','true') DEFAULT 'false' COMMENT '是否为内置分类',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_postmode`;
+
+CREATE TABLE `lc_postmode` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '配送方式id',
+  `classname` varchar(30) DEFAULT NULL COMMENT '配送方式名称',
+  `classid` varchar(30) DEFAULT NULL COMMENT '配送公司代码',
+  `orderid` smallint(5) unsigned DEFAULT NULL COMMENT '排列排序',
+  `checkinfo` enum('true','false') DEFAULT NULL COMMENT '审核状态',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_shipinfo`;
+
+CREATE TABLE `lc_shipinfo` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `pid` int(10) DEFAULT NULL,
+  `sid` int(10) DEFAULT NULL,
+  `first` float(12,1) DEFAULT NULL,
+  `fprice` float(12,2) DEFAULT NULL,
+  `second` float(12,1) DEFAULT NULL,
+  `sprice` float(12,2) DEFAULT NULL,
+  `area` text,
+  `TemPricingId` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_shipping`;
+
+CREATE TABLE `lc_shipping` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',
+  `TemName` varchar(50) DEFAULT NULL COMMENT '模板名称',
+  `TemFree` int(1) unsigned DEFAULT '0' COMMENT '是否包邮0不包邮1包邮',
+  `TemPricing` int(1) unsigned DEFAULT '0' COMMENT '计价方式0按重量１按件数２按立方',
+  `orderid` int(10) DEFAULT NULL COMMENT '排序',
+  `checkinfo` enum('true','false') DEFAULT NULL COMMENT '审核状态',
+  `TemAddressID` varchar(255) DEFAULT '0' COMMENT '仓库地址，记录城市id',
+  `postid` varchar(255) DEFAULT NULL COMMENT '运送方式',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_shopship`;
+
+CREATE TABLE `lc_shopship` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '配送方式id',
+  `title` varchar(30) NOT NULL COMMENT '配送方式',
+  `orderid` smallint(5) unsigned NOT NULL COMMENT '排列排序',
+  `checkinfo` enum('true','false') NOT NULL COMMENT '审核状态',
+  `description` text,
+  `version` varchar(50) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `apikey` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_uploads`;
+
+CREATE TABLE `lc_uploads` (
+  `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '上传信息id',
+  `name` varchar(30) NOT NULL COMMENT '文件名称',
+  `path` varchar(100) NOT NULL COMMENT '文件路径',
+  `size` int(10) NOT NULL COMMENT '文件大小',
+  `type` enum('image','soft','media') NOT NULL COMMENT '文件类型',
+  `posttime` int(10) NOT NULL COMMENT '上传日期',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_usercomment`;
+
+CREATE TABLE `lc_usercomment` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '评论id',
+  `gid` int(10) unsigned NOT NULL COMMENT '产品id',
+  `uid` int(10) NOT NULL COMMENT '用户id',
+  `uname` varchar(20) NOT NULL COMMENT '用户名',
+  `title` text NOT NULL COMMENT '评论标题',
+  `content` text NOT NULL COMMENT '评论内容',
+  `reply` text NOT NULL COMMENT '回复内容',
+  `posttime` int(10) unsigned NOT NULL COMMENT '评论时间',
+  `ip` varchar(30) NOT NULL COMMENT '评论ip',
+  `isshow` tinyint(1) unsigned NOT NULL COMMENT '是否显示',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_userfavorite`;
+
+CREATE TABLE `lc_userfavorite` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '收藏id',
+  `aid` int(10) unsigned NOT NULL COMMENT '信息id',
+  `molds` tinyint(1) unsigned NOT NULL COMMENT '信息类型',
+  `uid` int(10) unsigned NOT NULL COMMENT '用户id',
+  `uname` varchar(20) NOT NULL COMMENT '用户名',
+  `link` varchar(200) NOT NULL COMMENT '收藏网址',
+  `time` int(10) unsigned NOT NULL COMMENT '评论时间',
+  `ip` varchar(30) NOT NULL COMMENT '评论ip',
+  `isshow` tinyint(1) unsigned NOT NULL COMMENT '是否显示',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `lc_webconfig`;
+
+CREATE TABLE `lc_webconfig` (
+  `varname` varchar(50) NOT NULL COMMENT '变量名称',
+  `varinfo` varchar(80) NOT NULL COMMENT '参数说明',
+  `vargroup` smallint(5) unsigned NOT NULL COMMENT '所属组',
+  `vartype` char(10) NOT NULL COMMENT '变量类型',
+  `varvalue` text NOT NULL COMMENT '变量值',
+  `varcontent` text COMMENT '变量说明提示',
+  `varoption` text COMMENT '变量选项值',
+  `orderid` smallint(5) unsigned NOT NULL COMMENT '排列排序',
+  PRIMARY KEY (`varname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

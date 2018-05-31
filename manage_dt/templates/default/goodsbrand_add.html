@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.goods_brand_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+</head>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+
+</script>
+<body>    
+<form action=""  id="form" name="form" method="post" onsubmit="return cfm_goodscategory();">
+    <div class="Form02">
+      <h3>{$lang.basic}</h3>
+      <table width="100%" border="0" class="v5-table05">
+      		<tr>
+                <td align="right">{$lang.parentid}</td>
+                <td>
+                <select name="parentid" id="parentid">
+                <option value="0">--</option>
+                {foreach from=$class_info item=list}
+                    <option value="{$list.id}" 
+                    {if $parentid}
+                        {if $parentid eq $list.id}
+                        selected="selected"
+                        {/if}
+                    {/if}>{if $list.str}|-{$list.str}{/if}{$list.classname}</option>
+                {/foreach}
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td width="150" align="right"><span class="red">*</span>{$lang.classname}：</td>
+                <td id="batch_add">
+                    <input type="text" name="classname" class="v5-input in180" id="classname"/>
+                    <a href="javascript:;" onclick="batch_add('classname','{$lang.batch_add_tips}','batch_add')">{$lang.batch_add}</a>
+                </td>
+            </tr>
+            <tr>
+                <td width="150" align="right">{$lang.rename}：</td>
+                <td>
+                    <input type="text" name="rename" class="v5-input in180" id="rename"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="150" align="right">{$lang.logo}：</td>
+                <td>
+                    <input type="text" name="logo" class="v5-input in180" id="pic1"/><a href="javascript:;" onclick="showupload('pic1')">{$lang.uploadpic}</a> 
+                </td>
+            </tr>
+            <tr>
+                <td width="150" align="right">{$lang.url}：</td>
+                <td>
+                    <input type="text" name="url" class="v5-input in180" id="url"/>
+                </td>
+            </tr>
+            
+            <tr>
+                <td align="right">{$lang.orderid}：</td>
+                <td>
+                    <input type="text" id="orderid" name="orderid" class="v5-input in60" value="{$orderid}" onKeyUp="value=value.replace(/[^\d]/g,'')"></td>
+            </tr>
+            <tr>
+                <td align="right">{$lang.checkinfo}：</td>
+                <td>
+                    <input name="checkinfo" type="radio" value="true" checked="checked" />&nbsp;{$lang.yes}&nbsp;
+                    <input name="checkinfo" type="radio" value="false" />&nbsp;{$lang.no}
+                </td>
+            </tr>
+        </table>
+  </div>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" id="act" type="hidden" value="subadd" />
+</form> 
+</body>
+</html>

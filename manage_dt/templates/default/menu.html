@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$home.title}-{$home.menu}</title>
+<link href="templates/default/style/menu.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templates/default/js/jquery.min.js"></script>
+<script type="text/javascript" src="templates/default/js/tinyscrollbar.js"></script>
+<script type="text/javascript" src="templates/default/js/leftmenu.js"></script>
+</head>
+
+<body style="background-color:transparent">
+    <div class="tGradient"></div>
+    <div id="scrollmenu">
+        <div class="scrollbar">
+            <div class="track" >
+                <div class="thumb">
+                    <div class="end"></div>
+                </div>
+            </div>
+        </div>
+        <div class="viewport">
+            <div class="overview">
+            <!--开始-->
+                <div class="leftl">
+                    <span class="leftl_top">
+                        <div class="leftl_text">
+                            <a href="index.php?act=mywork" class="wo" target="_parent">&nbsp;&nbsp;&nbsp;{$home.mywork}</a>
+                            <a href="developer.php" class="wo1" target="main">&nbsp;&nbsp;&nbsp;{$home.box}</a>
+                        </div>
+                    </span>
+                    <div class="leftl_yh">
+                        <span class="tl"><img src="templates/default/images/hy_5.jpg" /></span>
+                        <span class="leftl_yh_wz">{$session.admin}<br />
+<a href="index.php?act=unlogin" target="_parent">{$home.unlogin}</a></span>
+                    </div>
+                    <div class="leftl_list">
+                        <ul>
+                        {foreach from=$menu item=list}
+                            {if $list.children}
+                                {foreach from=$list.children item=child key=k}
+                                    <li class="leftl_bj2" id="{$k}">
+                                        <a href="{$child.linkurl}" target="main" onclick="setmenuclass('{$k}')">
+                                            <div class="leftl_tp">
+                                            	<div class="ico" id="ico_{$k}"></div>
+                                            </div>
+                                            {$child.label}
+                                        </a>
+                                    </li>
+                                {/foreach}
+                            {/if}
+                    	{/foreach}
+                        </ul>
+                    </div>
+                </div>
+         	<!--结束-->
+            </div>
+        </div>
+    </div>
+    <div class="bGradient"></div>
+    <div class="left_bot">
+        <div><img src="templates/default/images/left_btn.png" width="100%" height="16" /></div>
+        <div class="cprt_bg">{$home.copyright}</div>
+    </div>
+</body>
+</html>

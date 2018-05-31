@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.db_backup}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script type="text/javascript" src="templates/default/js/db.func.js"></script>
+
+<body>        
+    <div class="pro_nr" id="header">
+        <div class="pro_bt1">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="20%" height="30" align="center" valign="middle" class="pro_rb">&nbsp;{$lang.structure_field}</td>
+                    <td width="30%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.structure_type}</td>
+                    <td width="20%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.structure_arrange}</td>
+                    <td width="10%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.structure_null}</td>
+                    <td width="10%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.structure_default}</td>
+                    <td width="10%" align="left" valign="middle">&nbsp;{$lang.structure_extra}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="height:52px"></div>
+    <div class="pro_nr">
+        <div class="pro_bottom">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            {foreach from=$info item=list}
+                <tr class="pro_bt2">
+                    <td width="20%" height="35" align="left" valign="middle" class="pro_tbr">
+                    	{$list.Field}{if $list.Key == 'PRI'}<img src="templates/default/images/database_key.gif" />{/if}<span style="font-size:10px;color:#999;padding-left:5px;">[{$list.Comment}]</span></td>
+                    <td width="30%" align="left" valign="middle" class="pro_tbr pro_l5">{$list.Type}</td>
+                    <td width="20%" align="left" valign="middle" class="pro_tbr pro_l5">{$list.Collation}</td>
+                    <td width="10%" align="left" valign="middle" class="pro_tbr pro_l5">
+                    {if $list.Null == 'NO'}
+                    {$lang.no}
+                    {else}
+                    {$lang.yes}
+                    {/if}</td>
+                    <td width="10%" align="left" valign="middle" class="pro_tbr pro_l5">
+                    {if $list.Default == ''}
+                    无
+                    {else}
+                    {$list.Default}
+                    {/if}</td>
+                    <td width="10%" align="left" valign="middle" class="pro_tbr pro_l5">{$list.Extra}</td>
+                </tr>
+            {/foreach}
+            </table>
+            <div class="footheight"></div>
+        </div>
+        <div class="pro_bot" id="footer">
+            <div class="page_info">{$lang.total}<span>{count($info)}</span>{$lang.total_field}</div>
+       </div>
+   </div>
+</body>
+</html>

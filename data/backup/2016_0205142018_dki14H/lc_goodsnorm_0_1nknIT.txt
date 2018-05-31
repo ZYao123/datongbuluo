@@ -1,0 +1,6 @@
+INSERT INTO `lc_goodsnorm` VALUES('1','颜色','','','color','1','true','true');
+INSERT INTO `lc_goodsnorm` VALUES('2','包装类型','','','text','2','true','true');
+INSERT INTO `lc_goodsnorm` VALUES('3','黑色','','黑色','color','3','true','false');
+INSERT INTO `lc_goodsnorm` VALUES('4','内存','内存','内存','text','4','true','true');
+INSERT INTO `lc_goodsnorm` VALUES('5','重量','重量','重量','text','5','true','false');
+INSERT INTO `lc_goodsnorm` VALUES('6','特色','特色','特色','text','6','true','false');

@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.ads_list_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" ></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script src="templates/default/js/getuploadify.js"></script>
+<script src="templates/default/js/getjcrop.js"></script>
+<script type="text/javascript" src="plugin/calendar/calendar.js"></script>
+<script type="text/javascript" src="editor/kindeditor-min.js"></script>
+<script type="text/javascript" src="editor/lang/zh_CN.js"></script>
+</head>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+
+</script>
+<body onload="GetMode('image')">     
+<form action="" method="post" id="form" name="form" onsubmit="return point_check();">
+<div class="Form02">
+	  <h3>{$lang.basic}</h3>
+	  <table width="100%" border="0" class="v5-table05">
+	  <tr>
+		<td><span class="red">*</span>{$lang.title}</td>
+		<td><input type="text" name="title" class="v5-input in180" id="title"/></td>
+	  </tr>
+	  <tr>
+		<td><span class="red">*</span>{$lang.classid}</td>
+		<td>
+		<select name="classid" id="classid" class="v5-select">
+		<option value="0">--</option>
+		{foreach from=$class_info item=list}
+			<option value="{$list.id}" 
+			{if $parentid}
+				{if $parentid eq $list.id}
+				selected="selected"
+				{/if}
+			{/if}>{if $list.str}|-{$list.str}{/if}{$list.classname}</option>
+		{/foreach}
+		</select>
+		</td>
+	  </tr>
+	  <tr id="adpic">
+		<td><span class="red">*</span>{$lang.picurl}</td>
+		<td> <input type="text" name="picurl" class="v5-input in180" id="picurl" />
+			<span class="cnote">
+				<span class="gray_btn" onclick="GetUploadify('uploadify','{$lang.thumupload}','image','image',1,20000000,'picurl')">{$lang.uploadpic}</span>
+				<span class="reimg">
+					<input type="checkbox" name="rempic" id="rempic" value="true" />{$lang.remote}
+				</span> 
+				<span class="cutimg">
+					<a href="javascript:;" onclick="GetJcrop('jcrop','picurl');return false;">{$lang.tailor}</a>
+				</span> 
+			</span></td>
+	  </tr>
+	  <tr id="adlink">
+		<td>{$lang.linkurl}</td>
+		<td><input type="text" name="linkurl" class="v5-input in180" id="linkurl"/>
+		</td>
+	  </tr>
+	  <tr id="adtext">
+		<td>{$lang.adtext}</td>
+		<td><textarea name="adtext" id="adtext" class="v5-textarea tin60 w360"></textarea>
+		</td>
+	  </tr>
+	   
+	  <tr >
+		<td><span class="red">*</span>{$lang.integral}</td>
+		<td><input type="text" name="integral"  class="v5-input in60 checkKey" id="integral"/></td>
+		</tr>
+       <tr >
+		<td><span class="red">*</span>{$lang.money}</td>
+		<td><input type="text" name="money"  class="v5-input in60 checkKey" id="money"/></td>
+		</tr> 
+		<tr >
+		<td><span class="red">*</span>{$lang.meet_money}</td>
+		<td><input type="text" name="meet_money"  class="v5-input in60 checkKey" id="meet_money"/></td>
+	  </tr>
+	  <tr id="adwidth">
+		<td><span class="red">*</span>{$lang.width}</td>
+		<td><input type="text" name="width"  class="v5-input in60" id="width"/></td>
+		</tr>
+		<tr id="adheight">
+		<td><span class="red">*</span>{$lang.height}</td>
+		<td><input type="text" name="height"  class="v5-input in60" id="height"/></td>
+	  </tr>
+	  
+	   <tr>
+		<td>{$lang.posttime}</td>
+		<td>
+		<input type="text" name="posttime" class="v5-input in150" id="posttime"   readonly="readonly" value="{$posttime}" />
+				{literal}
+				<script type="text/javascript">
+				date = new Date();
+				Calendar.setup({
+					inputField     :    "posttime",
+					ifFormat       :    "%Y-%m-%d %H:%M:%S",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+				</script>
+				{/literal}
+		</td>
+	  </tr>
+	   <tr>
+		<td><span class="red">*</span>{$lang.starttime}</td>
+		<td><input type="text" name="starttime" class="v5-input in150" id="starttime"   readonly="readonly"  />
+				{literal}
+				<script type="text/javascript">
+				date = new Date();
+				Calendar.setup({
+					inputField     :    "starttime",
+					ifFormat       :    "%Y-%m-%d",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+				</script>
+				{/literal}</td>
+	  </tr>
+	   <tr>
+		<td><span class="red">*</span>{$lang.endtime}</td>
+		<td><input type="text" name="endtime" class="v5-input in150" id="endtime"  readonly="readonly"  />
+		{literal}
+				<script type="text/javascript">
+				date = new Date();
+				Calendar.setup({
+					inputField     :    "endtime",
+					ifFormat       :    "%Y-%m-%d",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+				</script>
+				{/literal}
+		</td>
+	  </tr>
+	  <tr>
+		<td >{$lang.content}</td>
+		<td>
+            <div id='con1'>
+			<textarea name="content" id="content" class="kindeditor" ></textarea>
+				{literal}
+				<script>
+				var editor;
+				KindEditor.ready(function(K) {
+					editor = K.create('textarea[name="content"]', {allowFileManager : true,width:'667px',height:'280px'});
+				});
+				</script>
+				{/literal}
+			</div>
+		</td>
+	  </tr>
+	   <tr>
+		<td>{$lang.contact}</td>
+		<td><input type="text" name="contact" class="v5-input in180" id="contact" /></td>
+	  </tr>
+	   <tr>
+		<td>{$lang.tel}</td>
+		<td><input type="text" name="tel" class="v5-input in180" id="tel" /></td>
+	  </tr>
+	  <tr>
+		<td>{$lang.email}</td>
+		<td><input type="text" name="email" class="v5-input in180" id="email" /></td>
+	  </tr>
+	   <tr>
+		<td>{$lang.orderid}</td>
+		<td><input type="text" name="orderid" class="v5-input in60" id="orderid" value="{$orderid}"  onKeyUp="value=value.replace(/[^\d]/g,'')" /></td>
+	  </tr>
+	   <tr>
+		<td>{$lang.checkinfo}</td>
+		<td>
+			<input name="checkinfo" type="radio" value="true" checked="checked" />&nbsp;{$lang.yes}&nbsp;
+			<input name="checkinfo" type="radio" value="false" />&nbsp;{$lang.no}
+		</td>
+	  </tr>
+		</table>
+	</div>
+	
+	<input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+	<input name="act" id="act" type="hidden" value="subadd" />
+</form>
+</body>
+</html>

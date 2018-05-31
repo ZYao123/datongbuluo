@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.admin_list_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkz.func.js"></script>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+</script>
+</head>
+<body>     
+
+<form action="member.php" id="form" method="post" onsubmit="return {$refun}('{$act}');">
+    <div class="Form02">
+      <h3>{$lang.basic}</h3>
+        <table width="100%" border="0" class="v5-table05">
+		<tr>
+        <td>{$lang.username}:</td>
+        <td><input type="text" name="username" class="v5-input in180" id="username" value="{if $info.username}{$info.username}{/if}"/>
+          <span class="red">*</span></td>
+      </tr>
+      <tr>
+        <td>{$lang.email}:</td>
+        <td><input type="text" name="email" id="email" class="v5-input in180" value="{if $info.email}{$info.email}{/if}"/>
+          <span class="red">*</span></td>
+      </tr>      
+      <tr>
+        <td>{$lang.addPassword}:</td>
+        <td><input type="password" name="password" class="v5-input in180" id="password"/></td>
+      </tr>
+      <tr>
+        <td>{$lang.repassword}:</td>
+        <td><input type="password" name="repassword" class="v5-input in180" id="repassword" /></td>
+      </tr>
+      <tr>
+        <td>{$lang.user_rank}:</td>
+        <td>
+        <select name="user_rank"  class="v5-select">
+        {fun_user_rank({$info.user_rank})}
+        </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td>{$lang.sex}:</td>
+        <td>
+        <input type="radio" name="sex" value="0" {if $info.sex eq 0}checked {/if}>&nbsp;{$lang.secret}&nbsp;
+        <input type="radio" name="sex" value="1" {if $info.sex eq 1}checked {/if}>&nbsp;{$lang.m}&nbsp;
+        <input type="radio" name="sex" value="2" {if $info.sex eq 2}checked {/if}>&nbsp;{$lang.w}&nbsp;</td>
+      </tr>
+      <tr>
+        <td>{$lang.birthday}:</td>
+        <td><input type="text" name="birthday" class="v5-input in180" id="birthday" value="{if $info.birthday}{$info.birthday}{/if}" /></td>
+      </tr>      
+  <tr>
+    <td class="label">{$lang.credit_line}:</td>
+    <td><input class="v5-input in60" type="text" name="credit_line" id="credit_line"  value="{if $info.credit_line}{$info.credit_line}{/if}" /></td>
+  </tr>
+    <tr>
+    <td class="label">{$lang.MSN}:</td>
+    <td>
+    <input name="MSN" type="text" class="v5-input in180"  id="MSN" value="{if $info.MSN}{$info.MSN}{/if}"/>
+    </td>
+  </tr>
+    <tr>
+    <td class="label">{$lang.QQ}:</td>
+    <td>
+    <input name="QQ" type="text" class="v5-input in180"  id="QQ" value="{if $info.QQ}{$info.QQ}{/if}"/>
+    </td>
+  </tr>
+    <tr>
+    <td class="label">{$lang.telephone}:</td>
+    <td>
+    <input name="telephone" type="text" class="v5-input in180"  id="telephone" value="{if $info.telephone}{$info.telephone}{/if}"/>
+    </td>
+  </tr>
+
+      <tr>
+        <td>{$lang.mobile}:</td>
+        <td><input type="text" name="mobile" class="v5-input in180" id="mobile" value="{if $info.mobile}{$info.mobile}{/if}"/></td>
+      </tr>
+         <tr>
+        <td>{$lang.checkuser}:</td>
+        <td>
+        <input type="radio" name="checkuser" value="0" {if $info.checkuser==0}checked{/if}>&nbsp;{$lang.normal}&nbsp;
+        <input type="radio" name="checkuser" value="1" {if $info.checkuser==1}checked{/if}>&nbsp;{$lang.freeze}&nbsp;
+      </td>
+      </tr>
+     <input name="from" id="from" type="hidden" value="{$from}" />
+    </table>
+	</div>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" type="hidden" value="{$act}" />
+    <input name="id" type="hidden" value="{if $id}{$id}{/if}" />
+</form>
+</body>
+</html>

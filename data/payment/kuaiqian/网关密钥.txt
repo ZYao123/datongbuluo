@@ -1,0 +1,7 @@
+功能：人民币网关
+密钥：XJN6IK2C5CXXNB5C
+账号(MerchantAcctID)：1002149156301
+
+功能：网关订单查询接口
+密钥：976G562WA2MACGK5
+账号(MerchantAcctID)：1002149156301

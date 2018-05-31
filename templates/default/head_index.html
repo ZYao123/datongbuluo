@@ -1,0 +1,133 @@
+<div class="top_bg">
+    <div class="content">
+        <div class="fl">您好，欢迎来到大同部落！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {%if {%$username%}%}
+         <a href="member.php?act=default">{%$username%}</a>|<a href="member.php?act=logout&from={%$fromurl%}">退出</a>
+         {%else%}
+        <a href="member.php?act=login&from={%$fromurl%}">请登录</a>|<a href="member.php?act=regist&from={%$fromurl%}">免费注册</a>
+        {%/if%}
+        </div>
+        <div class="fr"><a href="member.php?act=default">会员中心</a></a><a href="news.php?cid=17">联系我们 <i class="fa fa-caret-down"></i></a><a href="news.php?cid=15&id=5">客户服务 <i class="fa fa-caret-down"></i></a></div>
+    </div>
+</div>
+<div class="content clearfix">
+    <div class="fl"><img src="templates/default/images/logo.jpg" width="211" height="115" /></div>
+    <div class="shopcar fr"><a href="shopcart.php?act=list"><img src="templates/default/images/index_01.jpg"></a>购物车<span class="red"> {%$shop_item_num%}</span>件</div>
+    <div class="search_box fr">
+
+        <form id="searchForm" class="search" name="searchForm" method="get" action="item_list.php" onSubmit="return checkSearchForm()">
+            
+            <input type="text" class="fl ss" name="keywords" id="keyword" onkeyup="keyupdeal(event,this.value);" onkeydown="keydowndeal(event);" onclick="keyupdeal(event,this.value);" onblur="closediv();"  autocomplete="off"  value="{%$keywords%}">
+            <input type="submit" value="搜 索" class="ss_btn">
+            <p>热词推荐：{%if $hotkeywords%}
+        {%foreach from=$hotkeywords item=list key=k%}
+        <a href='item_list.php?keywords={%$list%}'>{%$list%}</a>&nbsp;
+        {%/foreach%}
+        {%/if%}</p>
+        </form>
+    </div>
+</div>
+<div class="nav_bg">
+    <div class="content clearfix">
+        <div class="fl menu tc rel"><i class="fa fa-home"></i> 所有商品分类 >
+            <div class="subnav tl abs">
+                <ul>
+                {%foreach from=GetGoodsType('428',3) item=list key=k%}
+                    <li>
+                        <h3><img src="templates/default/images/icon1.png"><a href="item_list.php?cid={%$list.id%}">{%$list.classname%}</a></h3>
+                        <p>
+                    {%foreach from=GetGoodsType($list.id) item=child key=ks%}
+                        <a href="item_list.php?cid={%$child.id%}">{%$child.classname%}</a>/
+                    {%/foreach%} 
+                        </p>
+                    </li>
+                {%/foreach%}
+
+                </ul>
+            </div>
+        </div>
+        <ul class="nav fl">
+            <li><a href="index.php">首页</a></li>
+            {%foreach from=GetGoodsType('428',3) item=list key=k%}
+            <li><a href="item_list.php?cid={%$list.id%}">{%$list.classname%}</a></li>
+            {%/foreach%}
+            <li><a href="ganji.php?cid=452">网上赶集</a></li>
+        </ul>
+        <div class="fr supr"><!--<img src="templates/default/images/index_03.jpg">手机下单惊喜更多--></div>
+    </div>
+</div>
+<div class="rel">
+    <div class="flexslider">
+      <ul class="slides">
+      {%foreach from=GetArticle_list(29,5) item=list%}
+
+                     <li><img src="{%$list.picurl%}" /></li>
+                                {%/foreach%}
+      </ul>
+    </div>
+    <script>
+    $(function(){
+        $('.flexslider').flexslider({
+            directionNav: false,
+            pauseOnAction: false
+        });
+    });
+    </script>
+    <div class="content abs banner_box">
+        <div class="side fr">
+            <div class="login">
+                <div class="vip clearfix"><img src="templates/default/images/index_04.jpg"><h3>hello您好，
+欢迎光临大同部落！</h3></div>
+                <div class="tc button">
+                {%if {%$username%}%}
+        <a href="member.php?act=default">{%$username%}</a><a href="member.php?act=logout&from={%$fromurl%}">退出</a>
+        {%else%}
+         <a href="member.php?act=login&from={%$fromurl%}">请登录</a>|<a href="member.php?act=regist&from={%$fromurl%}">立即注册！</a>
+        {%/if%}
+
+                </div>
+            </div>
+            <div class="notice">
+                <h3>活动公告 <span>NOTICE</span></h3>
+                <div class="notice_list">
+                    <ul id="notice_list">
+                    {%foreach from=GetArticle_list(14,4) item=list%}
+                     <li><a href="news_info.php?cid={%$list.classid%}&id={%$list.id%}">·{%$list.title%} </a></li>
+                                {%/foreach%}
+                    </ul>
+                </div>
+            </div>
+            <div class="pro">
+                <ul class="pro_list">
+                {%foreach from=GetArticle_list(31,3) item=list%}
+                        <li><a><img src="{%$list.picurl%}" width="137" height="137"><h3>{%$list.title%}<br />{%$list.description%}</h3></a></li>
+                        {%/foreach%}
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<script>
+                function autoScroll(obj) {
+                    var height = $(obj).height();
+                    $(obj).find("ul").animate({
+                        marginTop: -height
+                    }, 1000, function () {
+                        $(this).css({ marginTop: "0" }).find("li:first").appendTo(this);
+                    })
+                }
+                setInterval('autoScroll(".notice_list")', 2000);
+            </script>
+
+             <script>
+                function checkSearchForm(){
+                    var key = $('#keyword').val();
+                    if(key==''|| key==undefined){
+                        alert('搜索不能为空');
+                        $('#keyword').focus();
+                        return false;
+                    }
+                    return true;
+                }
+</script>

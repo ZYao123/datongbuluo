@@ -1,0 +1,123 @@
+
+<table width="100%" border="1" cellspacing="0" cellpadding="0" id="classlist">
+	{if $brand_info}
+    <tr>
+        <td width="60">{$lang.brandid}</td>
+        <td id="brand">                  
+            <select name="brandid" id="brandid">
+            <option value="0">--</option>
+            {foreach from=$brand_info item=list}
+                <option value="{$list.list.id}" {if $list.selected == $list.list.id}selected="selected"{/if}>{$list.list.classname}</option>
+            {/foreach}
+            </select>
+        </td>
+    </tr>
+    {/if}
+	{if $attr_info}
+    <tr>
+        <td width="60">{$lang.attrname}</td>    
+        <td>    
+            {foreach from=$attr_info item=list}  
+            <div class="attrheight">            
+                {$list.attrname}:
+                {if $list.intype eq '0'}
+                    {if $list.attrvalue}
+                        <select name="flag[{$list.id}]">
+                            <option value="" >--</option>
+                            {foreach from=$list.attrvalue item=list1}
+                                <option value="{$list1}" {if $list.selected==$list1} selected="selected"{/if}>{$list1}</option>
+                            {/foreach}
+                        </select>
+                    {/if} 
+                {/if}
+                
+                {if $list.intype eq '1'}
+                    {if $list.attrvalue}
+                        {foreach from=$list.attrvalue item=list1}
+                            <input name="flag[{$list.id}][]" type="checkbox" value="{$list1}" 
+                            {if !empty($list.selected) and in_array($list1,$list.selected)}checked="checked" {/if}/>{$list1}
+                        {/foreach}
+                    {/if} 
+                {/if}
+                {if $list.intype eq '2'}
+                    <input type="text" name="flag[{$list.id}]" class="v5-input in360" value="{$list.selected}" />
+                {/if} 
+                {if $list.intype eq '3'}
+                    <textarea name="flag[{$list.id}]" class="v5-textarea tin60 w657">{$list.selected}</textarea>
+                {/if}
+            </div>
+            {/foreach}
+        </td>
+    </tr>
+    {/if}
+    {if $norm_info}
+    <tr>
+        <td width="60">{$lang.normname}</td>
+        <td>
+            {foreach from=$norm_info item=list key=k}  
+               <script type="text/javascript">
+                    list[{$k}] = new Array();
+                    listname[{$k}] = '{$list.normname}';
+                    /*验证可带长度为2位的小数表单*/
+
+                </script>
+                <div class="attrheight">
+                    <div style="float:left;margin: 0 3px;">
+                        {$list.normname}:
+                        <input name="norm[{$list.id}][normid]" type="hidden" value="{$list.id}"/>
+                        <input name="norm[{$list.id}][normname]" type="hidden" value="{$list.normname}"/>
+                    </div>
+                    {foreach from=$list.normvalue item=cklist3}  
+                        <script type="text/javascript">
+                            normsname[{$cklist3.id}]   		 = new Array();
+                            normsname[{$cklist3.id}]['id']   = '{$cklist3.id}';
+                            normsname[{$cklist3.id}]['name'] = '{$cklist3.name}';
+                            normsname[{$cklist3.id}]['color']= '{$cklist3.color}';
+                            normsname[{$cklist3.id}]['pic']  = '{$cklist3.pic}';
+                        </script>
+                     <div class="attrnameid"> 
+                        <div style="float:left;margin:3px;" >
+                            <input name="norm[{$list.id}][selected][{$cklist3.id}]" type="checkbox" value="{$cklist3.name}" onclick="setattr({$k},'{$cklist3.name}','{$list.compile}',{$cklist3.id},{$goodsid})" style="margin-top:11px" {if array_key_exists($cklist3.id,$list.selected)}checked="checked" {/if}/> 
+                            {if array_key_exists($cklist3.id,$list.selected)}
+                            <script>
+							$(document).ready(function() { 
+                               setattr({$k},'{$cklist3.name}','{$list.compile}',{$cklist3.id},{$goodsid})
+							});
+							</script>
+                            {/if}  
+                        </div>
+                        {if $list.rdotype eq 'color'}
+                            <div style="width:11px; height:11px; float:left;background-color: {$cklist3.color}; border:1px #333333 solid; margin:14px 3px 0 3px;"></div>
+                        {/if}
+                        {if $list.rdotype eq 'pic'}
+                            <div style="width:11px; height:11px; float:left; background:{$cklist3.pic} border:1px #333333 solid; margin:14px 3px 0 3px;"></div>
+                        {/if}           
+                        <div style="float:left;" >
+                            {$cklist3.name}&nbsp;&nbsp;
+                        </div>
+                         </div>
+                    {/foreach} 
+                </div>
+                <div style="clear:both"></div>
+            {/foreach}
+        </td>
+    </tr>
+
+    {else}
+    <script type="text/javascript">
+      $("#tr_salesprice").show();
+      $("#tr_buyprice").show();
+      $("#old_price").show();
+      $("#tr_housenum").show();                     
+    </script>
+    {/if}
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="normsedit" style="margin-top:10px">
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="attrlist" style="margin-top:10px">
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="display:none">
+<tr><td id="norm_attr"></td></tr>
+</table>
+

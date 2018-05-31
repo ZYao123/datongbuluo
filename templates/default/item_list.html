@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+{%include file="inc_link.html"%}
+</head>
+
+<body>
+<!--header start-->
+
+{%include file="head.html"%}
+<!--header end-->
+
+<!--main start-->
+<div class="main_bg">
+	<div class="main">
+		<div class="path"><i class="fa fa-map-marker red"></i> <a href="index.php">首页</a> > 商品列表</div>
+		<div class="clearfix">
+			<div class="left fl bgw">
+				<h3>商品精选</h3>
+				<ul>
+				{%foreach from=GetGoods(436,'',4) item=list%}
+					<li><a href="item_show.php?id={%$list.id%}&cid={%$list.classid%}">
+						<img src="{%$list.picurl%}" width="160" height="160">
+						<p>¥{%$list.price%}</p>
+						<h4>{%$list.title%}</h4>
+					</a></li>
+					{%/foreach%}
+					
+				</ul>
+			</div>
+			<div class="right fr">
+				<ul class="order clearfix">
+					<li class="active"><a href="{%$orderurl%}">综合 <i class="fa fa-long-arrow-down"></i></a></li>
+					<li><a href="{%$orderurl%}ordername=sumer&ordersort=desc">销量 <i class="fa fa-long-arrow-down"></i></a></li>
+					<li><a href="{%$orderurl%}ordername=price&ordersort=desc">价格 <i class="fa fa-long-arrow-down"></i></a></li>
+				</ul>
+				<div class="m_pro bgw">
+					<ul class="clearfix">
+					{%if $info%}
+					{%foreach from=$info item=list%}
+						<li>
+							<a href="item_show.php?id={%$list.id%}&cid={%$list.classid%}"><img src="{%$list.picurl%}" width="225" height="225"></a>
+							<p><em class="red">￥{%$list.price%}</em><span class="fr">销量 <span class="red">219</span></span></p>
+							<h3><a href="">{%$list.title%}</a></h3>
+						</li>
+						{%/foreach%}   
+					   {%else%}
+                      <li style=" width:100%; text-align:center; color:#F00">暂无商品</li>
+                       {%/if%}
+						
+					</ul>					
+				</div>
+				{%if $info%}
+
+				<div class="page tr">{%$page%}</div> {%/if%}
+				<!--<div class="page tr">
+
+				<a href="">上一页</a><a href="">1</a><a href="">2</a><a href="">下一页</a> 共20页 到第<input type="text" value="1">页<a href="">确定</a></div>-->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="content"><img src="templates/default/images/index_16.jpg"></div>
+<!--main end-->
+
+<!--footer start-->
+{%include file="bottom.html"%}
+<!--footer end-->
+</body>
+
+
+</html>

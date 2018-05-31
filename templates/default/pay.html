@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$title%}--{%$webname%}</title>
+<link href="templates/default/style/shopcart.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/lcshopz.js"></script>
+<!--[if IE 6]> 
+<script type="text/javascript" src="png.js"></script>
+<script>
+PNG.fix('*');
+</script>
+<![endif]-->
+</head>
+<body>
+<div class="gwc1">
+    <!--  header  开始  -->
+    <div class="gwc_header">
+        {%include file="shopcarthead.html"%}
+        <div class="gwc_top">
+            <div class="gwc_top_left"><a href='index.php'><img src="{%$LOGO.picurl%}"class="tl" /></a></div>
+            <div class="gwc_top_right">
+                <div class="gwc_lc gwc_lc_3"><span class="gwc_lc_w1"><img src="templates/default/images/1.jpg" align="left" />&nbsp;我的购物车</span><span class="gwc_lc_w2"><img src="templates/default/images/gwc_5.jpg" align="left" />&nbsp;确认订单信息</span><span class="tl color_white" ><img src="templates/default/images/3.jpg" align="left" />&nbsp;付款</span></div>
+            </div>
+        </div>
+    </div>
+    <!--  header  结束  -->
+    <!--  body  开始  -->
+    <div class="gwc_body">
+    <div id='face'>
+         <div class="face_close tr" onclick="facehide()"></div>
+         <div class="cl">
+            <div class="dd_top" style="width:100%;">
+                <span class="dd_t">付款</span>
+            </div>
+            <div style="width:350px; height:95px; margin-top:10px; text-align:left; line-height:30px">
+            如果您已经完成付款，请点完成付款安钮前往订单详情页面。
+            <div align="center"><input type="button" value="完成付款" onclick="location.href='member.php?act=ordercontent&orderid={%$id%}'" class="payinput"/>
+            </div></div>
+         </div>
+    </div>
+<!--------------------网上支付iframe---------------------------->
+<form action="pay.php?act=setpay&olnum={%$olnum%}" method="post" target="_blank" onsubmit="return pay()">
+{%if count($online_bank)%}
+<table width="100%" cellpadding="0" cellspacing="0" valign="top">
+<tr>
+<td height="40" align="left" colspan="6" valign="middle"><span class="font1">还差一步，请点击以下银行去支付：</span></td>
+</tr>
+<tr>
+
+{%$i=0%}
+{%foreach from=$online_bank.config item=list key=key%}
+{%$i=$i+1%}
+<td>
+<input id="bank_{%$key%}" type="radio" name="paytype" value="{%$online_bank.id%}" {%if $bankId == $list%} checked="checked"{%/if%} onclick="document.getElementById('bankId').value='{%$list%}'"/>
+<label for="bank_{%$key%}" onclick="document.getElementById('bankId').value='{%$list%}'"><img src="data/bankimage/bank_{%$list%}.jpg" border=0 width="129" height="42" style="border:2px #CCC solid; border-radius:8px"/></label>
+    
+<a href="pay.php?bankId={%$list%}&act=setpay&olnum={%$olnum%}&paytype={%$online_bank.id%}" target="_blank"></a></td>
+{%if $i%6 == 0%}
+</tr><tr>
+{%/if%}
+{%/foreach%}
+</tr>	
+</table>  
+{%/if%}
+
+<table width="100%" cellpadding="0" cellspacing="0" valign="top">
+<tr>
+<td height="40" align="left" colspan="6" valign="middle"><span class="font1">其他支付方式：</span></td>
+</tr>
+<tr>
+
+{%$i=0%}
+{%foreach from=$info item=list%}
+{%$i=$i+1%}
+<td style="height:70px;">
+ <input id="pay_{%$list.id%}" type="radio" name="paytype" value="{%$list.id%}" {%if $bankId == 0 or $bankId == ''%}{%if $paymode == $list.id%} checked="checked"{%/if%}{%/if%} onclick="document.getElementById('bankId').value='0'"/>
+    <label for="pay_{%$list.id%}" onclick="document.getElementById('bankId').value='0'"><img src="data/bankimage/{%$list.code%}.gif" border=0 alt="{%$list.name%}" width="129" height="42" style="border:2px #CCC solid; border-radius:8px"/></label>
+</td>
+{%if $i%6 == 0%}
+</tr><tr>
+{%/if%}
+{%/foreach%}
+</tr>	
+</table> 
+<table width="100%" cellpadding="0" cellspacing="0" valign="top">
+<tr>
+<td height="40" align="center" align="center">
+<input name="bankId" id="bankId" value="{%$bankId%}" type="hidden"/>
+
+<input name="" type="image" src="templates/default/images/btn-submit.gif" />
+</td></tr></table>
+</form>          
+    </div>
+    <div style="clear:both"></div>
+    <!--  body  结束  -->
+</div>
+{%include file="shopcartbottom.html"%}
+</body>
+</html>

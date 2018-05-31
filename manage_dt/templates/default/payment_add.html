@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.shop_pay}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script>
+{foreach from=$lang.js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+</script>
+</head>
+<body>     
+<form action=""  id="form" name="form" method="post" onsubmit="return cfm_payment();">
+<input type="hidden" name="code" id="code" value="{$pay.pay_code}"/>
+<input type="hidden" name="orderid" id="orderid" value="{$pay.pay_orderid}"/>
+<input type="hidden" name="id" id="id" value="{$pay.pay_id}"/>
+    <div class="Form02">
+      <h3>{$lang.basic}</h3>
+      <table width="100%" border="0" class="v5-table05">
+            <tr>
+                <td width="150" align="right"><span class="red">*</span>{$lang.name}：</td>
+                <td>
+                    <input type="text" name="name" class="v5-input in180" id="name" value="{$pay.pay_name}"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="150" align="right"><span class="red">*</span>{$lang.depict}：</td>
+                <td>
+                    <textarea name="depict" id="depict"  class="v5-textarea tin60 w360">{$pay.pay_depict}
+                    </textarea> 
+                </td>
+            </tr>
+            {foreach from=$pay.pay_config item=list}
+            <tr>
+                <td width="150" align="right">{$list.lang}：</td>
+                <td>
+                {if $list.type eq 'text'}
+                    <input type="text" name="config[{$list.name}]" class="v5-input in180" id="config[]" value="{$list.value}"/>
+                {/if}
+                </td>
+            </tr>
+            {/foreach}
+            <tr>
+                <td align="right">{$lang.is_cod}：</td>
+                <td>
+                    <input type="hidden" id="is_cod" name="is_cod" value="{$pay.is_cod}">
+                	{if $pay.is_cod eq '0'}
+                    	{$lang.no}
+                    {else}
+                   		{$lang.yes}
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td align="right">{$lang.is_online}：</td>
+                <td>
+                    <input type="hidden" id="is_online" name="is_online" value="{$pay.is_online}">
+                	{if $pay.is_online eq '0'}
+                    	{$lang.no}
+                    {else}
+                   		{$lang.yes}
+                    {/if}
+                </td>
+            </tr>
+        </table>
+  </div>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" id="act" type="hidden" value="subinstall" />
+</form>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.goods_category_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script src="templates/default/js/getuploadify.js"></script>
+<script src="templates/default/js/getjcrop.js"></script>
+</head>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+str='<tr><td><span class="delvote">[<a href="javascript:;" onclick="DelDmTr($(this))">-</a>]</span> <select name="attrstr[]" id="attrstr[]" class="v5-select"> <option value="0">--</option>{foreach from=$type_info item=list}<option value="{$list.id}">{$list.classname}</option>{/foreach}</select></td></tr>';
+</script>
+<body>     
+<form action="" method="post" id="form" name="form" onsubmit="return cfm_goodscategory();">
+    <div class="Form02">
+      <h3>{$lang.basic}</h3>
+        <table width="100%" border="0" class="v5-table05">
+            <tr>
+                <td width="150" align="right"><span class="red">*</span>{$lang.classname}：</td>
+                <td>
+                    <input type="text" name="classname" class="v5-input in180" id="classname" value="{if $info.classname}{$info.classname}{/if}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">{$lang.parentid}：</td>
+                <td>
+                    <select name="parentid" id="parentid" class="v5-select">
+                    <option value="0">--</option>
+                    {foreach from=$class_info item=list}
+                        <option value="{$list.id}" 
+                        {if $info.parentid}
+                            {if $info.parentid eq $list.id}
+                            selected="selected"
+                            {/if}
+                        {/if}>{if $list.str}|-{$list.str}{/if}{$list.classname}</option>
+                    {/foreach}
+                    </select>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+               		{$lang.attrstr}：
+                </td>
+                <td>
+                    <select name="attrstr" id="attrstr" class="v5-select">
+                        <option value="0">--</option>
+                        {foreach from=$type_info item=list}
+                        <option value="{$list.id}" 
+                        {if $info.attrstr}
+                        {if $info.attrstr == $list.id}
+                        selected="selected"
+                        {/if}
+                        {/if}>{$list.classname}</option>
+                        {/foreach}
+                    </select>
+                </td>
+            </tr>
+              <tr>
+        <td align="right">{$lang.picurl}：</td>
+        <td>
+       	  <input type="text" name="picurl" class="v5-input in180" id="picurl"  value="{$info.picurl}"/>
+        	<span class="cnote">
+                <span class="gray_btn" onclick="GetUploadify('uploadify','{$lang.thumupload}','image','image',1,20000000,'picurl')">{$lang.uploadpic}</span>
+               
+                <span class="cutimg">
+                	<a href="javascript:;" onclick="GetJcrop('jcrop','picurl');return false;">{$lang.tailor}</a>
+                </span> 
+            </span>
+        </td>
+      </tr>
+            <tr>
+                <td align="right">{$lang.section}：</td>
+                <td>
+                    <input type="text" name="section" class="v5-input in60" id="section" value="{$info.section}" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">{$lang.unit}：</td>
+                <td>
+                    <input type="text" name="unit" class="v5-input in60" id="unit"  value="{if $info.unit}{$info.unit}{/if}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">{$lang.orderid}：</td>
+                <td>
+                    <input type="text" id="orderid" name="orderid" class="v5-input in60" value="{if $info.orderid}{$info.orderid}{/if}" onKeyUp="value=value.replace(/[^\d]/g,'')"/>
+                    <label class="c01-3">{$lang.php.orderid_asc}</label>
+                    </td>
+            </tr>
+            <tr>
+                <td align="right">{$lang.checkinfo}：</td>
+                <td>
+                    <input name="checkinfo" type="radio" value="true"  {if $info.checkinfo}{if $info.checkinfo eq true}checked="checked" {/if}{else}checked="checked"{/if} />&nbsp;{$lang.yes}&nbsp;
+                    <input name="checkinfo" type="radio" value="false"  {if $info.checkinfo}{if $info.checkinfo eq false}checked="checked" {/if}{/if}  />&nbsp;{$lang.no}
+                </td>
+            </tr>
+        </table>
+        
+        <h3>{$lang.depict}</h3>
+        <table width="100%" border="0" class="v5-table05">
+            <tr>
+                <td align="right">{$lang.keywords}</td>
+                <td><input type="text" id="keywords" name="keywords" class="v5-input in360"  value="{if $info.keywords}{$info.keywords}{/if}"/></td>
+            </tr>
+            <tr>
+                <td align="right">{$lang.description}</td>
+                <td>
+                	<textarea class="v5-textarea tin60 w360" name="description" id="description">{if $info.description}{$info.description}{/if}</textarea>		</td>
+            </tr>
+        </table>
+</div>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" id="act" type="hidden" value="subedit" />
+    <input type="hidden" name="goodsid" id="goodsid"  value="{if $info.goodsid}{$info.goodsid}{/if}"/>
+    <input type="hidden" name="id" id="id"  value="{if $info.id}{$info.id}{/if}"/>
+</form>
+</body>
+</html>

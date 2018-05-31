@@ -1,0 +1,23 @@
+	{%assign var='result' value=GetArticle_show($smarty.get.cid)%}  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$result.title%}-{%$webname%}</title>
+<meta name="generator" content="{$generator}" />
+<meta name="keywords" content="{$keyword}" />
+<meta name="description" content="{$description}" />
+</head>
+<body>
+<div>
+
+	<!--  body  开始  -->
+
+
+	{%$result.content%}
+
+
+	<!--  body  结束  -->
+
+</body>
+</html>

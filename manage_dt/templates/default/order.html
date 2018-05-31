@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.order_list}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script src="templates/default/laydate/laydate.js"></script>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+
+</script>
+</head>
+<body>
+    <div class="pro_nr" id="header">
+   		<span class="pro_bt">
+            <a href="javascript:location.reload();">
+            <img onmousemove="src='templates/default/images/pro_2.jpg'" onmouseout="src='templates/default/images/pro_1.jpg'" src="templates/default/images/pro_1.jpg" width="47" height="16"/>
+            </a>
+        </span>
+        <div class="pro_top">
+            <ul>
+                <li>
+                    <A href="order.php?act=list" {if !isset($sign) and $checkinfo eq ''}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>{$lang.checkinfoall}({$countAll})</A>
+                </li>
+                <li>
+                    <A href="order.php?act=list&checkinfo=0"{if $checkinfo eq '0'}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>{$lang.checkinfo0}({$countPayfor})</A>
+                </li>
+                <li>
+                    <A href="order.php?act=list&checkinfo=1"{if $checkinfo eq '1'}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>{$lang.checkinfo1}({$countShip})</A>
+                </li>
+                <li>
+                    <A href="order.php?act=list&checkinfo=2"{if $checkinfo eq '2'}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>{$lang.checkinfo2}({$countReceipt})</A>
+                </li>
+                <li>
+                    <A href="order.php?act=list&checkinfo=3"{if $checkinfo eq '3'}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>{$lang.checkinfo3}({$countReceipted})</A>
+                </li>
+                 <li>
+                    <A href="order.php?act=list&checkinfo=5"{if $checkinfo eq '5'}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>退款({$countTuikuan})</A>
+                </li>           
+                <li>
+                    <A href="order.php?act=list&checkinfo=4"{if $checkinfo eq '4'}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>{$lang.checkinfo4}({$countReturned})</A>
+                </li>                            
+                <li>
+                    <A href="order.php?act=list&checkinfo=-1"{if $checkinfo eq '-1'}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>{$lang.checkinfoOther}({$countOther})</A>
+                </li>     
+                <li>
+                    <A href="order.php?act=list&sign=new"{if $sign eq 'new'}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>{$lang['sign'].new}({$countnew})</A>
+                </li>
+                <li>
+                    <A href="order.php?act=list&sign=task"{if $sign eq 'task'}style="color:#073164; background:url(templates/default/images/pro_4.jpg) no-repeat;"{/if}>{$lang['sign'].task}({$counttask})</A>
+                </li>     
+            </ul>
+        </div>
+        <div class="pro_xx">
+            <div class="tl">
+                <span class="pro_tbl1">
+                    <a href="javascript:;" onclick="return ConfDelAll('form');">
+                        <img src="templates/default/images/tbl2.jpg" align="left" />&nbsp;{$lang.action_del}
+                    </a>
+                </span>
+                <span class="pro_tbl2">
+                    <a href="javascript:;" onclick="$('#act').val('Invalid');$('#form').submit();">
+                        <img src="templates/default/images/tbl3.jpg" align="left" />&nbsp;{$lang.action_Invalid}
+                    </a>
+                </span>
+<!--                <span class="pro_tbl1">
+                    <a href="#">&nbsp;删除</a>
+                </span> -->
+                <span class="pro_tbl1">
+                    <a   href="javascript:;" onclick="fun_excel('{$url}')" ><img src="templates/default/images/tbl4.jpg" align="left" />&nbsp;{$lang.action_excel}</a>
+                </span>
+            </div>
+            <div class="tr" style="width:977px;">
+                <form action="order.php?act=list" style="border :0px; margin:0px; padding:0px;">
+               
+                    <input type="image" class="tr" name="imageField" id="imageField" src="templates/default/images/pro_7.jpg" />
+                <input name="orderlistnum" type="text" class="pro_text" id="orderlistnum" style="color:#666" onfocus="if (this.value == '{$lang.searchnum}'){literal} {this.value='';this.style.color='#000'}{/literal} "  value="{$lang.searchnum}" />
+                <input name="rec_name" type="text" class="pro_text" id="rec_name" style="color:#666" onfocus="if (this.value == '{$lang.searchname}'){literal} {this.value='';this.style.color='#000'}{/literal} "   value="{$lang.searchname}"/>
+                <input type="hidden" name="checkinfo" value="{$checkinfo}">  
+                <input type="hidden" name="sign" value="{$sign}"> 
+                    <input class="laydate-icon" id="demo1"  name="endtime" style=" float:right" > 
+                  <div style="float:right">&nbsp;&nbsp;结束时间：</div>    
+             
+                  <input class="laydate-icon" id="demo" name="starttime" style=" float:right"> 
+                  <div style="float:right">开始时间：</div>
+                  
+                <script src="templates/default/laydate/pf.js"></script> 
+                </form>
+            </div>
+         </div>
+        <div class="pro_bt1" style="margin-top:4px;">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="5%" height="30" align="center" valign="middle" class="pro_rb">
+                        <span class="tl">
+                            &nbsp; <input type="checkbox" name="checkbox" value="checkbox" onclick="chk_all($(this).attr('checked'))"/>&nbsp;
+                        </span>
+                        <a href="#"><img src="templates/default/images/pro_8.jpg" /></a>
+                    </td>
+                    <td width="10%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.orderlistnum}</td>
+                    <td width="7%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.action}</td>
+                    <td width="12%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.posttime}</td>
+                    <td width="22%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.username}</td>
+                    <td width="10%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.rec_name}</td>
+                  <td width="19%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.orderamount}</td>
+                    <td width="15%" align="left" valign="middle" class="pro_rb">&nbsp;{$lang.checkinfo}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="height:134px;"></div>
+    <div class="pro_nr">
+        <div class="pro_bottom">
+        {if $info}
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <form action="" method="post" id="form" name="form"> 
+            <input type="hidden" id="act" name="act" value="subdel" />
+            <input type="hidden" name="from" id="from" value="{$from}" />          
+                {foreach from=$info item=list}
+                 <tr class="pro_bt2">
+                    <td height="35" align="center" valign="middle" class="pro_tbr">
+                        <span class="tl">
+                            &nbsp;<input type="checkbox" name="id[]" value="{$list.id}"  />
+                        </span></td>
+                    <td width="10%" align="left" valign="middle" class="pro_tbr">
+                      &nbsp;{$list.orderlistnum} 
+                    </td>
+                    <td width="7%" align="left" valign="middle" class="pro_tbr">{if $act eq 'recycle'}
+                        <a href="goods.php?act=recycleedit&id={$list.id}">	
+                            <img src="templates/default/images/pro_11.jpg" title="{$lang.action_restore}" />
+                        </a>
+                        <a href="javascript:;" onclick="return ConfDel('goods.php?act=recycledel&id={$list.id}&from={$from}');">
+                            <img src="templates/default/images/pro_12.jpg" title="{$lang.action_del}" />
+                        </a>
+                    {else}
+                        <a href="javascript:DialogIframe('order.php?act=edit&id={$list.id}&from={$from}','{$lang.order_edit}','1000px','','','','','dosubmit');"><img src="templates/default/images/pro_11.jpg" title="{$lang.action_edit}" /></a>
+                        <a href="order.php?act=Invalid&id={$list.id}&from={$from}"><img src="templates/default/images/pro_12.jpg" title="{$lang.action_Invalid}" /></a>
+                        {if $list.checkinfo eq 2 }
+                        <a href="javascript:;" onclick="return DialogIframe('wuliu.php?id={$list.id}','{$lang.action_wuliu}','550px','','','NULL','','dosubmit');"><img src="templates/default/images/wuliu.png" title="{$lang.action_wuliu}" /></a>
+                        {/if}
+                    {/if}
+                    </td>
+                    <td width="12%" align="left" valign="middle" class="pro_tbr">&nbsp;{$list.posttime|date_format:'%Y/%m/%d %H:%M:%S'}</td>
+                    <td width="22%" align="left" valign="middle" class="pro_tbr">{$list.username|truncate:20}</td>
+                    <td width="10%" align="left" valign="middle" class="pro_tbr">{$list.rec_name}</td>
+                    <td width="19%" align="left" valign="middle" class="pro_tbr">￥{$list.orderamount|string_format:"%.2f"}元</td>
+                    <td width="15%" align="left" valign="middle" class="pro_tbr">
+                        {if $list.checkinfo eq 0}
+                        {$lang.checkinfo0}
+                        {elseif $list.checkinfo eq 1}
+                        {$lang.checkinfo1}
+                        {elseif $list.checkinfo eq 2}
+                        {$lang.checkinfo2}
+                        {elseif $list.checkinfo eq 3}
+                        {$lang.checkinfo3} 
+                            <span style="color:#F00">
+                            {if $list.returnid eq 1}
+                            {$lang.NoReturn}
+                            {else}
+                            {$lang.YesReturn}
+                            {/if}
+                            </span>
+                        {elseif $list.checkinfo eq 4} 
+                        需要退货
+                        {elseif $list.checkinfo eq 5} 
+                        需要退款
+                        {elseif $list.checkinfo eq 6} 
+                        已退款 
+                        {elseif $list.checkinfo eq 7} 
+                       已退货
+                        {elseif $list.checkinfo eq -1}
+                        {$lang.checkinfo_1}                                       
+                        {/if}                
+                    </td>
+                </tr>  
+                {/foreach}</form>
+            </table>
+            {else}
+            	<div class="no_info">{$lang.no_info}</div>
+            {/if}
+            <div class="footheight"></div>
+        </div>
+        <div class="pro_bot" id="footer">
+            {$page}
+        </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <title>大同部落手机app演示页</title>
+    {%include file="inc_link.html"%}
+    <style type="text/css">
+        button {
+            color: #444444;
+            background: #F3F3F3;
+            border: 1px #DADADA solid;
+            padding: 5px 10px;
+            border-radius: 2px;
+            font-weight: bold;
+            font-size: 9pt;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+<!--header start-->
+<div class="top_bg">
+    <div class="content">
+        <div class="fl">您好，欢迎来到大同部落！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {%if {%$username%}%}
+            <a href="member.php?act=default">{%$username%}</a>|<a href="member.php?act=logout&from={%$fromurl%}">退出</a>
+            {%else%}
+            <a href="member.php?act=login&from={%$fromurl%}">请登录</a>|<a href="member.php?act=regist&from={%$fromurl%}">免费注册</a>
+            {%/if%}
+        </div>
+        <div class="fr"><a href="member.php?act=default">会员中心</a></a><a href="news.php?cid=17">联系我们 <i
+                class="fa fa-caret-down"></i></a><a href="news.php?cid=15&id=5">客户服务 <i
+                class="fa fa-caret-down"></i></a></div>
+    </div>
+</div>
+<!--header end-->
+
+<!--index start-->
+<div class="content" id="main">
+    <div style="float: right;width: 60%">
+        <div style="font-size: 2em;padding: 10%;width: auto">大同部落手机app演示页</div>
+        <div style="padding: 10%;margin-top: 50%;">
+            <button id="1" type="button">注册</button>
+            <button id="2" type="button">下单</button>
+        </div>
+    </div>
+    <br/>
+    <video src="{%$template_dir%}video/001.Ogg" id="v" controls="controls" width="30%" style="float: left;margin-left: 10%">
+        您的浏览器不支持 video 标签。
+    </video>
+    <div style="clear: both;"></div>
+</div>
+<!--index end-->
+
+<!--footer start-->
+
+
+{%include file="bottom.html"%}
+<!--footer end-->
+</body>
+<script type="application/javascript">
+    $("button").click(function () {
+        var id = $(this).get(0).id;
+        if (id == 1) {
+            $("#v").get(0).src = "{%$template_dir%}video/001.Ogg";
+        }
+        if (id == 2) {
+            $("#v").get(0).src = "{%$template_dir%}video/002.Ogg";
+        }
+    })
+    $(function () {
+        var wid = $("#main").width();
+        $("#main").height(wid*0.58667)
+    })
+</script>
+</html>

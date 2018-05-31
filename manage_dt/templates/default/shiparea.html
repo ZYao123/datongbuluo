@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.area}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkz.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script>
+	var Value = art.dialog.data('Value');
+	var inputValue = art.dialog.data('inputValue');
+</script>
+</head>
+<body style="padding:5px;" onload="shipareaload()">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="v5-table05">
+<form  action="" method="post" id="form" name="form" onsubmit="return areadosubmit();">
+{foreach from=$area item=list key=k}
+  <tr>
+    <td width="80" valign="top">{$list.classname}</td>
+    <td valign="top">
+    {foreach from=$list.two item=two key=k1}
+    <div class="ShipArea" id="ShipArea{$two.id}">
+
+        <input name="areaid1[]"  type="checkbox" id="{$two.id}" value="{$two.id}" onclick="ShipAreaSelect(this.id,{$two.three|count})" />&nbsp;{$two.classname}<span id="spana{$two.id}"></span><span id="span{$two.id}">&nbsp;</span><span id="spanb{$two.id}"></span>
+        <img src="templates/default/images/icon08.gif" style="vertical-align:middle" width="9" height="5" onclick="ShipAreaShow('ShipAreaHidden{$two.id}','ShipArea{$two.id}')" />
+        
+        <div id='ShipAreaHidden{$two.id}' class='ShipAreaHidden'>
+            {foreach from=$two.three item=three key=k2}
+          <input name="areaid[]" type="checkbox" id="{$two.id}_1" value="{$three.id}" onclick="ShipAreaSelect1({$two.id},this.checked,{$two.three|count})"/>&nbsp;{$three.classname}&nbsp;&nbsp;
+             {$nk = $k2+1}
+             {if $nk mod 3 == 0}
+          <br>
+            {/if}
+            {/foreach}
+            <div align="right"><a href='javascript:;' onclick="ShipAreaHide('ShipAreaHidden{$two.id}','ShipArea{$two.id}')">关闭</a></div>
+        </div>
+                
+    </div>
+    {$nk1 = $k1+1}
+    {if $nk1 mod 4 == 0}
+    <br>
+    {/if}  
+    {/foreach} 
+    </td>
+  </tr>
+{/foreach} 
+<input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+</form>
+</table>
+</body>
+</html>

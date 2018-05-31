@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+{%include file="inc_link.html"%}
+</head>
+
+<body>
+<!--header start-->
+{%include file="head_index.html"%}
+<!--header end-->
+
+<!--index start-->
+<div class="content" id="main">
+	<div class="mar30 floor">
+		<div class="clearfix">
+			<div class="tit fl tit1">网上赶集 <b>Online listing</b></div>
+			<a href="ganji.php?cid=452" class="more more1 fr">更多</a>
+		</div>
+		<div class="clearfix">
+			<div class="listing_l tc fl">
+				<div><img src="templates/default/images/index_06.jpg"></div>
+				<div class="tips">臻品真便宜！农民身边的大集</div>
+				<div class="listing_l_type tc">
+				{%foreach from=GetGoodsType('411',4) item=list key=k%}
+            <a href="item_list.php?cid={%$list.id%}">{%$list.classname%}</a>
+            {%/foreach%}
+				
+				</div>
+
+				<div><img src="templates/default/images/index_08.png"></div>
+			</div>
+			<div class="listing_r bor1 fr">
+				<ul>
+
+				 {%foreach from=GetGoods(411,2,1) item=list%}
+					<li><a><img src="{%$list.picurl%}" width="326" height="438"></a></li>
+				{%/foreach%}
+				{%foreach from=GetGoods(411,3,3) item=list%}
+					<li><a href="item_show.php?id={%$list.id%}&cid={%$list.classid%}"><img src="{%$list.picurl%}" width="328" height="219"></a></li>
+				{%/foreach%}
+
+					<li class="tujian">
+						<h4 class="rel">优品推荐<a href="news.php?cid=16" class="tuijian_more fr">更多</a></h4>
+						
+						<div class="cl"></div>
+						<ul class="tuijian_list">
+						{%foreach from=GetArticle_list(16,5) item=list%}
+                     <li><a href="news_info.php?cid={%$list.classid%}&id={%$list.id%}">{%$list.title%} </a></li>
+                                {%/foreach%}
+
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="ad1"><a href=""><img src="templates/default/images/index_11.jpg"></a></div>
+	</div>
+	
+	<div class="mar30 floor">
+		<div class="clearfix">
+			<div class="tit fl tit2">农产品 <b>Agricultural products</b></div>
+			<a href="item_list.php?cid=409" class="more more2 fr">更多</a>
+			<div class="classify bg1 fr">
+			{%foreach from=GetGoodsType('409') item=list key=k%}
+			<a href="item_list.php?cid={%$list.id%}" class="active">{%$list.classname%}</a>
+			 {%/foreach%} 
+
+			</div>
+		</div>
+		<ul class="clearfix bor2 floor_list">
+			<li>
+				<div class="floor_tit floor_tit1 tc">
+					<h4>农产品</h4>
+					<h3>Agricultural & products</h3>
+				</div>
+				<div>
+				{%foreach from=GetGoods(409,2,1) item=list%}
+				<a ><img src="{%$list.picurl%}" width="247" height="343" alt="" /></a>
+				{%/foreach%}
+				</div>
+			</li>
+			{%foreach from=GetGoods(409,3,8) item=list%}
+			<li class="product">
+				<div class="pro_tit">
+					<h3 class="ellipsis">{%$list.title%}</h3>
+					<p class="green">{%$list.retitle%}</p>
+				</div>
+				<div class="tr"><img src="{%$list.picurl%}" width="180" height="130"></div>
+				<div class="price">
+					<span class="fl">￥{%$list.price%}</span>
+					<a href="item_show.php?id={%$list.id%}&cid={%$list.classid%}" class="fr">立即抢购</a>
+				</div>
+			</li>
+				{%/foreach%}
+			
+			
+		</ul>
+	</div>
+	<div class="mar30 floor">
+		<div class="clearfix">
+			<div class="tit fl tit1">农资 <b>Agricultural products</b></div>
+			<a href="item_list.php?cid=410" class="more more1 fr">更多</a>
+			<div class="classify bg2 fr">
+			{%foreach from=GetGoodsType('410') item=list key=k%}
+			<a href="item_list.php?cid={%$list.id%}" class="active">{%$list.classname%}</a>
+			 {%/foreach%}</div>
+		</div>
+		<ul class="clearfix bor1 floor_list">
+			<li>
+				<div class="floor_tit floor_tit2 tc">
+					<h4>农资</h4>
+					<h3>Agricultural & resources</h3>
+				</div>
+				<div>
+				{%foreach from=GetGoods(410,2,1) item=list%}
+				<a ><img src="{%$list.picurl%}" width="247" height="343" alt="" /></a>
+				{%/foreach%}</div>
+			</li>
+			{%foreach from=GetGoods(410,3,8) item=list%}
+			<li class="product">
+				<div class="pro_tit">
+					<h3 class="ellipsis">{%$list.title%}</h3>
+					<p class="green">{%$list.retitle%}</p>
+				</div>
+				<div class="tr"><img src="{%$list.picurl%}" width="180" height="130"></div>
+				<div class="price">
+					<span class="fl">￥{%$list.price%}</span>
+					<a href="item_show.php?id={%$list.id%}&cid={%$list.classid%}" class="fr">立即抢购</a>
+				</div>
+			</li>
+				{%/foreach%}
+			
+		</ul>
+		<div class="ad1"><a href=""><img src="templates/default/images/index_15.jpg"></a></div>
+	</div>
+	
+	<div class="mar30 floor">
+		<div class="clearfix">
+			<div class="tit fl tit3">日用品 <b>Daily necessities</b></div>
+			<a href="item_list.php?cid=412" class="more more3 fr">更多</a>
+			<div class="classify bg3 fr">
+				{%foreach from=GetGoodsType('412') item=list key=k%}
+			<a href="item_list.php?cid={%$list.id%}" class="active">{%$list.classname%}</a>
+			 {%/foreach%} 
+			</div>
+		</div>
+		<ul class="clearfix bor3 floor_list">
+			<li>
+				<div class="floor_tit floor_tit3 tc">
+					<h4>日用品</h4>
+					<h3>Daily & necessities</h3>
+				</div>
+				<div>
+				{%foreach from=GetGoods(412,2,1) item=list%}
+				<a><img src="{%$list.picurl%}" width="247" height="343" alt="" /></a>
+				{%/foreach%}
+				</div>
+			</li>
+			{%foreach from=GetGoods(412,3,8) item=list%}
+			<li class="product">
+				<div class="pro_tit">
+					<h3 class="ellipsis">{%$list.title%}</h3>
+					<p class="green">{%$list.retitle%}</p>
+				</div>
+				<div class="tr"><img src="{%$list.picurl%}" width="180" height="130"></div>
+				<div class="price">
+					<span class="fl">￥{%$list.price%}</span>
+					<a href="item_show.php?id={%$list.id%}&cid={%$list.classid%}" class="fr">立即抢购</a>
+				</div>
+			</li>
+				{%/foreach%}
+		</ul>
+	</div>
+	<div><img src="templates/default/images/index_16.jpg" alt="" /></div>
+</div>
+
+
+<div class="lift">
+	<ul id="LoutiNav">
+		<li class="active">1F</li>
+		<li>2F</li>
+		<li>3F</li>
+		<li>4F</li>
+		<div class="tc"><img src="templates/default/images/top.jpg" id="goTop"></div>
+	</ul>
+	
+</div>
+<!--index end-->
+
+<!--footer start-->
+
+
+{%include file="bottom.html"%}
+<!--footer end-->
+</body>
+
+
+</html>

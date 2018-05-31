@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+{%include file="inc_link.html"%}
+</head>
+
+<body>
+
+
+</body>
+
+<div class="main_bg1"></div>
+<div class="main_bg2 rel">
+	<div class="ldy">
+		<ul class="ldy_list">
+		 {%if $info%}
+					{%foreach from=$info item=list key=k%}
+			<li style="background:url(templates/default/images/main{%$k+3%}.png) no-repeat;">
+				<div>
+					<div class="ldy_list_pic"><a href=""><img src="{%$list.picurl%}" width="550" height="647"></a></div>
+					<div class="ldy_list_con">
+						<h2>{%$list.title%}</h2>
+						<h3 style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;width:330px;">{%$list.retitle%}</h3>
+						<p>{%$list.weight%}ml/瓶</p>
+						<h4>优惠价：￥<span>{%$list.price%}</span></h4>
+						<a href="item_show.php?id={%$list.id%}&cid={%$list.classid%}"><img src="templates/default/images/main8.png"></a>
+					</div>
+				</div>
+			</li>
+			 {%/foreach%}   
+					   {%else%}
+					   <li>
+				<div style="text-align: center;">
+					暂无商品
+				</div>
+			</li>
+                       {%/if%}
+			
+		</ul>
+	</div>
+	<img src="templates/default/images/main9.png" class="backtop">
+</div>
+<script type="text/javascript">
+	$('.backtop').click(function(event) {
+		$('html, body').animate({scrollTop: 0}, 1000);
+	});
+</script>
+</html>

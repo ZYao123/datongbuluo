@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="gb2312"?>
+<graph baseFontSize='12' showNames='1'  decimalPrecision='0'  >
+	<set name='{$checkinfo0}' value='{$countPayfor}' />
+	<set name='{$checkinfo1}' value='{$countShip}'  />
+	<set name='{$checkinfo2}' value='{$countReceipt}' />
+	<set name='{$checkinfo3}' value='{$countReceipted}' />
+	<set name='{$checkinfoOther}' value='{$countOther}' />
+</graph>

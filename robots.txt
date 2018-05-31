@@ -1,0 +1,20 @@
+#
+# robots.txt for LCSHOP
+#
+User-agent: * 
+Disallow: /admin
+Disallow: /data
+Disallow: /install
+Disallow: /cache
+Disallow: /face
+Disallow: /include
+Disallow: /language
+Disallow: /templates
+Disallow: /templates_c
+Disallow: /uploads
+Disallow: /js
+Disallow: /member.php
+Disallow: /orderpost.php
+Disallow: /pay.php
+Disallow: /shopcart.php
+Disallow: /orderinfo.php

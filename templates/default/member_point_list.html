@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$webname%}-会员中心</title>
+<meta name="generator" content="{%$generator%}" />
+<meta name="keywords" content="{%$keyword%}" />
+<meta name="description" content="{%$description%}" />
+<link href="templates/default/style/webstyle.css" rel="stylesheet" type="text/css" />
+<link href="{%$template_dir%}style/suggest.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templates/default/js/jquery.min.js"></script>
+<script type="text/javascript" src="js/suggest.js"></script>
+<script type="text/javascript" src="js/transport.js"></script>
+<!--[if IE 6]> 
+<script type="text/javascript" src="png.js"></script>
+<script>
+PNG.fix('*');
+</script>
+<![endif]-->
+</head>
+<body>
+<div class="help_bj">
+{%include file="head.html"%}    <!--  body  开始  -->
+	<div class="bodys">
+		<div class="help"><span class="help_top">首页 >  会员中心 > <span class="help_color">我的优惠券</span></span>
+			<div class="help_bottom">
+				{%include file="left.html"%}
+				<div class="dd">
+					<div class="help_right"><span class="dd_wz">我的优惠券</span>
+						<div class="dd_top"><span class="dd_t">全部购物券</span><a href="point.php" target="_blank">查看商家购物券</a></div>
+							 <div class="help_list">
+						{%if $membercoll%}
+							<table width="1065" border="0" cellspacing="0" cellpadding="0">							
+								<tr>
+									<td  height="28" align="center" valign="middle" class="help_back">购物券标题</td>
+									<td width="10%" align="center" valign="middle" class="help_back">券码</td>
+									<td width="10%" align="center" valign="middle" class="help_back">面值</td>
+									<td width="10%" align="center" valign="middle" class="help_back">条件</td>
+									<td width="10%" align="center" valign="middle" class="help_back">有效期</td>
+									<td width="10%" align="center" valign="middle" class="help_back">状态</td>
+									<td width="5%" align="center" valign="middle" class="help_back">操作</td>
+								</tr>																					
+								 {%foreach from=$membercoll item=list%}
+							 
+							   
+								<tr>
+									<td height="81" align="center" valign="middle" class="help_bor ys1">
+										<span class="ys">{%$list.title%} </span></td>
+									<td align="center" valign="middle" class="help_bor">
+									{%$list.password%}
+									</td>
+									<td align="center" valign="middle" class="help_bor"><span class="ys3">￥{%$list.money%}</span>
+									</td>
+									<td align="center" valign="middle" class="help_bor">
+									<span class="ys3">￥{%$list.meet_money%}</span>
+									</td>
+									<td align="center" valign="middle" class="help_bor">
+									<span class="ys3">{%$list.day%}天</span>
+									</td>
+									<td align="center" valign="middle" class="help_bor">
+									<span class="ys3">{%$list.o_id%}</span>
+									</td>
+									<td align="center" valign="middle" class="help_bor ys4">
+									<a href="point_info.php?id={%$list.id%}">查看</a>
+									<br />
+									   <!-- <a href="javascript:;" onclick="AddShopCart('shopcar_popup')"><img src="templates/default/images/index_35.jpg" alt="还要买"/></a> --></td>
+								</tr>
+								{%/foreach%}
+								<tr>
+									<td height="60" colspan="5" align="right" valign="middle" class="help_links"> {%$page%}</td>
+								</tr>
+							</table>
+							
+							{%else%}
+								<table width="1065" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td height="43" align="center" valign="middle">&nbsp;
+										暂无信息！
+									</td>
+								</tr>
+								</table>
+							{%/if%}
+							
+						</div>
+						<div class="help_tp"><img src="templates/default/images/tp28.jpg" width="1064" 
+				  height="60" /></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  body  结束  -->
+{%include file="bottom.html"%}
+</div>
+</body>
+</html>

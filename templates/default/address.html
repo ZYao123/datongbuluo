@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{%include file="inc_link.html"%}
+<link href="templates/default/style/webstyle.css" rel="stylesheet" type="text/css" />
+</head>
+<link type="text/css" rel="stylesheet" href="js/validator.css"></link>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/formValidator.js" type="text/javascript" charset="UTF-8"></script>
+<script src="js/formValidatorRegex.js" type="text/javascript" charset="UTF-8"></script>
+<script src="js/checkform.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+{%foreach from=$js item=list key=k%}
+var {%$k%}	= "{%$list%}";
+{%/foreach%}
+function checkform()
+{
+	ReadyValidator('form1');
+	
+	isempty('rec_name','',rec_name,'','true','true','',rec_name);
+	isempty('AddrCountry','',AddrCountry,'','true','true','',AddrCountry);
+	isempty('AddrProvince','',AddrProvince,'','true','true','',AddrProvince);
+	isempty('AddrCity','',AddrCity,'','true','true','',AddrCity);
+	isempty('AddrArea','',AddrArea,'','true','true','',AddrArea);
+	isempty('cur_address','',cur_address,'','true','true','',cur_address);
+	checkzipcode('zipcode',zipcode,zipcode,'',zipcodeerror);
+	telandphone('phone',phone,phone,'');
+}
+</script>
+<!--[if IE 6]> 
+<script type="text/javascript" src="png.js"></script>
+<script>
+PNG.fix('*');
+</script>
+<![endif]-->
+<style type="text/css">
+.regist_suc
+{
+position:fixed;
++position:absolute;
++top:expression(eval(document.documentElement.scrollTop||document.body.scrollTop)+50);
+}
+</style>
+<body onload="checkform()">
+
+{%include file="head.html"%}
+    <!--  body  开始  -->
+    <div class="bodys">
+        <div class="help"><span class="help_top">首页 >  会员中心 > <span class="help_color">账号管理</span></span>
+            <div class="help_bottom">
+                {%include file="left.html"%}
+                
+                
+<div class="dd">
+                    <div class="help_right"><div class="dd_top"><span class="dd_t">收货地址</span></div>
+                      <div class="help_list">
+<form id="form1" method="post" action="member.php">
+            <div class="shdz_nr">
+                            <ul>
+                                <li><strong class="shdz_color">新增收货地址</strong>&nbsp;电话号码、手机号选填一项 其余均为必填项</li>
+                                <li><span class="shdz_wz">收货人姓名:</span>
+                                  <input type="text" class="shdz_text" name="rec_name" id="rec_name" style="vertical-align: middle" />
+                                  <span id="rec_nameTip"></span></li>
+                                <!--<li><span class="shdz_wz">所在地区:</span><span class="shdz_sr">
+                                    <select class="shdz_text1">
+                                        <option>黑龙江省</option>
+                                        &nbsp;
+                                    </select>
+                                    <select class="shdz_text1">
+                                        <option>哈尔滨市</option>
+                                        &nbsp;
+                                    </select>
+                                    <select class="shdz_text1">
+                                        <option>道里区</option>
+                                        &nbsp;
+                                    </select>
+                                    *</span></li>-->
+                                <li style="height:70px;"><span class="shdz_wz">收货地址<!--街道地址-->:</span><span class="shdz_sr">
+         <select name="AddrCountry" id="AddrCountry" onchange="do_area('AddrCountry','AddrProvince','{%$lang.AddrProvince%}')" class="in100">
+          <option value="" >{%$lang.AddrCountry%}</option>
+          {%foreach from=$info item=list%}
+          <option value="{%$list.id%}">{%$list.classname%}</option>
+          {%/foreach%}
+        </select>
+        <select name="AddrProvince" id="AddrProvince" onchange="do_area('AddrProvince','AddrCity','{%$lang.AddrCity%}')" class="in100">
+          <option value="" >{%$lang.AddrProvince%}</option>
+        </select>    
+        <select name="AddrCity" id="AddrCity"  class="in100" onchange="do_area('AddrCity','AddrArea','{%$lang.AddrArea%}')" >
+          <option value="" >{%$lang.AddrCity%}</option>
+        </select>          
+        <select name="AddrArea" id="AddrArea" class="in100">
+          <option value="" >{%$lang.AddrArea%}</option>
+        </select><span id="AddrCountryTip" ></span><span id="AddrProvinceTip" ></span><span id="AddrCityTip" ></span><span id="AddrAreaTip" ></span><br><input  name="cur_address" type="text" class="shdz_text" id="cur_address" value="" style=" clear:both;width:400px" /><span id="cur_addressTip" ></span>
+                              </span></li>
+                              <li><span class="shdz_wz">邮政编码:</span><span class="shdz_sr">
+                                    <input type="text" class="shdz_text3" name="zipcode" id="zipcode" />
+                                    &nbsp;&nbsp;</span><span id="zipcodeTip" ></span></li>
+                                <li><span class="shdz_wz">手机号码:</span><span class="shdz_sr">
+                                    <input type="text" class="shdz_text" name="phone" id="phone" />
+                                    &nbsp;&nbsp;</span><span id="phoneTip" style="width:250px"></span></li>
+                                <li><span class="shdz_wz">电话号码:</span><span class="shdz_sr">
+                                    <input type="text" class="shdz_text" name="telephone" id="telephone" />
+                                    <!--<span class="shdz_g">-</span>
+                                    <input type="text" class="shdz_text5" />
+                                    <span class="shdz_g">-</span>
+                                    <input type="text" class="shdz_text4" />
+                                    &nbsp;&nbsp;<span class="shdz_color1">区号-电话号码-分机</span>--></span></li>
+                                <!--<li><span class="shdz_wz">设为默认:</span><span class="shdz_sr">
+                                    <input name="is_first" id="is_first" type="checkbox" value="1" />
+                                    </span><span class="login_text3" id="rephone"></span></li>-->
+                                <li><span class="shdz_bc"><input type="image" name="imageField" id="imageField" src="templates/default/images/shdz_2.jpg" /></span>
+                                  <input name="act" type="hidden" id="act" value="address_jud" />
+                                </li>
+
+                            </ul>
+                </div>
+            </form>
+                            
+                    <div class="shdz_ybc">已保存的有效地址</div>
+                    <div class="shdz_t">
+                        <ul>
+                            <li class="shdz_l1">收货人</li>
+                            <li class="shdz_l2">所在地区</li>
+                            <li class="shdz_l3">街道地址</li>
+                            <li class="shdz_l4">邮编</li>
+                            <li class="shdz_l5">电话/手机</li>
+                            <li class="shdz_l55">&nbsp;</li>
+                            <li class="shdz_l6">操作</li>
+                            <li class="cl"></li>
+                        </ul>
+                    </div>                            
+                    {%section name=l loop=$addr%}
+                    <form id="form" method="post" action="?a=address" onsubmit="return CheckReg();">
+                    <div class="shdz_list" onmousemove="this.className = 'shdz_list_on'" onmouseout="this.className = 'shdz_list'">
+                        <ul>
+                            <li {%if $addr[l].is_first == '1'%} class='first' {%/if%}>
+                            <span class="shdz_l1">
+                            {%if $addr[l].rec_name%}
+                            {%$addr[l].rec_name%}
+                            {%else%}
+                            &nbsp;
+                            {%/if%}
+                            </span>
+                            <span class="shdz_l2">
+                            {%if $addr[l].road_address%}
+                            {%$addr[l].road_address%}
+                            {%else%}
+                            &nbsp;
+                            {%/if%}                            
+                            </span>
+                            <span class="shdz_l3">
+                            {%if $addr[l].cur_address%}
+                            {%$addr[l].cur_address%}
+                            {%else%}
+                            &nbsp;
+                            {%/if%}                            
+                            </span>
+                            <span class="shdz_l4">
+                            {%if $addr[l].zipcode%}
+                            {%$addr[l].zipcode%}
+                            {%else%}
+                            &nbsp;
+                            {%/if%}                            
+                            </span>
+                            <span class="shdz_l5">{%$addr[l].telephone%}
+                            {%if $addr[l].phone && $addr[l].telephone%}/{%/if%}
+                            {%$addr[l].phone%}</span>
+                            <span class="shdz_l55"><a href="member.php?act=is_first&id={%$addr[l].id%}">{%if $addr[l].is_first == '1'%}默认地址{%/if%}{%if $addr[l].is_first != '1'%}设为默认{%/if%}</a></span>
+                            <span class="shdz_l6"><a href="member.php?act=address_update&id={%$addr[l].id%}">修改</a>|<a href="member.php?act=address_delete&id={%$addr[l].id%}" id="address_del" onclick="return confirm('确定删除该收货地址？')">删除</a></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <input type="hidden" name="delid" id="delid" value="{%$addr[l].id%}" />
+                    </form>
+                    {%/section%}
+                            
+                            
+                      </div>
+                        <div class="help_tp"></div>
+          </div>
+              </div> 
+            </div>
+        </div>
+    </div>
+    <!--  body  结束  -->
+{%include file="bottom.html"%}
+
+</body>
+</html>

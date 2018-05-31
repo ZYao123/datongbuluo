@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.admin_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+var postid = "{$lang.postid}";
+</script>
+
+</head>
+<body style="overflow-x:hidden">
+<form id="form2" method="post" action="order.php">
+  <div class="gwc_body" style="clear:both">
+   
+    <div class="mt_padding">
+      <div class='title'>{$lang.checkinfo}&nbsp;&nbsp;</div>
+      <div class='content'>
+                    {if $info.checkinfo eq 0}
+                    <span style="color:#f00">{$lang.checkinfo0}</span>&nbsp;&nbsp;<br>
+                    <input name="checkinfo" type="hidden" value="0" />
+                    {elseif $info.checkinfo eq 1}
+                    <span style="color:#f00">{$lang.checkinfo1}</span>&nbsp;&nbsp;<br>
+                       <input name="checkinfo" type="hidden" value="1" />
+                    {$lang.postinfo} : 
+                    <label for="Courierid"></label>
+                    <select name="Courierid" id="Courierid">
+                      {foreach from=$postmode_info item=list}
+                      <option value="{$list.classid}" {if $info.postmode eq $list.id} selected="selected" {/if}>{$list.classname}</option>
+                      {/foreach}
+                    </select>
+                    <input type="text" name="postid" class="shdz_text"  id="postid" value="{$lang.postid}" style="color:#CCC" onfocus="if (this.value == '{$lang.postid}'){literal} {this.value='';this.style.color='#000'}{/literal} "  onblur="if (this.value == '') {literal}{{/literal}this.value='{$lang.postid}';this.style.color='#ccc'{literal}}{/literal} "/>                    
+                    {elseif $info.checkinfo eq 2}
+                    <span style="color:#f00">{$lang.checkinfo2}
+                    <select name="checkinfo" id="checkinfo">
+                      <option value="2">{$lang.checkinfo2}</option>
+                      <option value="3">{$lang.checkinfo3}</option>
+                    </select>                     
+                    
+                    </span>
+                   
+                    {elseif $info.checkinfo eq 3}
+                    <span style="color:#f00">{$lang.checkinfo3}
+                    <select name="checkinfo" id="checkinfo">
+                      <option value="3">{$lang.checkinfo3}</option>
+                      {if $returnid eq 0}
+                      <option value="4">{$lang.checkinfo4}</option>
+                      {/if}
+                    </select>                        
+                    </span> 
+                    {elseif $info.checkinfo eq 4}
+                        <span style="color:#f00">是否已经退货:
+                            　<input name="checkinfo" type="radio" value="4" />否　
+                            <input name="checkinfo" type="radio" value="7" />是
+                        </span>
+                    {elseif $info.checkinfo eq 5}
+                       <span style="color:#f00">是否已经退款:
+                            　<input name="checkinfo" type="radio" value="5" />否　
+                            <input name="checkinfo" type="radio" value="6" />是
+                       </span>
+                    {elseif $info.checkinfo eq 6}
+                       <span style="color:#f00">已经退款</span>
+                    {elseif $info.checkinfo eq 7}
+                       <span style="color:#f00">已经退货</span>  
+                    {/if}
+                    
+                    {if $info.checkinfo <=3 }
+                        {if $info.checkinfo eq 3 && $returnid eq 1}
+                        {$lang.checkTimeout}
+                        {else}
+                        {$lang.checkcontent}
+                        {/if}
+                    {/if}
+                    </div>
+       {if $info.checkinfo ==6 or $info.checkinfo ==5}
+      <div class='title'>退款备注&nbsp;&nbsp;</div>
+      <div  class='content'>
+      {$info.buyremark}
+      </div>
+      {/if}
+       {if $info.checkinfo ==4 or $info.checkinfo ==7}
+      <div class='title'>退货备注&nbsp;&nbsp;</div>
+      <div  class='content'>
+      {$info.buyremark}
+      </div>
+      {/if}
+      <div class='title'>{$lang.Receipt}&nbsp;&nbsp;</div>
+      <div id = 'address' class='content'>
+      
+      
+            <div class="shdz_nr">
+                            <ul>
+                                <li><span class="shdz_wz">{$lang.rec_name}:</span><span class="shdz_sr">
+                                <input type="text" class="shdz_text" name="rec_name" id="rec_name" value="{$info.rec_name}" />&nbsp;*</span><span id="rec_nameTip" style="float:left"></span></li>
+                                <!--<li><span class="shdz_wz">所在地区:</span><span class="shdz_sr">
+                                    <select class="shdz_text1">
+                                        <option>黑龙江省</option>
+                                        &nbsp;
+                                    </select>
+                                    <select class="shdz_text1">
+                                        <option>哈尔滨市</option>
+                                        &nbsp;
+                                    </select>
+                                    <select class="shdz_text1">
+                                        <option>道里区</option>
+                                        &nbsp;
+                                    </select>
+                                    *</span></li>-->
+                                <li><span class="shdz_wz">{$lang.cur_address}<!--街道地址-->:</span><span class="shdz_sr">
+                                    <textarea cols="" rows="" class="shdz_text2" name="cur_address" id="cur_address">{$info.cur_address}</textarea>
+                                    &nbsp;*&nbsp;&nbsp;<!--<span class="shdz_color1">不需要重复填写省/市/区</span>--></span><span id="cur_addressTip" ></span></li>
+                                <li><span class="shdz_wz">{$lang.zipcode}:</span><span class="shdz_sr">
+                                    <input name="zipcode" type="text" class="shdz_text3" id="zipcode" value="{$info.zipcode}" />
+                                    &nbsp;*&nbsp;&nbsp;</span><span id="zipcodeTip" ></span></li>
+                                <li><span class="shdz_wz">{$lang.phone}:</span><span class="shdz_sr">
+                                    <input name="phone" type="text" class="shdz_text" id="phone" value="{$info.phone}" />
+                                    &nbsp;&nbsp;</span><span id="phoneTip" style="width:250px"></span></li>
+                                <li><span class="shdz_wz">{$lang.telephone}:</span><span class="shdz_sr">
+                                    <input name="telephone" type="text" class="shdz_text" id="telephone" value="{$info.telephone}" />
+                                    <!--<span class="shdz_g">-</span>
+                                    <input type="text" class="shdz_text5" />
+                                    <span class="shdz_g">-</span>
+                                    <input type="text" class="shdz_text4" />
+                                    &nbsp;&nbsp;<span class="shdz_color1">区号-电话号码-分机</span>--></span></li>
+                                <!--<li><span class="shdz_wz">设为默认:</span><span class="shdz_sr">
+                                    <input name="is_first" id="is_first" type="checkbox" value="1" />
+                                    </span><span class="login_text3" id="rephone"></span></li>-->
+                            </ul>
+                        </div>
+
+      
+      
+      
+      
+      
+      </div>
+    </div>
+    <div class="mt_padding">
+      <div class='title'>{$lang.PaymentAndDelivery}</div>
+      <div class='content'>
+        <div class='content_title'>{$lang.paymode}</div>
+        
+        {if $payment_info}
+        <input name="paymode" type="radio" value="1" {if $payment_info.is_online eq '1'} checked="checked" {/if} disabled="disabled"/>
+        在线支付　　　　　　即时到帐，支持绝大数银行借记卡及部分银行信用卡<br />
+        
+        <input name="paymode" type="radio" value="2" {if $payment_info.is_cod eq '1'} checked="checked" {/if} disabled="disabled"/>
+        货到付款　　　　　　送货上门后再收款，支持现金、POS机刷卡、支票支付
+        {/if}
+        <div class='content_title'>{$lang.Delivery}</div>
+        <div class='content_title1'>{$lang.postmode}：</div>
+          {if $postmode_info}
+             {foreach from=$postmode_info item=list key=k}             
+               　　<input name="postmode" type="radio" id="postmode" value="{$list.id}" {if $info.postmode eq $list.id} checked="checked" {/if}/>{$list.classname}<br>
+             {/foreach}
+             {/if}
+        <div class='content_title1'>{$lang.TimeRequired}：</div>
+        
+        <input name="buyremark" type="radio" value="1" {if $info.buyremark eq '1'} checked="checked" {/if}/>
+        只工作日送货（双休日与假日不用送货）（注：写字楼/商用地址客户请选择） <br />
+        
+        <input name="buyremark" type="radio" value="2" {if $info.buyremark eq '2'} checked="checked" {/if}/>
+        工作日、双休日与节假日均可送货<br />
+        
+        <input name="buyremark" type="radio" value="3" {if $info.buyremark eq '3'} checked="checked" {/if}/>
+        只双休日、假日送货（工作日不用送货） </div>
+    </div>
+    <div class="mt_padding">
+      <div class='title'>{$lang.Invoice}</div>
+      <div class='content'> {$lang.InvoiceType}：
+        <input name="InvoiceType" type="radio" value="1" checked="checked" />普通发票<br />{$lang.companyname}：
+        <input name="Invoice" type="radio" value="1"  {if $info.Invoice eq '1'} checked="checked" {/if} 
+        onclick="javascript:$('#companyname').hide()" />个人
+        <input name="Invoice" type="radio" value="2" {if $info.Invoice eq '2'} checked="checked" {/if} onclick="javascript:$('#companyname').show()"/>
+        单位&nbsp;&nbsp;
+        <input id = 'companyname' name="companyname" value="{$info.companyname}" type="text" class='shdz_com' {if $info.Invoice eq '1'}style="display:none; "{/if} />
+      </div>
+    </div>
+    <div class="mt_padding">
+      <div class='title'>{$lang.message}</div>
+      <div class='content'>
+       <textarea style="width:100%">{$info.message}</textarea>
+      </div>
+    </div>
+    <div class="mt_padding">
+      <div class='title'>{$lang.goodslist}</div>
+      <div class='content'>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ececec" style="margin-top:10px;">
+          <tr>
+            <td width="285" height="25" align="center" valign="middle">{$lang.goodsinfo}</td>
+            <td width="100" align="center" valign="middle">{$lang.goodsprice}</td>
+            <td width="100" align="center" valign="middle" class="gwc_color">类型</td>
+            <td width="100" align="center" valign="middle">{$lang.goodsnum}</td>
+            <td width="120" align="center" valign="middle">{$lang.goodstotal}</td>
+            <td align="center" valign="middle">{$lang.goodsStatus}</td>
+          </tr>
+        </table>
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          {foreach from=$cart_info item=list key=k}
+          <tr id = 'tr{$list.id}'>
+            <td width="90" height="82" align="left" valign="middle" ><span class="tp01"><img src="/{$list.picurl}" width="60" height="60" /></span></td>
+            <td width="195" align="left" valign="middle" >{$list.title}<strong style="color:#d00; font-family:Arial;">{$list.attrname}</strong></td>
+            {if $list.consume_points}
+            <td width="100" align="center" valign="middle" >¥<span id='Unit_price{$k}'>{$list.salesprice}</span></td>
+            <td width="100" align="center" valign="middle" >
+
+            积分兑换商品,消耗积分:{$list.consume_points*$list.num}
+            </td>
+            {else}
+            
+            <td width="100" align="center" valign="middle" >¥<span id='Unit_price{$k}'>{$list.salesprice}</span></td>
+            <td width="100" align="center" valign="middle" >&nbsp;
+            
+            </td>
+            {/if}
+            <td width="100" align="center" valign="middle" >{$list.num}</td>
+            <td width="120" align="center" valign="middle"><strong class="color05">¥<span id='total{$k}'>{$list.total}</span></strong></td>
+            <td align="center" valign="middle">{$list.housenum}</td>
+          </tr>
+          {/foreach}
+        </table>
+      </div>
+    </div>
+    <div class="onsubmit">  {$lang.listtotal}：<span>￥{$info.orderamount+$info.cost}
+      <input name="totalprice" type="hidden" value="{$info.orderamount}" />
+      </span>元&nbsp;&nbsp;
+      (含运费:￥{$info.cost}元)
+      <input name="act" type="hidden" value="subedit" /><input name="id" type="hidden" value="{$id}" />
+      <input name="orderlistnum" type="hidden" value="{$info.orderlistnum}" />
+      <!-- <button type="submit" class="checkout-submit"  id="order-submit" onclick="return checkorderpost()">提交订<b></b></button> -->
+      <input type="submit" name="button" id="dosubmit" value="提交" style="display:none" />
+    </div>
+    {if $refun_row }
+    <div class="mt_padding">
+      <div class='title'>{$lang.refund}</div>
+      <div class='content'>
+      {$lang.refund_time}：{$refun_row.datetime}
+      <br>
+        <textarea name="content" cols="45" rows="5" class="text_b" id="textarea" readonly="readonly">{$refun_row.content}</textarea>
+      </div>
+    </div>
+    {/if}
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.chart_order}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" ></script>
+<script type="text/javascript" src="plugin/calendar/calendar.js"></script> 
+<script language="JavaScript" src="templates/default/js/FusionCharts.js"></script>
+</head>
+<body>
+    <div class="pro_nr">
+   		<span class="pro_bt">
+            <a href="javascript:location.reload();">
+            <img onmousemove="src='templates/default/images/pro_2.jpg'" onmouseout="src='templates/default/images/pro_1.jpg'" src="templates/default/images/pro_1.jpg" width="47" height="16"/>
+            </a>
+        </span>
+
+    </div>
+
+    <div class="pro_nr">
+        <div class="pro_bottom">
+      
+      <div id="chartdiv" align="center">FusionCharts. </div>
+      <script type="text/javascript">
+		   var chart = new FusionCharts("templates/default/Charts/Pie3D.swf", "ChartId", "600", "480");
+		   //chart.setDataURL("templates/default/Charts/Pie3D.xml");
+		   chart.setDataURL(escape("chart_order.php?act=xml&endtime={$endtime}&starttime={$starttime}"));
+		   chart.addParam("wmode","Opaque");   
+		   chart.render("chartdiv");
+		</script>
+        
+        </div>
+
+	</div>
+        <div class="pro_bot" id="footer" style="clear:both; text-align:left; z-index:1000;">
+        <form action="?act=list" method="post" id="form" name="form" >
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="80" align="center">
+                    {$lang.starttime}
+                    </td>
+                    <td width="150"><input type="text" name="starttime" class="v5-input in150" id="starttime" value="{$starttime}" readonly="readonly" />
+        		{literal}
+				<script type="text/javascript">
+				date = new Date();
+				Calendar.setup({
+					inputField     :    "starttime",
+					ifFormat       :    "%Y-%m-%d",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+				</script>
+                {/literal}</td>
+                    <td width="80" align="center">{$lang.endtime}</td>
+                    <td width="150"><input type="text" name="endtime" class="v5-input in150" id="endtime" value="{$endtime}" readonly="readonly"/>
+        {literal}
+				<script type="text/javascript">
+				date = new Date();
+				Calendar.setup({
+					inputField     :    "endtime",
+					ifFormat       :    "%Y-%m-%d",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+				</script>
+                {/literal}</td>
+                    <td valign="top"style="padding-left:10px;"><input type="image" name="imageField" id="imageField" src="templates/default/images/pro_7.jpg" /></td>
+                  </tr>
+                </table>
+        </form>            
+            
+        </div>    
+    
+</body>
+</html>

@@ -1,0 +1,22 @@
+<div class="header_top">
+    <div class="header_link">
+        <span class="tl">
+        {%foreach from=GetArticle_list(27,1) item=list%}
+                {%$list.content%}
+        {%/foreach%}
+        </span>
+        <a href='index.php' style="color:#F00">商城首页</a>
+        {%if {%$username%}%}
+        <a href="member.php?act=default">{%$username%}</a><a href="member.php?act=logout&from={%$fromurl%}">退出</a>
+        {%else%}
+        <a href="member.php?act=login&from={%$fromurl%}">登录</a>|<a href="member.php?act=regist&from={%$fromurl%}">注册</a>
+        {%/if%}
+        <a href="member.php?act=default">我的订单</a>|<a href="member.php?act=default">会员中心</a>
+
+        {%foreach from=GetNav('top') item=list key=key%}
+        |<a href="{%$list.linkurl%}" target="{%$list.target%}">{%$list.classname%}</a>
+        {%/foreach%}
+
+    </div>
+    您好，欢迎来到SHOPX测试演示站！！
+</div>

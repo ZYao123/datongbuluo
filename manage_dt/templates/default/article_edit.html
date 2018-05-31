@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.article_edit}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" ></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkf.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+<script src="templates/default/js/getuploadify.js"></script>
+<script src="templates/default/js/getjcrop.js"></script>
+
+<script type="text/javascript" src="plugin/colorpicker/colorpicker.js"></script>
+<script type="text/javascript" src="plugin/calendar/calendar.js"></script>
+<script type="text/javascript" src="editor/kindeditor-min.js"></script>
+<script type="text/javascript" src="editor/lang/zh_CN.js"></script>
+</head>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+
+</script>
+<body>  
+<form action="" method="post" id="form" name="form" onsubmit="return cfm_article();">
+    <div class="Form02">
+      <h3>{$lang.basic}</h3>
+        <table width="100%" border="0" class="v5-table05">
+<tr>
+        <td><span class="red">*</span>{$lang.title}</td>
+        <td>
+        	<input type="text" name="title" class="v5-input in180" id="title" value="{if $info.title}{$info.title}{/if}" />
+            <div class="title_panel">
+                <input type="hidden" name="colorval" id="colorval"  value="{if $info.colorval}{$info.colorval}{/if}"/>
+                <input type="hidden" name="boldval" id="boldval"  value="{if $info.boldval}{$info.boldval}{/if}"/>
+                <span onclick="colorpicker('colorpanel','colorval','title');" class="color"></span>
+                <span id="colorpanel"></span> 
+                <span onclick="blodpicker('boldval','title');" class="blod"> </span> 
+                <span onclick="clearpicker()" class="clear" title="清除属性">[#]</span>
+            </div>
+       </td>
+      </tr>
+      <tr>
+        <td>{$lang.classid}</td>
+        <td>
+        <select name="classid" id="classid" class="v5-select">
+        <option value="0">--</option>
+        {foreach from=$class_info item=list}
+            <option value="{$list.id}" 
+            {if $info.classid}
+                {if $info.classid eq $list.id}
+                selected="selected"
+                {/if}
+            {/if}>{if $list.str}|-{$list.str}{/if}{$list.classname}</option>
+        {/foreach}
+        </select>
+        </td>
+      </tr>
+      <tr>
+        <td>{$lang.picurl}</td>
+        <td><input type="text" name="picurl" class="v5-input in180" id="picurl" value="{if $info.picurl}{$info.picurl}{/if}"/>
+        	<span class="cnote">
+                <span class="gray_btn" onclick="GetUploadify('uploadify','{$lang.thumupload}','image','image',1,20000000,'picurl')">{$lang.uploadpic}</span>
+                <span class="reimg">
+                	<input type="checkbox" name="rempic" id="rempic" value="true" />{$lang.remote}
+                </span> 
+                <span class="cutimg">
+                	<a href="javascript:;" onclick="GetJcrop('jcrop','picurl');return false;">{$lang.tailor}</a>
+                </span> 
+            </span>
+        </td>
+      </tr>
+      <tr>
+        <td>{$lang.linkurl}</td>
+        <td><input type="text" name="linkurl" class="v5-input in180" id="linkurl" value="{if $info.linkurl}{$info.linkurl}{/if}"/>
+        </td>
+      </tr> 
+      <tr>
+        <td>{$lang.keywords}</td>
+        <td><input type="text" name="keywords" class="v5-input in180" id="keywords" value="{if $info.keywords}{$info.keywords}{/if}"/>
+        </td>
+      </tr>
+      <tr>
+        <td width="150" height="38"> {$lang.description}</td>
+        <td width="878"><textarea name="description" id="description" class="v5-textarea tin60 w657">{if $info.description}{$info.description}{/if}</textarea></td>
+      </tr>
+      <tr>
+        <td> </td>
+        <td>
+        <input name="phone" type="checkbox" value="1" {if $info.phone==1}checked="checked"{/if}/>&nbsp;{$lang.phone}</td>
+        </td>
+      </tr>
+       <tr>
+        <td width="150" height="38">{$lang.content}</td>
+        <td width="878">
+                <input name="checkinfo" type="button" value="{$lang.pc}"  id="show1" onclick="select_con('con1','con2')"/>
+                <input name="checkinfo" type="button" value="{$lang.phone}" id="show2" onclick="select_con('con2','con1')"/>
+        <div id='con1'>
+        <textarea name="content" id="content" class="kindeditor">{if $info.content}{$info.content}{/if}</textarea>
+       			{literal}
+		  		<script>
+				var editor;
+				KindEditor.ready(function(K) {
+					editor = K.create('textarea[name="content"]', {allowFileManager : true,width:'667px',height:'280px'});
+				});
+				</script>
+                {/literal}
+        </div>
+        <div style="display:none;" id="con2">
+        <textarea name="phone_content" id="phone_content" class="kindeditor">{if $info.phone_content}{$info.phone_content}{/if}</textarea>
+                        {literal}
+                                <script>
+                                var editor;
+                                KindEditor.ready(function(K) {
+                                        editor = K.create('textarea[name="phone_content"]', {allowFileManager : true,width:'667px',height:'280px'});
+                                });
+                                </script>
+                {/literal}
+        </div>
+        	<div class="features">
+					<input type="checkbox" name="remote" id="remote" value="true" />
+					{$lang.downloadpic}
+					&nbsp;
+					<input type="checkbox" name="autothumb" id="autothumb" value="true" />
+					{$lang.fristpic}
+					&nbsp;
+					<input type="checkbox" name="autodesc" id="autodesc" value="true" />
+					{$lang.draw}
+					<input type="text" name="autodescsize" id="autodescsize" value="200" size="3" class="input_gray_short" />
+					{$lang.toword}
+					&nbsp;
+					<input type="checkbox" name="autopage" id="autopage" value="true" />
+					{$lang.autopage}
+					<input type="text" name="autopagesize" id="autopagesize" value="5" size="6" class="input_gray_short" />
+					{$lang.kb}</div>	
+        </td>
+      </tr>
+      
+      
+       <tr>
+        <td>{$lang.posttime}</td>
+        <td>
+        <input type="text" name="posttime" class="v5-input in150" id="posttime"   readonly="readonly" value="{if $info.posttime}{$info.posttime|date_format:'%Y-%m-%d %H:%M:%S'}{/if}"/>
+       			{literal}
+				<script type="text/javascript">
+				date = new Date();
+				Calendar.setup({
+					inputField     :    "posttime",
+					ifFormat       :    "%Y-%m-%d %H:%M:%S",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+				</script>
+                {/literal}
+        </td>
+      </tr>
+       <tr>
+        <td>{$lang.author}</td>
+        <td><input type="text" name="author" class="v5-input in60" id="author"  value="{if $info.author}{$info.author}{/if}"/></td>
+      </tr>
+       <tr>
+        <td>{$lang.orderid}</td>
+        <td><input type="text" name="orderid" class="v5-input in60" id="orderid"  value="{if $info.orderid}{$info.orderid}{/if}"  onKeyUp="value=value.replace(/[^\d]/g,'')" /></td>
+      </tr>
+       <tr>
+        <td>{$lang.hits}</td>
+        <td><input type="text" name="hits" class="v5-input in60" id="hits"  value="{if $info.hits}{$info.hits}{/if}" /></td>
+      </tr>
+       <tr>
+        <td>{$lang.checkinfo}</td>
+        <td>
+        	<input name="checkinfo" type="radio" value="true"  
+                {if $info.checkinfo=='true'}checked="checked" {/if} />&nbsp;{$lang.yes}&nbsp;
+            <input name="checkinfo" type="radio" value="false" 
+            {if $info.checkinfo=='false'}checked="checked" {/if}  />&nbsp;{$lang.no}
+        </td>
+      </tr>
+        </table>
+	</div>
+    	<input type="hidden" name="id" id="id"  value="{if $info.id}{$info.id}{/if}"/>
+        <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="{$lang.submit}">
+        <input name="act" id="act" type="hidden" value="subedit" />
+</form>
+</body>
+</html>

@@ -1,0 +1,387 @@
+
+<style>
+.left_side
+{
+	float: left;
+	width: 730px;
+}
+.coupon_block
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+	/*
+	border-color: #DFDFDF;
+	border-image: none;
+	border-style: solid;
+	border-width: 0px 1px 1px;
+	*/
+	clear: both;
+	float: left;
+	height: auto;
+	margin-bottom: 20px;
+	padding-bottom: 5px;
+	width: 727px;
+	margin-left:3px;
+	/*border-top: 2px solid #2EB6AA;*/
+	border-radius: 4px; /*border-color: #FFB685;*/
+}
+
+.coupon_block .title
+{
+	border-bottom: 1px solid #C3D2DC;
+	clear: both;
+	color: #333333;
+	font-size: 20px;
+	height: 32px;
+	margin: 8px 10px 5px 10px;
+	position: relative;
+	font-weight: bold;
+	overflow: hidden; /*white-space: nowrap;*/
+}
+
+
+
+
+
+.coupon_block .body
+{
+	margin: 5px 10px 0;
+}
+.normal_l{background: none repeat scroll 0 0 #FFFFFF; position:relative;
+	border: 1px solid #FFE2C4;width:200px; display:block; text-align:center; float:left; overflow:hidden; margin-left:5px; _margin-left:5px；
+	margin-right:10px;}
+.normal_l a img{ max-width:90px}
+.normal_l a.text{display:block}
+.normal_l .quan_shoulu {
+	height: 54px;
+	position: absolute;
+	right: -2px;
+	top: -2px;
+	width: 56px;
+	z-index: 9999;
+}
+.normal_m{ /*border-left: 1px solid #EEEEEE; */ padding-left: 18px;width:460px; display:block; float:left;margin-left:15px; _margin-left:8px;overflow:hidden;}
+.normal_m h6, .normal_m h1{ display:block; margin:0 auto; padding:5px 0; font-size:14px; color:#017BC6}
+.normal_m ul li, .normal_m p{margin:5px 0; line-height:20px}
+.normal_m ul li.green i{font-style:normal; color:red; font-family:Verdana}
+.normal_m ul li.score{font-family:Arial; color:#C60808; font-size:22px; line-height:22px; margin:0}
+
+.normal_m ul li.out{color:#aaa}
+
+
+
+
+/*coupon detail*/
+.box_detail_img {
+	height: 160px;
+	padding-top: 20px;
+	position: relative;
+	text-align: center;
+	width: 200px;
+	/*background: none repeat scroll 0 0 #F6F6F6;*/
+}
+
+.detail_top {
+	color: #666666;
+	font-size: 16px;
+	height: 50px;
+	text-align: center;
+	width: 100%;
+	margin-top:10px;
+}
+.box_detail_img em {
+	color: #FF4444;
+	font-family: Arial;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: bold;
+	margin: 0 5px;
+	position: relative;
+	top: 2px;
+}
+.box_detail_img em.size22{ font-size:22px;}
+.box_detail_img em.size20{ font-size:20px;}
+.box_detail_img em.size12{ font-size:12px;}
+.box_detail_img .coupondetail_left_fubiao
+{
+	left: 0;
+	position: absolute;
+	top: 0;    
+}
+.other_quan
+{
+	margin-top: 15px;
+	text-align: center;
+}
+.other_quan a:link, .other_quan a:visited, .other_quan a:hover
+{
+	background: none repeat scroll 0 0 #FF9900;
+	border-radius: 3px 3px 0 0;
+	color: #FFFFFF;
+	display: inline-block;
+	margin-right: 5px;
+	padding: 2px 10px;
+}
+
+
+.getquan_step
+{
+	/*background: none repeat scroll 0 0 #FAFAFA;*/
+	border-top: 1px solid #E5E5E5;
+	font-family: "宋体" ,Arial;
+	height: 100px;
+	margin: 10px 0;
+	padding: 10px;
+}
+.getquan_step p
+{
+	height: 24px;
+	line-height: 24px;
+	padding: 3px 0;
+}
+.getquan_step_info .fl a
+{
+	color: #FF9900;
+}
+.getquan_step_info .fr a
+{
+	color: #83C215;
+}
+a.orange:link, a.orange:visited, .orange {
+	color: #FF6600;
+}
+
+.clearfix {
+	display: block;
+}
+.gobuys .go-action
+{
+	float: left;
+	width: 114px;
+}
+.gobuys .go-action a
+{
+	margin-top: 15px;
+}
+		
+.gobuys .stat-info
+{
+	float: left;
+	margin-top: 18px;
+	width: 220px;
+}
+		
+		.pullbtn2 {
+	 background: url("templates/default/images/btn_receivebj.gif") no-repeat scroll 0 0 transparent;
+	border: medium none;
+	color: white;
+	cursor: pointer;
+	display: block;
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	overflow: hidden;
+	text-align: center;
+	text-decoration: none;
+	width: 90px;
+}
+.normal_m .how
+{
+	float: left;
+	margin: 24px 0 0 8px;
+}
+		
+
+.clearfix:after {
+	/*/*/content: "."; /* 兼容ie8 */
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clear:after{content:"."; display:block; height:0; clear:both; visibility:hidden;font-size:0;line-height:0;}
+
+.font14{
+font-size: 15px;
+font-family: Microsoft YaHei;
+font-weight: bold;
+}
+.introduction {
+height: 26px;
+line-height: 26px;   
+border-bottom: 1px solid #2EB6AA;
+margin: 10px 0px;
+margin-bottom:10px;
+}
+.used_number {
+font-size: 14px;
+width: 96%;
+background: gainsboro;
+border-collapse: separate;
+border-spacing: 1px;
+margin:3px 15px;
+}
+.used_number th {
+background: #EEE;
+}
+.used_number td, th {
+text-align: center;
+background: white;
+white-space: nowrap;
+height: 22px;
+padding: 5px;
+}
+.used_number td a{
+	font-size:12px;
+}
+.btn_getmore {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #D9D9D9;
+	color: #868B98;
+	font-size: 22px;
+	height: 30px;
+	line-height: 30px;
+	margin: 15px auto;
+	text-align: center;
+	width: 170px;
+}
+.btn_getmore a {
+	color: #868B98;
+	outline-style:none;
+}
+.btn_getmore a:hover {
+	text-decoration: none;
+}
+.btn_getmore img {
+	display: none;
+	height: 10px;
+	width: 50px;
+}
+.detail{
+	font-size: 14px;
+	line-height: 2.2;
+	font-family: Microsoft YaHei;
+	color: #333;
+}
+.normal_m ul.detail  li, .normal_m .detail p{
+	margin: 0px 0px;
+	line-height:28px;
+}
+.detail li em{font-style: normal;color:green;}
+.msg_info,.notice_area {
+	border: 1px solid #B8E2FB;
+	margin-bottom: 10px;
+	padding: 10px 10px 10px 35px;
+	position: relative;
+}
+</style>
+<div class="left_side">
+				<!--当前券如果过期，第一块区域推荐当前商家得一些券-->
+	<div class="coupon_block">
+		<div class="title">
+			{%$info.title%}
+		</div>
+		<div class="main_l_c_c body">
+				
+			<div class="normal_l">
+
+				<img src="{%$info.picurl%}" width="202" height="182"/>
+			</div>
+					
+			<div class="normal_m">
+				<ul class="normal_m_u detail clear">
+					<!--购买价格-->
+					
+					<li><em>有效期：</em>{%$info.date%}止<br>
+					</li>
+					
+					<li><em>优惠券数：</em> 已发放 <i>
+						{%$info.tot%}</i> 张
+						
+					</li>
+                    <li><em>所需积分：</em> <i>
+						{%$info.integral%}分</i> 
+						
+					</li>
+					
+					
+				</ul>
+				<!--购买或领取按钮-->
+			
+				<div class="getquan_step">
+					<div class="gobuys clearfix">
+						<div class="go-action">
+							<a  class="pullbtn2"  target="_blank"  href="member.php?act=point_add&id={%$info.id%}&uri={%$from%}">
+								去领券
+							</a>
+							
+						</div>
+						<div class="go-action">
+							<a  class="pullbtn2"  target="_blank"  href="point.php">
+								更多优惠券
+							</a>
+							
+						</div>
+					</div>
+				</div>
+					
+				<div class="clear">
+				</div>
+				<!--Admin Pamel-->
+				<!--管理员看到的-->
+				<div class="clear">
+				</div>
+			</div>
+			<div style="clear: both" class="clear"></div>
+			<div class="clear introduction font14">使用条件</div>
+			<div class="clear outarea setImgMaxWidth">
+			{%$info.content%}
+			</div>
+			<div class="introduction font14">最新领取记录</div>
+			<table cellspacing="1" cellpadding="1" id="used_number_table" class="used_number">
+							<tbody>
+								<tr>
+									<th>
+										领取用户
+									</th>
+									<th>
+										券码
+									</th>
+									<th>
+										是否使用
+									</th>
+									<th>
+										领取时间
+									</th>
+								</tr>
+							</tbody>
+							<tbody id="usedQuanTbody">
+								{%foreach item=list from=$history%}
+								<tr style="" class="">
+									<td>
+										{%$list.username%}
+										
+									</td>
+									<td>
+										
+										仅领取者本人知道
+									</td>
+									<td>
+										
+										未知
+										
+									</td>
+									<td>
+										{%getdateTime($list.posttime)%}
+									</td>
+								</tr>
+								{%/foreach%}
+								
+							</tbody>
+						</table>
+		</div>
+	</div>
+	<div class="clear">
+	</div>
+</div>

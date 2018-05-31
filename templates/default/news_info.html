@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+{%include file="inc_link.html"%}
+<link href="templates/default/style/webstyle.css" rel="stylesheet" type="text/css" />
+<link href="templates/default/style/suggest.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/suggest.js"></script>
+<script type="text/javascript" src="js/transport.js"></script>
+<script type="text/javascript" src="js/loadimage.js"></script>
+</head>
+<body>
+
+   {%include file="head.html"%}
+    <!--  body  开始  -->
+    <div class="body">
+        <div class="ltitle">{%$getposstr%}</div>
+        <div class="xwxxy">
+        	{%$info.content%}
+        </div>
+    </div>
+    <!--  body  结束  -->
+   {%include file="bottom.html"%}
+
+</body>
+</html>

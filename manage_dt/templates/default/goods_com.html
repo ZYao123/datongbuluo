@@ -1,0 +1,121 @@
+<div class="pro_xx">
+			<div class="tl">
+				
+				<span class="pro_tbl1">
+					<a href="javascript:;" onclick="return ConfDelAll('form');">
+						<img src="templates/default/images/tbl2.jpg" align="left" />&nbsp;{$lang.com_goods_del}
+					</a>
+				</span>
+			
+			</div>
+			<div class="tr">
+				<a href="javascript:Upselect('goods.php','list')" class="tr">
+					<img src="templates/default/images/pro_7.jpg" />
+				</a>
+				<input type="text" name="keyword" id="keyword" class="pro_text v5-input in180" value="{$keyword}" />
+				<select class="pro_text1 v5-select" name="classid" id="classid">
+					<option value="">--</option>
+					{foreach from=$class_info item=list}
+						<option value="{$list.id}" 
+						{if $classid}
+							{if $classid eq $list.id}
+							selected="selected"
+							{/if}
+						{/if}>{if $list.str}|-{$list.str}{/if}{$list.classname}</option>
+					{/foreach}
+				</select>
+				<input type="hidden" name="nav" value="{$nav}" id="nav"/>
+				<span class="pro_wz1">{$lang.select}:</span>
+			</div>
+		</div>
+		
+		<div class="pro_bt1">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr align="center">
+					<td width="5%" height="30"  valign="middle" class="pro_rb">
+						<span class="tl">
+							 &nbsp; <input type="checkbox" name="checkbox" value="checkbox" onclick="chk_all($(this).attr('checked'))"/>&nbsp;
+						</span>
+						<a href="#"><img src="templates/default/images/pro_8.jpg" /></a>
+					</td>
+					<td width="4%" valign="middle" class="pro_rb">&nbsp;{$lang.action}</td>
+					<td width="11%"  valign="middle" class="pro_rb">&nbsp;{$lang.com_tit}
+					<td width="10%"  valign="middle" class="pro_rb">&nbsp;{$lang.con_username}</td>
+					<td width="22%"  valign="middle" class="pro_rb">&nbsp;{$lang.title}
+					</td>
+					<td width="4%" valign="middle" class="pro_rb">&nbsp;{$lang.picurl}</td>
+					<td width="14%" valign="middle" class="pro_rb">&nbsp;{$lang.salesprice}</td>
+					<td width="5%"  valign="middle" class="pro_rb">&nbsp;{$lang.show}</td>
+					<td width="7%"  valign="middle" class="pro_rb">&nbsp;{$lang.com_reply}</td>
+					<td width="10%"  valign="middle">&nbsp;{$lang.com_posttime}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<div style="height:149px;"></div>
+	<div class="pro_nr">
+		<div class="pro_bottom">
+			{if $info}
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				{foreach from=$info item=list}
+				 <tr class="pro_bt2" align="center">
+					<td width="6%" height="35" align="center" valign="middle" class="pro_tbr">
+						<span class="tl">
+							&nbsp; <input type="checkbox" name="id[]" value="{$list.id}"  />
+						</span>
+						<a href="#"><img src="templates/default/images/pro_9.jpg" /></a>
+					</td>
+					<td width="4%"  valign="middle" class="pro_tbr">
+						<a href="javascript:;" onclick="return ConfDel('goods.php?act=subdel&id={$list.id}&sign=com&from={$from}');"><img src="templates/default/images/pro_12.jpg" title="{$lang.action_del}" /></a>
+					</td>
+					<td width="11%"  valign="middle" class="pro_tbr" title="{$list.title}">
+					&nbsp;{$list.title|truncate:30:"...":true}
+					</td>
+					<td width="10%" valign="middle" class="pro_tbr">
+					&nbsp;{$list.username}
+					</td>
+					<td width="22%"  valign="middle" class="pro_tbr" title="{$list.title}">&nbsp;{$list.g_title|truncate:30:"...":true}
+					</td>
+					<td width="4%"  valign="middle" class="pro_tbr">
+						&nbsp;<img src="templates/default/images/pro_13.jpg" alt="/{$list.picurl}" class="tip" />
+					</td>
+					
+					<td width="14%"  valign="middle" class="pro_tbr">&nbsp;￥{$list.salesprice}</td>
+					<td width="5%"  valign="middle" class="pro_tbr">
+					&nbsp;
+					{if $list.isshow==1}
+					<a href="javascript:;" onclick="return Confcom_n('goods.php?act=edit_com_sta&id={$list.id}&sign=0&from={$from}');">
+					<font color="green">{$lang.yes}</font>
+					</a>
+					{else}
+					<a href="javascript:;" 
+					onclick="return Confcom_y('goods.php?act=edit_com_sta&id={$list.id}&sign=1&from={$from}');">
+					<font color="red">{$lang.no}</font>
+					</a>
+					{/if}
+					</td>
+					<td width="7%"  valign="middle" class="pro_tbr">
+					&nbsp;
+					<a href="javascript:DialogIframe('goods.php?act=com_edit&id={$list.id}','{$lang.com_edit}','80%','95%','','','','dosubmit');">
+					{if $list.reply!=""}
+					<font color="green">{$lang.see}</font>
+					{else}				
+					<font color="red">{$lang.reply}</font>
+					{/if}
+					</a>
+					</td>
+					<td width="10%"  valign="middle" class="pro_tbr">&nbsp;
+					{$list.posttime|date_format:'%Y/%m/%d %H:%M:%S'}</td>
+				</tr>  
+				{/foreach}
+			
+			</table>
+			{else}
+		  <div class="no_info">{$lang.no_info}</div>
+			{/if}
+			<div class="footheight"></div>
+		</div>
+		<div class="pro_bot" id="footer">
+			{$page}
+		</div>

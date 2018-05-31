@@ -1,0 +1,63 @@
+
+<style>
+.coupons-list .coupon .left, 
+.coupons-list .coupon .right span b, 
+.coupons-list{ position:relative; margin-left:-1px; margin-bottom:-2px; overflow:hidden; zoom:1}
+.coupons-list a{color:#1163A3}
+.coupons-list em{ font-style:normal}
+.coupons-list li{ float:left; display:inline; margin-left:1px; width:300px; border-bottom:dashed 2px #D9D9D9; cursor:default;overflow:hidden;}
+.coupons-list .coupon-wrapper{ float:left; width:300px; height:240px; position:relative;}
+.coupons-list .coupon-wrapper a:hover{text-decoration: none;}
+.coupons-list li .scissors{ position:absolute; display:none; left:195px; top:169px; width:20px; height:20px; overflow:hidden; background-position:-100px -80px}
+.coupons-list h2{ padding-top:15px; padding-left:0px; padding-bottom:0; line-height:20px; font-size:14px; height:20px; overflow:hidden}
+.coupons-list h2 a{float:left;}
+i.hot,i.new{width:21px;height:11px;overflow: hidden;text-indent: -9999px;float:left;margin-left:2px;margin-top:5px;}
+#main_l_l .coupons-list h2{ padding-bottom:0}
+.coupons-list .coupon{ display:block; margin:15px auto; width:314px; height:124px;  text-decoration:none; background-color:white; cursor:pointer}
+.coupons-list .coupon:hover{ border-color:#f8ded5}
+.coupons-list .coupon:hover .right {background:#fbf2ef}
+
+
+
+
+
+
+.coupons-list .coupon-wrapper .info{ margin-left:5px; color:#666}
+.coupons-list .coupon-wrapper .info span{margin-right:3px;}
+.coupons-list .coupon-wrapper .info i{color:#07f;font-style: normal;}
+
+.coupons-list li:hover .scissors, .coupons-list li.hover .scissors{ display:block}
+.coupons-list li .scissors{ position:absolute; display:none; left:184px; top:169px; width:20px; height:20px; overflow:hidden; background-position:-100px -80px}
+</style>
+
+<div class="main_l_c_c">
+<ul id="J_CouponsList" class="coupons-list">
+{%foreach from=$info item=list%}
+	<li>
+		<div class="coupon-wrapper">
+			<div class="scissors">
+			</div>
+			<h2>
+				<a target="_blank" href="{%if $list.linkurl%}{%$list.linkurl%}{%else%}point_info.php?id={%$list.id%}{%/if%}" title="{%$list.title%}">
+					{%$list.title%}</a>
+			</h2>
+			<div class="coupon">
+			<a target="_blank" href="{%if $list.linkurl%}{%$list.linkurl%}{%else%}point_info.php?id={%$list.id%}{%/if%}" title="{%$list.title%}">
+				<img src="{%$list.picurl%}" width="286" height="124" title="{%$list.title%}" alt="{%$list.title%}">
+				</a>
+			</div>
+			
+			<div class="info">
+				
+				<span>还剩 <i>
+					{%$list.day%}</i> 天 </span>
+				
+				<span>已领数量：<i>{%$list.tot%}</i></span> 
+			</div>
+			
+		</div>
+	</li>
+	{%/foreach%}
+
+	</ul>
+</div>

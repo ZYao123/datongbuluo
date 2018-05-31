@@ -1,0 +1,90 @@
+<script>
+// 只允许输入可带长度为2的小数
+$('body').on('keydown','.s_order_num',function(e){
+// 190、229、110 点
+// 48~57 和 96~105是数字
+// 8退格
+if(e.keyCode != 8 && e.keyCode != 46){
+	var self = $(this);
+	var value = self.val();
+	if(e.keyCode == 229){ 	 // 按下的是其它标点符号
+		if(value == '' || !parseFloat(value)){
+		$(this).val(self[0].defaultValue);
+		}else{
+		self.val(parseFloat(value).toFixed(2));
+		}
+		return false;
+	}else{
+		var selectionStart = self[0].selectionStart;
+		var selectionEnd = self[0].selectionEnd;
+		var float_index = value.indexOf('.');
+		if( (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode == 110 || e.keyCode == 190 || e.keyCode == 229){
+			if(float_index != -1){	// 有个点
+				if(e.keyCode == 110 || e.keyCode == 190 || e.keyCode == 229){	// 按下的还是点
+					if(float_index < selectionStart || float_index >= selectionEnd ){	 // 如果没点被选中
+					return false;	 // 取消事件
+					}
+				}else
+				{	 // 按下的不是点
+					if(selectionEnd > float_index && value.length - float_index >= 3 && selectionStart == selectionEnd){	 // 如果在点的后面 并且点后的长度大于等于2 并且没有选中任何值
+					return false;	// 取消事件
+					}
+				}
+			}
+		}else{
+			return false;
+		}
+	}
+}
+});
+
+$('body').on('blur','.s_order_num',function(e){
+var value = $(this).val();
+if(value == '' || !parseFloat(value) && parseFloat(value) !=0){
+$(this).val($(this)[0].defaultValue);
+}else{
+$(this).val(parseFloat(value).toFixed(2));
+}
+});
+
+
+$(function(){
+	$('.checkKey').keydown(function(e){
+		// 190、229、110 点
+		// 48~57 和 96~105是数字
+		// 8退格
+		if(e.keyCode != 8 && e.keyCode != 46){
+			var self = $(this);
+			var value = self.val();
+			if(e.keyCode == 229){ 	 // 按下的是其它标点符号
+				if(value == '' || !parseFloat(value)){
+				$(this).val(self[0].defaultValue);
+				}else{
+				self.val(parseFloat(value).toFixed(2));
+				}
+				return false;
+			}else{
+				var selectionStart = self[0].selectionStart;
+				var selectionEnd = self[0].selectionEnd;
+				var float_index = value.indexOf('.');
+				if( (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode == 110 || e.keyCode == 190 || e.keyCode == 229){
+					if(float_index != -1){	// 有个点
+						if(e.keyCode == 110 || e.keyCode == 190 || e.keyCode == 229){	// 按下的还是点
+							if(float_index < selectionStart || float_index >= selectionEnd ){	 // 如果没点被选中
+							return false;	 // 取消事件
+							}
+						}else
+						{	 // 按下的不是点
+							if(selectionEnd > float_index && value.length - float_index >= 3 && selectionStart == selectionEnd){	 // 如果在点的后面 并且点后的长度大于等于2 并且没有选中任何值
+							return false;	// 取消事件
+							}
+						}
+					}
+				}else{
+					return false;
+				}
+			}
+		}
+	})	
+})
+</script>

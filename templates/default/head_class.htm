@@ -1,0 +1,162 @@
+<style type="text/css">
+#list01{
+position:absolute;top:0px;left:0px;width:200px;color:#333;
+}
+
+#list01 .mt b, #list01 h3, #list01 s, #list01.hover .mt b{
+	background-image:url(templates/default/images/class_new_bg.png);
+	background-repeat:no-repeat;
+}
+#list01 .mc{
+position:absolute;left:0px;width:200px;height:402px;padding: 3px 3px 3px 0px;background:#FAFAFA;border:solid #E4393C;border-width:0 2px 2px;
+overflow:visible;zoom:1;
+}
+#list01 .hover .mc{
+display:block;
+}
+#list01 .item{
+	width:200px;height:28px;border-top:1px solid #FFF;
+}
+#list01 .fore1{
+border-top:0;
+}
+#list01 span{
+	display:block;
+	width:200px;
+	position:absolute;z-index:1;
+}
+#list01 h3{
+	width:186px;height:26px;line-height:26px;padding-left:13px;border-width:1px 0;background-image:none;
+	font-weight:400;
+}
+#list01 h3 a:link, #list01 h3 a:visited{
+	color:#333;
+}
+#list01 s{
+	display:block;position:absolute;top:10px;left:189px;width:6px;height:9px;background-position:-110px -45px;
+}
+
+#list01 .item .i-mc{
+display:none;position:absolute;left:198px;top:3px;width:705px;border: 1px solid #DDD;
+background: #fff;
+overflow: visible;
+-moz-box-shadow: 0 0 10px #DDD;
+-webkit-box-shadow: 0 0 10px #DDD;
+box-shadow: 0 0 10px #DDD;
+}
+#list01 .hover .i-mc
+{
+	display: block;
+	z-index: 12;
+}
+#list01 .hover h3{
+	border: solid #DDD;
+border-width: 1px 0;
+background-color: #fff;
+overflow: hidden;
+-moz-box-shadow: 0 0 8px #DDD;
+-webkit-box-shadow: 0 0 8px #DDD;
+box-shadow: 0 0 8px #DDD;
+}
+#list01 .close{
+	position: absolute;
+top: -1px;
+left: 706px;
+z-index: 14;
+width: 26px;
+height: 26px;
+background: rgba(0,0,0,.6);
+text-align: center;
+line-height: 26px;
+color: #fff;
+cursor: pointer;
+font-size: 26px;
+background-color: transparent\9;
+filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=1, startColorstr='#60000000', endColorstr='#60000000');
+}
+#list01 .subitem{
+float: left;
+width: 698px;
+min-height: 370px;
+padding: 0 4px 0 8px;
+}
+#list01 .subitem dl{
+border-top: 1px solid #EEE;
+padding: 6px 0;
+overflow: hidden;
+zoom: 1;
+}
+#list01 .subitem .fore1{
+	border-top:0px;
+}
+#list01 .item dt{
+padding: 3px 6px 0 0;
+font-weight: 700;
+color: #E4393C;
+}
+#list01 .subitem dt{
+float: left;
+width: auto;
+line-height: 22px;
+text-align: right;
+}
+#list01 .subitem dt a{
+color: #E4393C;
+text-decoration: underline;
+}
+#list01 .item dd{
+padding: 3px 0 0;
+overflow: hidden;
+zoom: 1;
+}
+#list01 .subitem dd{
+	overflow:hidden;
+}
+em{
+	font-style: normal;
+}
+#list01 .subitem em{
+float: left;
+height: 14px;
+margin: 4px 0;
+line-height: 14px;
+padding: 0 8px;
+border-left: 1px solid #ccc;
+}
+#list01 .subitem dd a{
+	white-space: nowrap;
+}
+.dw{ width:auto; position:absolute; margin-top:38px; background:#fff;}
+.list01{ width:198px; border:solid 1px #e6e6e6; float:left;text-align:left;  }
+</style>
+<div class="dw" style="visibility: hidden;z-index:999;" id="dw" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+	<div id="list01">
+		<div id="_JD_ALLSORT" class="mc" load="2">
+			{%foreach from=GetGoodsType('428',12) item=list key=k%}
+			<div class="item fore{%$K+1%}"  onmouseover="$(this).addClass('hover')" onmouseout="$(this).removeClass('hover')" class="close">
+				<span data-split="1" clstag="homepage|keycount|home2013|0604a">
+					<h3><a href="item_list.php?cid={%$list.id%}">{%$list.classname%}</a></h3>
+					<s></s>
+				</span>    
+				<div class="i-mc" style="top: 3px;">        
+					<div onclick="$(this).parent().parent().removeClass('hover')" class="close">×</div>        
+					<div class="subitem" clstag="homepage|keycount|home2013|0604b">
+						{%foreach from=GetGoodsType($list.id) item=child key=ks%}
+						<dl class="fore{%$ks+1%}">                
+							<dt>
+								<a style="" href="item_list.php?cid={%$child.id%}">{%$child.classname%}</a>
+							</dt>                
+							<dd>
+								{%foreach from=GetGoodsType($child.id) item=childs key=kss%}
+								<em><a style="" href="item_list.php?cid={%$childs.id%}">{%$childs.classname%}</a></em>
+								{%/foreach%}            
+							</dd>            
+						</dl>
+						{%/foreach%}            
+					</div>    
+				</div>
+			</div>
+			{%/foreach%}
+		</div>
+	</div>
+</div>

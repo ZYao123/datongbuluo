@@ -1,0 +1,7 @@
+INSERT INTO `lc_postmode` VALUES('1','申通(申通E物流)','shentong','7','true');
+INSERT INTO `lc_postmode` VALUES('3','顺丰速递（中文结果）','shunfeng','2','true');
+INSERT INTO `lc_postmode` VALUES('4','顺丰（英文结果）','shunfengen','3','true');
+INSERT INTO `lc_postmode` VALUES('5','中通速递','zhongtong','4','true');
+INSERT INTO `lc_postmode` VALUES('6','韵达快运','yunda','5','true');
+INSERT INTO `lc_postmode` VALUES('7','EMS(E邮宝)','ems','6','true');
+INSERT INTO `lc_postmode` VALUES('8','送货上门','songhuo','1','true');

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$home.title}</title>
+<link href="templates/default/style/frame.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templates/default/js/jquery.min.js"></script>
+<script type="text/javascript" src="templates/default/js/frame.js"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+
+</head>
+<body>
+
+<div class="header">
+    <div class="mb_header">
+            <div class="mb_header_r">
+           		<div class="logo03"><img src="templates/default/images/hy_21.png" /></div>
+                <div class="icon_list" >
+                    <ul>
+                    	<li class="icon01">
+                        <a href="javascript:DialogIframe('bug.php?act=add','{$home.bug}','80%','95%','','','','dosubmit');">
+{$home.bug}</a></li>
+                        <li class="icon02"><a href="../" target="_blank">{$home.index}</a></li>
+                    	<li class="icon03"><a href="index.php?act=clearcache" target="main">{$home.cache}</a></li>
+                    	<li class="icon04"><a href="index.php?act=unlogin">{$home.unlogin}</a></li>
+                    </ul>
+                </div>
+                
+            	<div class="nav">
+                {foreach from=$nav item=list key=k}
+                <a href="javascript:;" onclick="TopMenu('index.php?act=menu&menukey={$list.linkurl}','{$list.righturl}')">{$list.label}</a>
+                {/foreach}
+                </div>
+            </div>
+    	</div>
+    </div>
+    
+    <div class="left">
+        <div class="menu">
+            <iframe name="menu" id="menu" frameborder="0" src="{$lefturl}" scrolling="no" allowTransparency="true" ></iframe>
+        </div>
+    </div>
+    <div class="right">
+        <div class="main">
+        	<div class="left_btn02"><a href="javascript:;" class="togglemenu"><img src="templates/default/images/left_btn02.png" border="0" /></a></div>
+            <iframe name="main" id="main" frameborder="0" src="{$righturl}" allowTransparency="true" ></iframe>
+   
+        </div>
+    </div>
+    <div class="cl"></div>
+</body>
+</html>

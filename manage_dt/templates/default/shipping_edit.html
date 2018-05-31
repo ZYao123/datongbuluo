@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lang.home.title} - {$lang.area_add}</title>
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script src="templates/default/js/jquery.min.js" type="text/javascript"></script>
+<script src="templates/default/js/artDialog.js?skin=default"></script>
+<script src="templates/default/js/iframeTools.source.js"></script>
+<script src="templates/default/js/artDialog_js.php"></script>
+<script src="templates/default/js/checkz.func.js"></script>
+<script src="templates/default/js/mgr.func.js"></script>
+</head>
+<script>
+{foreach from=$js item=list key=k}
+var {$k}	= "{$list}";
+{/foreach}
+
+</script>
+<body>     
+<form action="" method="post" id="form" name="form" onsubmit="return cfm_ship_edit();">
+    <div class="Form02">
+      <h3>{$lang.basic}</h3>
+        <table width="100%" border="0" class="v5-table05">
+<tr>
+        <td width="100">{$lang.TemName}</td>
+        <td><input type="text" name="TemName" class="v5-input in180" id="TemName" value="{$info.TemName}"/></td>
+      </tr>
+      <tr>
+        <td>{$lang.TemAddressID}</td>
+        <td>
+        <select name="AddrCountry" id="AddrCountry" onchange="do_area('AddrCountry','AddrProvince','{$lang.AddrProvince}')" class="in100">
+          <option value="" >{$lang.AddrCountry}</option>
+          {foreach from=$TemAddressIDS.0 item=list}
+          <option value="{$list.id}" {if $TemAddressID.1 eq $list.id} selected="selected" {/if}>{$list.classname}</option>
+          {/foreach}
+        </select>
+        <select name="AddrProvince" id="AddrProvince" onchange="do_area('AddrProvince','AddrCity','{$lang.AddrCity}')" class="in100">
+          <option value="" >{$lang.AddrProvince}</option>
+          {foreach from=$TemAddressIDS.1 item=list}
+          <option value="{$list.id}" {if $TemAddressID.2 eq $list.id} selected="selected" {/if}>{$list.classname}</option>
+          {/foreach}          
+        </select>    
+        <select name="AddrCity" id="AddrCity"  class="in100" onchange="do_area('AddrCity','AddrArea','{$lang.AddrArea}')" >
+          <option value="" >{$lang.AddrCity}</option>
+          {foreach from=$TemAddressIDS.2 item=list}
+          <option value="{$list.id}" {if $TemAddressID.3 eq $list.id} selected="selected" {/if}>{$list.classname}</option>
+          {/foreach}          
+        </select>          
+        <select name="AddrArea" id="AddrArea" class="in100">
+          <option value="" >{$lang.AddrArea}</option>
+          {foreach from=$TemAddressIDS.3 item=list}
+          <option value="{$list.id}" {if $TemAddressID.4 eq $list.id} selected="selected" {/if}>{$list.classname}</option>
+          {/foreach}          
+        </select>        
+        </td>
+      </tr>
+      <tr>
+        <td>{$lang.TemFree}</td>
+        <td><input name="TemFree" type="radio" value="0" {if $info.TemFree eq '0'} checked="checked" {/if} />
+          &nbsp;{$lang.TemFree0}&nbsp;
+          <input name="TemFree" type="radio" value="1" {if $info.TemFree eq '1'} checked="checked" {/if} />
+        &nbsp;{$lang.TemFree1}</td>
+      </tr>
+       <tr>
+         <td>{$lang.TemPricing}</td>
+         <td>
+<input name="TemPricing" type="radio" value="0" onclick="reloadshipedit('{$info.postid}',{$id},{$info.TemPricing})" {if $info.TemPricing eq '0'} checked="checked" {/if} />
+&nbsp;{$lang.TemPricing0}&nbsp;
+<input name="TemPricing" type="radio" value="1" onclick="reloadshipedit('{$info.postid}',{$id},{$info.TemPricing})" {if $info.TemPricing eq '1'} checked="checked" {/if}/>
+&nbsp;{$lang.TemPricing1}
+<input name="TemPricing" type="radio" value="2" onclick="reloadshipedit('{$info.postid}',{$id},{$info.TemPricing})" {if $info.TemPricing eq '2'} checked="checked" {/if} />
+&nbsp;{$lang.TemPricing2}</td>
+       </tr>
+       <tr>
+        <td>{$lang.orderid}</td>
+        <td><input type="text" name="orderid" class="v5-input in60" id="orderid" value="{$info.orderid}"  onKeyUp="value=value.replace(/[^\d]/g,'')" /></td>
+      </tr>
+       <tr>
+        <td>{$lang.checkinfo}</td>
+        <td>
+        	<input name="checkinfo" type="radio" value="true" {if $info.checkinfo eq 'true'} checked="checked" {/if} />&nbsp;{$lang.yes}&nbsp;
+            <input name="checkinfo" type="radio" value="false" {if $info.checkinfo eq 'false'} checked="checked" {/if} />&nbsp;{$lang.no}&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#f00">{$lang.checkinfocontent}</span>
+        </td>
+      </tr>
+       <tr>
+         <td valign="top">{$lang.shippingMethod}</td>
+         <td valign="top">
+         <p style="color:#666">{$lang.shippingMethodInfo}</p>
+         {foreach from=$postinfo item=list }
+         <p>
+           <input type="checkbox" name="pid[]" id="pid{$list.id}" value="{$list.id}" 
+             {foreach from=$postid item=pid key=k}
+                 {if $pid.k == {$list.id}}
+                 checked
+                 {/if}
+             {/foreach}           
+            onclick="selectshipedit({$list.id},{$id})" />
+           {$list.classname}
+         </p>
+         <div id='ship{$list.id}' class='shipHidden'>
+             {foreach from=$postid item=pid key=k}
+                 {if $pid.k == {$list.id}}
+                 <script>selectshipedit({$list.id},{$id})</script>
+                 {/if}
+             {/foreach}
+         </div>
+         {/foreach}
+         </td>
+       </tr>      
+      </table>
+	</div>
+    <input type="submit" name="dosubmit" id="dosubmit"  class="dialog" value="">
+    <input name="act" id="act" type="hidden" value="subedit" />
+
+</form>
+</body>
+</html>

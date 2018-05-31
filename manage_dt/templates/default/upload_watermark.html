@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$lang.home.title} - {$lang.upload_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="templates/default/style/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templates/js/jquery.min.js"></script>
+<script type="text/javascript" src="templates/js/mgr.func.js"></script>
+</head>
+<body style="margin:0;padding:0;">
+<div style="float:left;margin-right:12px;">
+		<form name="form" enctype="multipart/form-data" method="post" action="">
+				<input type="file" name="upfile" style="height:21px;width:195px;">
+				<input type="submit" value="{$lang.upload}" style="height:21px;width:45px;">
+		</form>
+</div>
+<div class="uploading" style="line-height:21px;">
+	<span style="color:#999;">{$lang.upload_file_type}</span>
+    <span style="color:#ff0000;">
+    {$upload}
+    </span>
+</div>
+</body>
+</html>
